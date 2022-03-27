@@ -1,0 +1,52 @@
+.clientes_item {
+  width: 90%;
+  background-color: white;
+  list-style: none;
+  margin: 1.5rem auto;
+  color: rgb(58, 58, 58);
+  border-radius: 5px;
+  background: linear-gradient(135deg, #ebf1f5, #fefefe);
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.08),
+    -10px -10px 15px rgba(255, 255, 255, 0.8);
+  padding: 0.8rem;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.clientes_nome-custo {
+  font-weight: 700;
+  margin-bottom: .5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.clientes_custo {
+  color: rgb(160, 19, 19);
+  text-align: right;
+  display: block;
+  font-weight: 500;
+}
+
+.clientes_lista-pedidos {
+  padding: 0;
+  list-style: none;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+}
+
+.clientes_pedido {
+  border-top: 1px solid rgb(207, 207, 207);
+  border-left: 1px solid rgb(207, 207, 207);
+  border-right: 1px solid rgb(207, 207, 207);
+  padding: .2rem .5rem .4rem;
+  background-color: white;
+}
+
+.clientes_pedido:nth-child(1) {
+  border-radius: 5px 5px 0 0;
+}
+
+.clientes_pedido:last-child {
+  border-bottom: 1px solid rgb(207, 207, 207);
+  border-radius: 0 0 5px 5px;
+}
