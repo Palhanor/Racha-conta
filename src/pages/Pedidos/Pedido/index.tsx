@@ -1,31 +1,31 @@
-// Interface
-import TipoCliente from "../../../interfaces/TipoCliente";
+import ICliente from "../../../interfaces/cliente";
+import IPedido from "../../../interfaces/pedido";
+import "./style.css";
 
-// Style
-import "./style.css"
+export default function Pedido({
+  dadosPedido,
+  listaClientes,
+}: {
+  dadosPedido: IPedido;
+  listaClientes: ICliente[];
+}) {
+  const { nome, preco, autor } = dadosPedido;
 
-interface Props {
-    nomePedido: string,
-    precoPedido: number,
-    autor: number,
-    listaClientes: TipoCliente[];
-}
-
-export default function Pedido({ nomePedido, precoPedido, autor, listaClientes }: Props) {
   return (
     <li className="pedidos_item">
       <div>
         <strong>Pedido: </strong>
-        {nomePedido}
+        {nome}
       </div>
       <div>
-        <strong>Preco: </strong>
-        R$ {precoPedido.toFixed(2)}
+        <strong>Preço: </strong>
+        R$ {preco.toFixed(2)}
       </div>
       <div>
         <strong>Autor: </strong>
+        {/* Usar um .filter() */}
         {listaClientes.map((dadosCliente) => {
-          if (dadosCliente.id === autor) return dadosCliente.nome
+          if (dadosCliente.id === autor) return dadosCliente.nome;
         })}
       </div>
     </li>

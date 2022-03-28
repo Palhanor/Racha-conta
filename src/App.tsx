@@ -1,23 +1,18 @@
-// Dependencias
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-// Componentes
 import Navegacao from "./components/Navegacao";
 import FormularioInicial from "./pages/FormularioInicial";
 import Clientes from "./pages/Clientes";
 import Pedidos from "./pages/Pedidos";
 import NotFound from "./pages/NotFound";
-
-// Interfaces
-import TipoCliente from "./interfaces/TipoCliente";
-import TipoPedido from "./interfaces/TipoPedido";
+import ICliente from "./interfaces/cliente";
+import IPedido from "./interfaces/pedido";
 
 function App() {
   const [mesa, setMesa] = useState("");
   const [nome, setNome] = useState("");
-  const [listaClientes, setListaClientes] = useState<TipoCliente[]>([]);
-  const [listaPedidos, setListaPedidos] = useState<TipoPedido[]>([]);
+  const [listaClientes, setListaClientes] = useState<ICliente[]>([]);
+  const [listaPedidos, setListaPedidos] = useState<IPedido[]>([]);
 
   return (
     <Router>
@@ -39,7 +34,6 @@ function App() {
           element={
             <Clientes
               mesa={mesa}
-              nome={nome}
               listaClientes={listaClientes}
               setListaClientes={setListaClientes}
             />
