@@ -1,3 +1,6 @@
+// 1. Cirar pagina de cliente que recebe o id do cliente e exibe todas as informacoes do cliente em questao
+// 2. Permitir que o cliente seja apagado ou que seus dados sejam editados
+
 export default function Cliente() {
   return (
     <h1>Ola mundo</h1>

@@ -1,11 +1,13 @@
+// 1. Importar a imagem como um Componente SVG
+// 2. Resolver o problema de renderizacao da pagina na construcao inicial do componente
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IFormularioInicialProps } from "../../interfaces/props";
 import contador from "../../utils/contador";
 import "./style.css";
-// import imagem from "./img.png"
 
-export default function FormularioInicial(props: IFormularioInicialProps) {
+export default function Inicio(props: IFormularioInicialProps) {
   const { mesa, setMesa, nome, setNome, setListaClientes } = props;
 
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ export default function FormularioInicial(props: IFormularioInicialProps) {
   return (
     <>
       <h1 className="page_title">Racha conta</h1>
-      {/* <img src={imagem} alt="Ilustracao do Racha conta" className="page_image" /> */}
+      <img src="assets/image.svg" alt="Ilustracao do Racha conta" className="page_image" />
       <form className="form_cointainer" onSubmit={(e) => criaMesa(e)}>
         <h2 className="form_title">Nova mesa</h2>
         <label htmlFor="mesa" className="form_labels">

@@ -22,7 +22,3 @@ export interface IPedidosProps {
   listaClientes: ICliente[];
   setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
 }
-
-export interface IItemPedidoProps {
-  dadosPedido: IPedido;
-}

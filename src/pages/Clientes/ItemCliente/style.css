@@ -29,16 +29,7 @@
   font-weight: 500;
 }
 
-.clientes_lista-pedidos {
-  padding: 0;
-  list-style: none;
-  margin-top: .5rem;
-  margin-bottom: .5rem;
-  background-color: #fefefe;
-  border-radius: 5px;
-  border: 1px solid #eaf3f3;
-}
-
-.clientes_pedido {
-  padding: .6rem;
+.clientes_num-pedidos {
+  font-size: .9rem;
+  color: rgb(107, 107, 107);
 }

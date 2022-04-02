@@ -1,7 +1,7 @@
-/* Passar um normalize */
-/* Começar a usar um sistema de estilo: CSS Modules, SASS, Styled Components, Tailwind */
-/* Criar uma padronização de estilo para elementos repetidos: container, input, label, button... */
-/* Criar uma padronização com variáveis para breakpoints, cores, bordas, padding... */
+/* 1. Passar um normalize */
+/* 2. Começar a usar um sistema de estilo: CSS Modules, SASS, Styled Components, Tailwind */
+/* 3. Criar uma padronização de estilo para elementos repetidos: container, input, label, button... */
+/* 4. Criar uma padronização com variáveis para breakpoints, cores, bordas, padding... */
 
 @import url('https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap');
 

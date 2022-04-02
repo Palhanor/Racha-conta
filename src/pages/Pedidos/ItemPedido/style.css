@@ -9,3 +9,27 @@
   box-sizing: border-box;
   cursor: pointer;
 }
+
+.pedidos_page-link {
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+}
+
+.pedidos_nome-custo {
+  font-weight: 700;
+  margin-bottom: .5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.pedidos_custo {
+  color: rgb(160, 19, 19);
+  text-align: right;
+  display: block;
+  font-weight: 500;
+}
+
+.pedidos_nomes-autores {
+  font-size: .9rem;
+  color: rgb(107, 107, 107);
+}

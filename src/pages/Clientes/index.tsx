@@ -1,4 +1,4 @@
-// Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
+// 1. Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";

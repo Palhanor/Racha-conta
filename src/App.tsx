@@ -1,8 +1,8 @@
-// Passar para o sistema de routes.js usando gerenciamento de estado global para não guardar estados no arquivo de rotas
+// 1. Passar para o sistema de routes.js usando gerenciamento de estado global para não guardar estados no arquivo de rotas
 
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import FormularioInicial from "./pages/FormularioInicial";
+import Inicio from "./pages/Inicio";
 import Clientes from "./pages/Clientes";
 import Pedidos from "./pages/Pedidos";
 import NotFound from "./pages/NotFound";
@@ -21,7 +21,7 @@ function App() {
         <Route
           path="/"
           element={
-            <FormularioInicial
+            <Inicio
               mesa={mesa}
               setMesa={setMesa}
               nome={nome}

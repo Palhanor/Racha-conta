@@ -72,3 +72,9 @@
 .pedidos_lista {
     padding: 0;
 }
+
+.pedidos_vazio {
+    height: 12rem;
+    display: block;
+    margin: auto;
+}

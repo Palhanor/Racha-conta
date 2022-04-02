@@ -1,15 +1,16 @@
 .page_title {
   font-size: 2rem;
-  margin: 1.6rem 5%;
+  margin: 1.4rem 5%;
   font-weight: 600;
   text-align: center;
   color: #FFFFFF;
 }
 
-/* .page_image {
+.page_image {
   display: block;
   margin: auto;
-} */
+  height: 18rem;
+}
 
 .form_cointainer {
   position: absolute;
