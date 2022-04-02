@@ -1,22 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ICliente from "../../interfaces/cliente";
+import { IFormularioInicialProps } from "../../interfaces/props";
 import contador from "../../utils/contador";
 import "./style.css";
+// import imagem from "./img.png"
 
-export default function FormularioInicial({
-  mesa,
-  setMesa,
-  nome,
-  setNome,
-  setListaClientes,
-}: {
-  mesa: string;
-  setMesa: React.Dispatch<React.SetStateAction<string>>;
-  nome: string;
-  setNome: React.Dispatch<React.SetStateAction<string>>;
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
-}) {
+export default function FormularioInicial(props: IFormularioInicialProps) {
+  const { mesa, setMesa, nome, setNome, setListaClientes } = props;
+
   const navigate = useNavigate();
 
   function criaMesa(e: React.FormEvent<HTMLFormElement>) {
@@ -30,8 +21,10 @@ export default function FormularioInicial({
 
   return (
     <>
-      <h1 className="form_title">Criar nova mesa</h1>
+      <h1 className="page_title">Racha conta</h1>
+      {/* <img src={imagem} alt="Ilustracao do Racha conta" className="page_image" /> */}
       <form className="form_cointainer" onSubmit={(e) => criaMesa(e)}>
+        <h2 className="form_title">Nova mesa</h2>
         <label htmlFor="mesa" className="form_labels">
           Nome da mesa
         </label>

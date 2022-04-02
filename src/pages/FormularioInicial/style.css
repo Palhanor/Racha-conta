@@ -1,49 +1,61 @@
+.page_title {
+  font-size: 2rem;
+  margin: 1.6rem 5%;
+  font-weight: 600;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+/* .page_image {
+  display: block;
+  margin: auto;
+} */
+
 .form_cointainer {
-  width: 90%;
-  margin: 1rem auto 2rem;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #ebf1f5, #fefefe);
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.08),
-    -10px -10px 15px rgba(255, 255, 255, 0.8);
-  padding: 1.5rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-radius: 40px 40px 0 0;
+  background: #FFFFFF;
+  padding: 2rem;
   box-sizing: border-box;
 }
 
 .form_title {
-  font-size: 1.4rem;
-  margin: 1.6rem 5%;
+  font-size: 1.6rem;
+  margin: 0 0 1.8rem;
   font-weight: 600;
-  text-align: center;
 }
 
 .form_labels {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: rgb(53, 53, 53);
+  display: none;
 }
 
 .form_input {
-  width: 90%;
-  border-radius: 5px;
+  width: 100%;
   border: none;
-  padding: .8rem;
-  margin-bottom: 0.8rem;
-  margin-top: 0.5rem;
+  border-bottom: 1px solid #426D77;
+  padding: .8rem 0 .4rem;
+  font-size: 1rem;
+  margin-bottom: 1.2rem;
   display: block;
-  background-color: #dde5e9;
+  font-family: inherit;
 }
 
 .form_input:focus {
   outline: none;
+  border-bottom: 2px solid #426D77;
 }
 
 .form_button {
   display: block;
-  margin: 1.5rem auto 0;
-  width: 50%;
-  padding: 0.5rem;
+  margin: 2.5rem auto 1rem;
+  width: 100%;
+  padding: 0.8rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #b1c0c7;
+  background-color: #426D77;
+  font-family: inherit;
+  color: #FFFFFF;
 }

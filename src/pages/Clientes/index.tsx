@@ -1,19 +1,23 @@
-import { useState } from "react";
-import ICliente from "../../interfaces/cliente";
+// Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
+
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Navegacao from "../../components/Navegacao";
+import { IClientesProps } from "../../interfaces/props";
 import contador from "../../utils/contador";
-import Cliente from "./Cliente";
+import ItemCliente from "./ItemCliente";
 import "./style.css";
 
-export default function Clientes({
-  mesa,
-  listaClientes,
-  setListaClientes,
-}: {
-  mesa: string;
-  listaClientes: ICliente[];
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
-}) {
-  const [cliente, setCliente] = useState("");
+export default function Clientes(props: IClientesProps) {
+  const { mesa, listaClientes, setListaClientes } = props;
+  const [cliente, setCliente] = useState<string>("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (mesa === "") {
+      navigate("/");
+    }
+  });
 
   function novoCliente(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,16 +30,16 @@ export default function Clientes({
 
   return (
     <>
-      <h1 className="clientes_title">{mesa}</h1>
       <form className="clientes_form" onSubmit={(e) => novoCliente(e)}>
+        <h2 className="clientes_title">Novo cliente</h2>
         <label htmlFor="cliente" className="clientes_label">
-          Adicionar cliente
+          Novo cliente
         </label>
         <input
           type="text"
           name="cliente"
           id="cliente"
-          placeholder="Adicionar um novo cliente"
+          placeholder="Nome do cliente"
           className="clientes_input"
           value={cliente}
           onChange={(e) => setCliente(e.target.value)}
@@ -46,9 +50,10 @@ export default function Clientes({
       <h2 className="clientes_lista-title">Clientes</h2>
       <ul className="clientes_lista">
         {listaClientes.map((dadosCliente) => (
-          <Cliente key={dadosCliente.id} {...dadosCliente} />
+          <ItemCliente key={dadosCliente.id} {...dadosCliente} />
         ))}
       </ul>
+      <Navegacao />
     </>
   );
 }

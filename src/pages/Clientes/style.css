@@ -1,59 +1,56 @@
-.clientes_title {
-    font-size: 1.4rem;
-    margin: 1.6rem 5%;
-    font-weight: 600;
-    text-align: center;
-}
-
 .clientes_form {
-    width: 90%;
-    margin: 1rem auto 2rem;
-    border-radius: 10px;
-    background: linear-gradient(135deg, #ebf1f5, #fefefe);
-    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.08),
-      -10px -10px 15px rgba(255, 255, 255, 0.8);
-    padding: 1.5rem;
+    width: 100%;
+    margin: 0 auto 2rem;
+    border-radius: 0 0 40px 40px;
+    background: #FFFFFF;
+    padding: 2rem;
     box-sizing: border-box;
 }
 
+.clientes_title {
+    font-size: 1.4rem;
+    margin: .8rem 0 2rem;
+    font-weight: 600;
+}
+
 .clientes_label {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: rgb(53, 53, 53);
+    display: none;
 }
 
 .clientes_input {
-    width: 90%;
-    border-radius: 5px;
+    width: 100%;
     border: none;
-    padding: .8rem;
-    margin-bottom: 0.8rem;
-    margin-top: 0.5rem;
+    border-bottom: 1px solid #426D77;
+    padding: .8rem 0 .4rem;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
     display: block;
-    background-color: #dde5e9;
+    font-family: inherit;
 }
 
 .clientes_input:focus {
     outline: none;
+    border-bottom: 2px solid #426D77;
 }
 
 .clientes_button {
     display: block;
-    margin: 1.5rem auto 0;
-    width: 50%;
-    padding: 0.5rem;
+    margin: 2.5rem auto 1rem;
+    width: 100%;
+    padding: 0.8rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    background-color: #b1c0c7;
+    background-color: #426D77;
+    font-family: inherit;
+    color: #FFFFFF;
 }
 
 .clientes_lista-title {
     font-size: 1.4rem;
-    color: rgb(44, 44, 44);
-    margin: 1rem 0 1.5rem;
+    color: #FFFFFF;
+    margin: 1rem 5% 1.5rem;
     font-weight: 600;
-    padding-left: 5%;
 }
 
 .clientes_lista {

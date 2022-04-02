@@ -1,11 +1,16 @@
+/* Passar um normalize */
+/* Começar a usar um sistema de estilo: CSS Modules, SASS, Styled Components, Tailwind */
+/* Criar uma padronização de estilo para elementos repetidos: container, input, label, button... */
+/* Criar uma padronização com variáveis para breakpoints, cores, bordas, padding... */
+
+@import url('https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Marcellus SC', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #F7FAFC;
+  background-color: #426D77;
   margin-bottom: 7rem;
 }
 

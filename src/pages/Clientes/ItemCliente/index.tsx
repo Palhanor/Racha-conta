@@ -3,12 +3,10 @@ import { Link } from "react-router-dom";
 import ICliente from "../../../interfaces/cliente";
 import "./style.css";
 
-export default function Cliente({
-  nome,
-  pedidos,
-  id,
-}: ICliente) {
-  const [custo, setCusto] = useState(0);
+export default function ItemCliente(props: ICliente) {
+  const { nome, pedidos, id } = props;
+
+  const [custo, setCusto] = useState<number>(0);
 
   useEffect(() => {
     const custoTotal = pedidos.reduce((total, item) => item.preco + total, 0);
@@ -22,16 +20,6 @@ export default function Cliente({
           <strong>{nome}</strong>
           <span className="clientes_custo">R$ {custo}</span>
         </div>
-        {pedidos.length > 0 && (
-          <ol className="clientes_lista-pedidos">
-            {pedidos.map((dadosPedido, index) => (
-              <li key={index} className="clientes_pedido">
-                {index + 1}. {dadosPedido.nome} - R${" "}
-                {dadosPedido.preco.toFixed(2)}
-              </li>
-            ))}
-          </ol>
-        )}
       </Link>
     </li>
   );
