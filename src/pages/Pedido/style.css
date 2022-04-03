@@ -1,0 +1,42 @@
+.pedido_container {
+    width: 90%;
+    background-color: white;
+    list-style: none;
+    margin: 2rem auto;
+    border-radius: 10px;
+    background: #FFFFFF;
+    padding: 0.8rem;
+    box-sizing: border-box;
+}
+
+.pedido_title {
+    font-weight: 700;
+    margin: 0 0 1rem;
+    font-size: 1.8rem;
+}
+
+.pedido_dados {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pedido_autores {
+    font-size: .9rem;
+    color: rgb(107, 107, 107);
+}
+
+.pedido_container-custo {
+    color: rgb(160, 19, 19);
+    font-weight: 500;
+}
+
+.pedido_clientes-title {
+    font-size: 1.4rem;
+    color: #FFFFFF;
+    margin: 1rem 5% 1.5rem;
+    font-weight: 600;
+}
+
+.pedido_clientes-lista {
+    padding: 0;
+}

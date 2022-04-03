@@ -1,11 +1,12 @@
 // 1. Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
+// 2. Não pode permitir dois clientes com nomes iguais (o nome é usado como valor do multiselect)
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
 import { IClientesProps } from "../../interfaces/props";
 import contador from "../../utils/contador";
-import ItemCliente from "./ItemCliente";
+import Item from "./Item";
 import "./style.css";
 
 export default function Clientes(props: IClientesProps) {
@@ -50,7 +51,7 @@ export default function Clientes(props: IClientesProps) {
       <h2 className="clientes_lista-title">Clientes</h2>
       <ul className="clientes_lista">
         {listaClientes.map((dadosCliente) => (
-          <ItemCliente key={dadosCliente.id} {...dadosCliente} />
+          <Item key={dadosCliente.id} {...dadosCliente} />
         ))}
       </ul>
       <Navegacao />

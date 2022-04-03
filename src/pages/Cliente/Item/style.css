@@ -1,0 +1,26 @@
+.container_nome-pedido {
+    width: 90%;
+    background-color: white;
+    list-style: none;
+    margin: 1rem auto;
+    border-radius: 10px;
+    background: #FFFFFF;
+    padding: 0.8rem;
+    box-sizing: border-box;
+}
+
+.container_conteudo-pedido {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total-custo-pedido {
+    font-size: .8rem;
+    color: rgb(70, 70, 70);
+}
+
+.custo-dividido-pedido {
+    color: rgb(160, 19, 19);
+    font-weight: 500;
+    text-align: right;
+}

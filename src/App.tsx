@@ -55,8 +55,14 @@ function App() {
             />
           }
         />
-        <Route path="cliente/:id" element={<Cliente listaClientes={listaClientes} />} />
-        <Route path="pedido/:id" element={<Pedido listaPedidos={listaPedidos} />} />
+        <Route
+          path="cliente/:id"
+          element={<Cliente listaClientes={listaClientes} />}
+        />
+        <Route
+          path="pedido/:id"
+          element={<Pedido listaPedidos={listaPedidos} />}
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

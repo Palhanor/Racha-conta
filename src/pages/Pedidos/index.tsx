@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import Navegacao from "../../components/Navegacao";
 import { IPedidosProps } from "../../interfaces/props";
-import ItemPedido from "./ItemPedido";
+import Item from "./Item";
 import ICliente from "../../interfaces/cliente";
 import "./style.css";
 
@@ -133,7 +133,7 @@ export default function Pedidos(props: IPedidosProps) {
       {listaPedidos.length > 0 ? (
         <ul className="pedidos_lista">
           {listaPedidos.map((dadosPedido, index) => (
-            <ItemPedido key={index} {...dadosPedido} />
+            <Item key={index} {...dadosPedido} />
           ))}
         </ul>
       ) : (

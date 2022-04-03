@@ -2,7 +2,7 @@
 
 import { Link } from "react-router-dom";
 import { FaUserTie, FaClipboardList } from "react-icons/fa";
-import { MdExitToApp } from "react-icons/md";
+// import { MdExitToApp } from "react-icons/md";
 import "./style.css";
 import { IconContext } from "react-icons";
 
@@ -19,11 +19,11 @@ export default function Navegacao() {
       text: "Pedidos",
       icon: <IconContext.Provider value={{color: "#FFFFFF"}}><FaClipboardList size={20} /></IconContext.Provider>
     },
-    {
-      url: "/sair",
-      text: "Sair",
-      icon: <IconContext.Provider value={{color: "#FFFFFF"}}><MdExitToApp size={20} /></IconContext.Provider>
-    }
+    // {
+    //   url: "/sair",
+    //   text: "Sair",
+    //   icon: <IconContext.Provider value={{color: "#FFFFFF"}}><MdExitToApp size={20} /></IconContext.Provider>
+    // }
   ];
 
   return (

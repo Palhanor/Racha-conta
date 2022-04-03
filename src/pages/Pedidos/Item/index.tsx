@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import IPedido from "../../../interfaces/pedido";
 import "./style.css";
 
-export default function ItemPedido({ nome, preco, autores }: IPedido) {
+export default function Item({ nome, preco, autores }: IPedido) {
   const navigate = useNavigate();
 
   return (
