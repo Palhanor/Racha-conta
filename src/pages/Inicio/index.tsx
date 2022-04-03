@@ -1,3 +1,5 @@
+// Icone usado: https://www.pixeltrue.com/free-packs/product-management
+
 // 1. Importar a imagem como um Componente SVG
 // 2. Resolver o problema de renderizacao da pagina na construcao inicial do componente
 
@@ -18,7 +20,7 @@ export default function Inicio(props: IFormularioInicialProps) {
       ...listaAnterior,
       { nome: nome, pedidos: [], total: 0, id: contador() },
     ]);
-    navigate("/clientes");
+    navigate("/clientes", { replace: true });
   }
 
   return (

@@ -1,9 +1,12 @@
-// 1. Fazer ajustes no sitema de multiselect
-    // https://www.npmjs.com/package/multiselect-react-dropdown
-// 2. Usar mascara de dinheiro no input de preco
-    // https://www.npmjs.com/package/react-currency-format
-// 3. Fazer tratamento para impedir o cadastro de pedido sem um autor
-// 4. Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
+// Icone usado: https://www.pixeltrue.com/free-packs/error-state
+// Biblioteca de multiselect usada: https://www.npmjs.com/package/multiselect-react-dropdown
+
+// 1. Usar mascara de dinheiro no input de preco
+// https://www.npmjs.com/package/react-currency-format
+// 2. Fazer tratamento para impedir o cadastro de pedido sem um autor
+// 3. Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
+// 4. Criar sistema de ids para os pedidos
+
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -33,7 +36,8 @@ export default function Pedidos(props: IPedidosProps) {
   });
 
   const estiloMultiselectComponent = {
-    searchBox: { // Input e container das tags
+    searchBox: {
+      // Input e container das tags
       cursor: "pointer",
       color: "#426D77",
       border: "1px solid #426D77",
@@ -42,11 +46,13 @@ export default function Pedidos(props: IPedidosProps) {
       padding: ".5rem",
       fontFamily: "inherit",
     },
-    chips: { // Tag contendo o valor selecionado
+    chips: {
+      // Tag contendo o valor selecionado
       background: "#426D77",
       borderRadius: "5px",
     },
-    optionContainer: { // Lista contendo os valores para selecionar
+    optionContainer: {
+      // Lista contendo os valores para selecionar
       marginTop: "-1rem",
     },
   };
@@ -64,13 +70,16 @@ export default function Pedidos(props: IPedidosProps) {
     const novaListaClientes: ICliente[] = listaClientes.map((dadosCliente) => {
       const listaDeQuemFezPedido = [...novoPedido.autores];
       if (listaDeQuemFezPedido.indexOf(dadosCliente.nome) === -1) {
-        return {...dadosCliente}
+        return { ...dadosCliente };
       } else {
-        return {...dadosCliente, pedidos: [...dadosCliente.pedidos, novoPedido]}
+        return {
+          ...dadosCliente,
+          pedidos: [...dadosCliente.pedidos, novoPedido],
+        };
       }
-    })
+    });
     setListaClientes(novaListaClientes);
-    
+
     setNomePedido("");
     setPrecoPedido(0);
   }
@@ -121,12 +130,19 @@ export default function Pedidos(props: IPedidosProps) {
         <button className="pedidos_button">Adicionar</button>
       </form>
       <h2 className="pedidos_lista-title">Pedidos</h2>
-      {listaPedidos.length > 0 ? 
-      <ul className="pedidos_lista">
-        {listaPedidos.map((dadosPedido, index) => (
-          <ItemPedido key={index} {...dadosPedido} />
-        ))}
-      </ul> : <img src="assets/Tissue.png" alt="Ilustração de um rolo de papel higiênico vazio" className="pedidos_vazio" /> }
+      {listaPedidos.length > 0 ? (
+        <ul className="pedidos_lista">
+          {listaPedidos.map((dadosPedido, index) => (
+            <ItemPedido key={index} {...dadosPedido} />
+          ))}
+        </ul>
+      ) : (
+        <img
+          src="assets/Tissue.png"
+          alt="Ilustração de um rolo de papel higiênico vazio"
+          className="pedidos_vazio"
+        />
+      )}
       <Navegacao />
     </>
   );

@@ -1,4 +1,5 @@
 // 1. Passar para o sistema de routes.js usando gerenciamento de estado global para não guardar estados no arquivo de rotas
+// 2. Quando digita uma rota nova ele crasha e volta para o inicio
 
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -8,6 +9,8 @@ import Pedidos from "./pages/Pedidos";
 import NotFound from "./pages/NotFound";
 import ICliente from "./interfaces/cliente";
 import IPedido from "./interfaces/pedido";
+import Cliente from "./pages/Cliente";
+import Pedido from "./pages/Pedido";
 
 function App() {
   const [mesa, setMesa] = useState<string>("");
@@ -52,6 +55,8 @@ function App() {
             />
           }
         />
+        <Route path="cliente/:id" element={<Cliente listaClientes={listaClientes} />} />
+        <Route path="pedido/:id" element={<Pedido listaPedidos={listaPedidos} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
