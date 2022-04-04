@@ -1,13 +1,6 @@
 // Icone usado: https://www.pixeltrue.com/free-packs/error-state
 // Biblioteca de multiselect usada: https://www.npmjs.com/package/multiselect-react-dropdown
 
-// 1. Usar mascara de dinheiro no input de preco
-// https://www.npmjs.com/package/react-currency-format
-// 2. Fazer tratamento para impedir o cadastro de pedido sem um autor
-// 3. Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
-// 4. Criar sistema de ids para os pedidos
-
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";

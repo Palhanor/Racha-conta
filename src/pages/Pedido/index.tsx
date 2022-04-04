@@ -1,8 +1,3 @@
-// 1. Passar dados do autor do pedido
-// 2. Usar o componente ItemCliente
-// 3. Criar um id para os pedidos
-// 4. Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
-
 import IPedido from "../../interfaces/pedido";
 import { useParams } from "react-router-dom";
 import NotFound from "../NotFound";

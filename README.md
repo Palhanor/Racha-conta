@@ -1,3 +1,72 @@
+## Próximos passos
+
+### GLOBAL
+1. Modificar o icone principal da aplicação dentro do navegador
+***
+
+### GESTÃO DE DADOS
+1. Usar um sistema de gestão de dados global através de ```Context API```, ```Recoil``` ou ```Redux```
+***
+
+### BUGS
+1. O sistema crasha com qualquer nova rota passada para ele
+2. Resolver o problema de renderizacao da pagina na construcao inicial do componente
+3. Em alguns momentos não pega a imagem do not found
+***
+
+### ROTAS DE NAVEGAÇÃO
+1. Configurar o routes.js e importar rodando dentro do index.tsx
+  * Deixar o sistema de rotas funcional no routes.js
+  * Resolver o problema do nested route com a pagina inicial ```"/"```
+  * Resolver a questao da condiçao para exibiçao do ```<Navegacao />``` apenas em Clientes, Pedidos, Cliente e Pedido
+  * Criar uma PaginaPadrao?
+***
+
+### ESTILIZAÇÃO
+1. Seguir o padrão BEM
+2. Usar o normalize CSS dentro do projeto
+3. Adicionar responsividade com media queries
+  * Criar um design para tablet e para desktop
+  * Desenvolver as alterações dentro do sistema
+4. Criar variaveis de padronização para a página
+  * Cores
+  * Espaçamentos
+  * Breakpoints
+5. Usar um sistema de estilização
+  * CSS Modules
+  * SASS
+  * Styled Components
+  * Tailwind
+6. Criar estilos e componentes padrão para elementos comuns
+  * Titulo
+  * Container
+  * Input
+  * Label
+  * Button
+***
+
+### COMPONENTES E UTILS
+1. Implementar sistema de ID para os pedidos
+2. Criar um sistema de active para a aba que está sendo usada no componente Navegacao
+3. Importar as ilustrações como um componente SVG ou uma váriavel JS para uma tag ```<img>```
+4. Criar página de extratos
+  * Adicionar um sistema de graficos para consumo por cliente e por pedido
+5. Aprimorar o sistema de ID dos clientes e pedidos
+  * Criar um sistema de id para pedidos e id para clientes separado
+  * Substituir o id do contador por um [UUID](https://www.npmjs.com/package/react-uuid)
+6. Gestão de cliente e pedido
+  * Permitir a deleção do cliente - Não pode apagar um cliente que vai deixar um pedido sem nenhum autor
+  * Permitir a edição do cliente - Nome...
+  * Permitir a deleção do pedido
+  * Permitir a edição do pedido - Nome, preço, autores... e não pode deixar o pedido sem autores
+7. Fazer tratamento de dados de fomulário
+  * Não pode permitir dois clientes com nomes iguais (o nome é usado como valor do ```Multiselect```)
+  * Não pode permitir que um pedido seja criado sem ao menos um autor
+  * Usar uma máscara monetária para o input de preço: [React Currency Format](https://www.npmjs.com/package/react-currency-format) 
+  * Modificar a fonte do placeholder do ```Multiselect```
+
+***
+***
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,7 +1,5 @@
 // Icone usado: https://www.pixeltrue.com/free-packs/error-state
 
-// 1. Em alguns momentos não pega a imagem do not found
-
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 

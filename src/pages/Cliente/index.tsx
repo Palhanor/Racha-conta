@@ -1,8 +1,3 @@
-// 1. Cirar pagina de cliente que recebe o id do cliente e exibe todas as informacoes do cliente em questao
-// 2. Permitir que o cliente seja apagado ou que seus dados sejam editados
-// 3. Criar um id para os pedidos
-// 4. Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
-
 import { useParams } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
 import ICliente from "../../interfaces/cliente";
@@ -41,7 +36,7 @@ export default function Cliente({
           </span>
         </div>
       </div>
-      <h2 className="cliente_pedidos-title">Pedidos</h2>
+      <h2 className="cliente_pedidos-title">Consumo</h2>
       <ul className="cliente_pedidos-lista">
         {cliente.pedidos.map((pedido, index) => (
           <Item key={index} pedido={pedido} />

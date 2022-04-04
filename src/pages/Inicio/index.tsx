@@ -1,8 +1,5 @@
 // Icone usado: https://www.pixeltrue.com/free-packs/product-management
 
-// 1. Importar a imagem como um Componente SVG
-// 2. Resolver o problema de renderizacao da pagina na construcao inicial do componente
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { IFormularioInicialProps } from "../../interfaces/props";

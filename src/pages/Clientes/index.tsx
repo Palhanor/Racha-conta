@@ -1,6 +1,3 @@
-// 1. Remover o <Navegacao> e passar para o sistema de rotas de forma condicional
-// 2. Não pode permitir dois clientes com nomes iguais (o nome é usado como valor do multiselect)
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";

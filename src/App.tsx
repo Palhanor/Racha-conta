@@ -1,6 +1,3 @@
-// 1. Passar para o sistema de routes.js usando gerenciamento de estado global para não guardar estados no arquivo de rotas
-// 2. Quando digita uma rota nova ele crasha e volta para o inicio
-
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Inicio from "./pages/Inicio";

@@ -1,4 +1,4 @@
-// 1. Criar um sistema de active para a aba que está sendo usada
+
 
 import { Link } from "react-router-dom";
 import { FaUserTie, FaClipboardList } from "react-icons/fa";
