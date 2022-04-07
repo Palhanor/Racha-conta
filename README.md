@@ -45,3 +45,4 @@
 - [ ] Permitir edição do nome do cliente ou dos autores, nome e preço do pedido (não pode deixar sem autores)
 - [ ] Adicionar o uso de localStorage para persistência dos dados
 - [ ] Ver questão de importar svg e png no React e CSS Module deprecated no Foruma da Alura
+- [ ] Problemas do HeshRouter para o deploy no Github

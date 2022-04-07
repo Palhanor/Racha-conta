@@ -10,8 +10,6 @@ import "./style.scss";
 export default function Navegacao() {
   const { pathname } = useLocation();
 
-  console.log(pathname);
-
   const branco = "#FFFFFF";
   const tema = "#a7c2c9";
 
