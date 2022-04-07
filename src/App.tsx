@@ -55,11 +55,22 @@ function App() {
         />
         <Route
           path="cliente/:id"
-          element={<Cliente listaClientes={listaClientes} />}
+          element={
+            <Cliente
+              listaClientes={listaClientes}
+              setListaClientes={setListaClientes}
+            />
+          }
         />
         <Route
-          path="pedido/:id"
-          element={<Pedido listaPedidos={listaPedidos} />}
+          path="pedido/:pageId"
+          element={
+            <Pedido
+              listaPedidos={listaPedidos}
+              setListaPedidos={setListaPedidos}
+              setListaClientes={setListaClientes}
+            />
+          }
         />
         <Route
           path="extrato"
@@ -72,7 +83,6 @@ function App() {
               setNome={setNome}
               setListaClientes={setListaClientes}
               setListaPedidos={setListaPedidos}
-
             />
           }
         />

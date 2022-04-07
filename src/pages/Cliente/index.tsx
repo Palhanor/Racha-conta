@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
 import ICliente from "../../interfaces/cliente";
 import NotFound from "../NotFound";
@@ -7,16 +7,25 @@ import "../../styles/global.scss";
 
 export default function Cliente({
   listaClientes,
+  setListaClientes,
 }: {
   listaClientes: ICliente[];
+  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
 }) {
   const { id } = useParams();
-  const cliente = listaClientes.find(
-    (dadosCliente) => dadosCliente.id === id
-  );
+  const cliente = listaClientes.find((dadosCliente) => dadosCliente.id === id);
+
+  const navigate = useNavigate();
 
   if (!cliente) {
     return <NotFound />;
+  }
+
+  function apagarCliente() {
+    setListaClientes((velhaLista) =>
+      velhaLista.filter(velhoCliente => velhoCliente.id !== id || velhoCliente.pedidos.length > 0)
+    );
+    navigate("/clientes");
   }
 
   return (
@@ -36,6 +45,14 @@ export default function Cliente({
               )
               .toFixed(2)}
           </span>
+        </div>
+        <div>
+          <button
+            className="global-element_button global-element_button--danger"
+            onClick={() => apagarCliente()}
+          >
+            Apagar
+          </button>
         </div>
       </div>
       <div className="global-list_container">

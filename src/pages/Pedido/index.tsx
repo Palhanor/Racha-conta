@@ -1,18 +1,46 @@
 import IPedido from "../../interfaces/pedido";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "../NotFound";
 import "../../styles/global.scss";
 import Item from "./Item";
 import Navegacao from "../../components/Navegacao";
+import ICliente from "../../interfaces/cliente";
 
-export default function Cliente({ listaPedidos }: { listaPedidos: IPedido[] }) {
-  const { id } = useParams();
-  const pedido = listaPedidos.find(
-    (dadosPedido) => dadosPedido.id === id
-  );
+export default function Cliente({
+  listaPedidos,
+  setListaPedidos,
+  setListaClientes,
+}: {
+  listaPedidos: IPedido[];
+  setListaPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>;
+  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
+}) {
+  const { pageId } = useParams();
+  const pedido = listaPedidos.find((dadosPedido) => dadosPedido.id === pageId);
+  const navigate = useNavigate();
 
   if (!pedido) {
     return <NotFound />;
+  }
+
+  function apagarPedido() {
+
+    setListaClientes((velhaListaClientes) =>
+      velhaListaClientes.map((dadosCliente) => {
+        const { nome, pedidos, id } = dadosCliente;
+        const novosPedidos = pedidos.filter(pedido => pedido.id !== pageId)
+        return {
+          nome: nome,
+          pedidos: novosPedidos,
+          id: id,
+        };
+      })
+    );
+
+    setListaPedidos((velhaLista) =>
+      velhaLista.filter((velhoPedido) => velhoPedido.id !== pageId)
+    );
+    navigate("/pedidos");
   }
 
   return (
@@ -28,8 +56,16 @@ export default function Cliente({ listaPedidos }: { listaPedidos: IPedido[] }) {
             R$ {pedido.preco.toFixed(2)}
           </span>
         </div>
+        <div>
+          <button
+            className="global-element_button global-element_button--danger"
+            onClick={() => apagarPedido()}
+          >
+            Apagar
+          </button>
+        </div>
       </div>
-      <div  className="global-list_container">
+      <div className="global-list_container">
         <h2 className="global-list_title">Autores</h2>
         <ul className="global-list">
           {pedido.autores.map((autor, index) => (
