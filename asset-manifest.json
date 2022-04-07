@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Racha-conta/static/css/main.b900df2f.css",
-    "main.js": "/Racha-conta/static/js/main.f5cf4aba.js",
+    "main.js": "/Racha-conta/static/js/main.65993f08.js",
     "static/media/InitialIllustration.svg": "/Racha-conta/static/media/InitialIllustration.8cb07572e75f4461d9ae261053191b65.svg",
     "static/media/ErrorIllustration.svg": "/Racha-conta/static/media/ErrorIllustration.d5e76db712e8e89fb6251ef046f75c9e.svg",
     "index.html": "/Racha-conta/index.html",
     "main.b900df2f.css.map": "/Racha-conta/static/css/main.b900df2f.css.map",
-    "main.f5cf4aba.js.map": "/Racha-conta/static/js/main.f5cf4aba.js.map"
+    "main.65993f08.js.map": "/Racha-conta/static/js/main.65993f08.js.map"
   },
   "entrypoints": [
     "static/css/main.b900df2f.css",
-    "static/js/main.f5cf4aba.js"
+    "static/js/main.65993f08.js"
   ]
 }
