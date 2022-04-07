@@ -8,6 +8,7 @@ import ICliente from "./interfaces/cliente";
 import IPedido from "./interfaces/pedido";
 import Cliente from "./pages/Cliente";
 import Pedido from "./pages/Pedido";
+import Extrato from "./pages/Extrato";
 
 function App() {
   const [mesa, setMesa] = useState<string>("");
@@ -59,6 +60,21 @@ function App() {
         <Route
           path="pedido/:id"
           element={<Pedido listaPedidos={listaPedidos} />}
+        />
+        <Route
+          path="extrato"
+          element={
+            <Extrato
+              listaClientes={listaClientes}
+              listaPedidos={listaPedidos}
+              mesa={mesa}
+              setMesa={setMesa}
+              setNome={setNome}
+              setListaClientes={setListaClientes}
+              setListaPedidos={setListaPedidos}
+
+            />
+          }
         />
         <Route path="*" element={<NotFound />} />
       </Routes>

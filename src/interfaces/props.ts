@@ -22,3 +22,13 @@ export interface IPedidosProps {
   listaClientes: ICliente[];
   setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
 }
+
+export interface IExtratoProps {
+  listaClientes: ICliente[];
+  listaPedidos: IPedido[];
+  mesa: string;
+  setMesa: React.Dispatch<React.SetStateAction<string>>;
+  setNome: React.Dispatch<React.SetStateAction<string>>;
+  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
+  setListaPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>;
+}

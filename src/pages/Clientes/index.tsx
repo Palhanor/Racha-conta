@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
 import { IClientesProps } from "../../interfaces/props";
-import contador from "../../utils/contador";
+import { v4 as uuidv4 } from "uuid";
 import Item from "./Item";
-import "./style.css";
+import "../../styles/global.scss";
 
 export default function Clientes(props: IClientesProps) {
   const { mesa, listaClientes, setListaClientes } = props;
@@ -19,18 +19,28 @@ export default function Clientes(props: IClientesProps) {
 
   function novoCliente(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    if ((listaClientes.find((clienteVirificado) => clienteVirificado.nome === cliente))) {
+      alert("O nome dos clientes devem ser diferentes entre si");
+      setCliente("");
+      return;
+    }
+
     setListaClientes([
       ...listaClientes,
-      { nome: cliente, pedidos: [], id: contador() },
+      { nome: cliente, pedidos: [], id: uuidv4() },
     ]);
     setCliente("");
   }
 
   return (
     <>
-      <form className="clientes_form" onSubmit={(e) => novoCliente(e)}>
-        <h2 className="clientes_title">Novo cliente</h2>
-        <label htmlFor="cliente" className="clientes_label">
+      <form
+        className="global-form_container global-form_container--top"
+        onSubmit={(e) => novoCliente(e)}
+      >
+        <h1 className="global-form_title">Novo cliente</h1>
+        <label htmlFor="cliente" className="global-element_label">
           Novo cliente
         </label>
         <input
@@ -38,19 +48,23 @@ export default function Clientes(props: IClientesProps) {
           name="cliente"
           id="cliente"
           placeholder="Nome do cliente"
-          className="clientes_input"
+          className="global-element_input"
           value={cliente}
           onChange={(e) => setCliente(e.target.value)}
           required
         />
-        <button className="clientes_button">Adicionar</button>
+        <button className="global-element_button">Adicionar</button>
       </form>
-      <h2 className="clientes_lista-title">Clientes</h2>
-      <ul className="clientes_lista">
-        {listaClientes.map((dadosCliente) => (
-          <Item key={dadosCliente.id} {...dadosCliente} />
-        ))}
-      </ul>
+      <div className="global-list_container">
+        <div>
+          <h2 className="global-list_title">Clientes</h2>
+        </div>
+        <ul className="global-list">
+          {listaClientes.map((dadosCliente) => (
+            <Item key={dadosCliente.id} {...dadosCliente} />
+          ))}
+        </ul>
+      </div>
       <Navegacao />
     </>
   );

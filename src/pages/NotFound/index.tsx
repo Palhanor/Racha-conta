@@ -1,18 +1,20 @@
-// Icone usado: https://www.pixeltrue.com/free-packs/error-state
-
 import { useNavigate } from "react-router-dom";
-import "./style.css";
+import "../../styles/global.scss"
+const erro: string = require("../../assets/ErrorIllustration.svg").default;
 
 export default function NotFound() {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-
-    return (
-      <>
-        <h1 className="error_title">Página não encontrada!</h1>
-        <img src="assets/Error.svg" alt="Ilustração de uma televisão pegando fogo e exibindo o sinal de 404" className="error_image" />
-        <button className="error_return" onClick={() => navigate(-1)}>Retornar</button>
-      </>
-    );
-  }
-  
+  return (
+    <main>
+      <h1 className="global-element_title">Página não encontrada!</h1>
+      <img src={erro} alt="Imagem de erro 404" className="global-element_image" />
+      <button
+        className="global-element_button global-element_button--secondary"
+        onClick={() => navigate(-1)}
+      >
+        Retornar
+      </button>
+    </main>
+  );
+}

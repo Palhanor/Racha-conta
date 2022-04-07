@@ -1,5 +1,5 @@
 import IPedido from "../../../interfaces/pedido";
-import "./style.css"
+import "../../../styles/global.scss"
 
 export default function Item({
   autor,
@@ -9,10 +9,10 @@ export default function Item({
   pedido: IPedido;
 }) {
   return (
-    <li className="container_autor-pedido">
-      <div className="container_conteudo">
-        <strong>{autor}</strong>
-        <span className="custo-dividido">R${" "}{(pedido.preco / pedido.autores.length).toFixed(2)}</span>
+    <li className="global-list_item">
+      <div className="global-util_horizontal-align">
+        <strong className="global-list_item-title">{autor}</strong>
+        <span className="global-list_item-cost">R${" "}{(pedido.preco / pedido.autores.length).toFixed(2)}</span>
       </div>
     </li>
   );

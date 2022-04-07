@@ -1,6 +1,3 @@
-// Icone usado: https://www.pixeltrue.com/free-packs/error-state
-// Biblioteca de multiselect usada: https://www.npmjs.com/package/multiselect-react-dropdown
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
@@ -8,7 +5,8 @@ import Navegacao from "../../components/Navegacao";
 import { IPedidosProps } from "../../interfaces/props";
 import Item from "./Item";
 import ICliente from "../../interfaces/cliente";
-import "./style.css";
+import "../../styles/global.scss";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Pedidos(props: IPedidosProps) {
   const {
@@ -37,7 +35,7 @@ export default function Pedidos(props: IPedidosProps) {
       borderRadius: "5px",
       marginBottom: "1rem",
       padding: ".5rem",
-      fontFamily: "inherit",
+      fontFamily: 'Marcellus SC',
     },
     chips: {
       // Tag contendo o valor selecionado
@@ -53,10 +51,16 @@ export default function Pedidos(props: IPedidosProps) {
   function atribuirPedido(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
+    if (autoresPedido.length === 0) {
+      alert("Adicione ao menos um autor para o pedido")
+      return;
+    }
+
     const novoPedido = {
       nome: nomePedido,
       preco: precoPedido,
       autores: [...autoresPedido],
+      id: uuidv4()
     };
     setListaPedidos([...listaPedidos, novoPedido]);
 
@@ -79,8 +83,11 @@ export default function Pedidos(props: IPedidosProps) {
 
   return (
     <>
-      <form onSubmit={(e) => atribuirPedido(e)} className="pedidos_form">
-        <h2 className="pedidos_title">Novo pedido</h2>
+      <form
+        onSubmit={(e) => atribuirPedido(e)}
+        className="global-form_container global-form_container--top"
+      >
+        <h1 className="global-form_title">Novo pedido</h1>
         <Multiselect
           isObject={false}
           onRemove={(e) => {
@@ -93,7 +100,7 @@ export default function Pedidos(props: IPedidosProps) {
           placeholder="Autores do pedido"
           style={estiloMultiselectComponent}
         />
-        <label htmlFor="nomePedido" className="pedidos_label">
+        <label htmlFor="nomePedido" className="global-element_label">
           Nome do pedido
         </label>
         <input
@@ -101,41 +108,37 @@ export default function Pedidos(props: IPedidosProps) {
           name="nomePedido"
           id="nomePedido"
           placeholder="Nome do pedido"
-          className="pedidos_input"
+          className="global-element_input"
           value={nomePedido}
           onChange={(e) => setNomePedido(e.target.value)}
           required
         />
-        <label htmlFor="precoPedido" className="pedidos_label">
+        <label htmlFor="precoPedido" className="global-element_label">
           Preco do pedido
         </label>
         <input
           type="number"
           name="precoPedido"
           id="precoPedido"
-          className="pedidos_input"
+          className="global-element_input"
           step={0.01}
           min="0.01"
           value={precoPedido}
           onChange={(e) => setPrecoPedido(Number(e.target.value))}
           required
         />
-        <button className="pedidos_button">Adicionar</button>
+        <button className="global-element_button">Adicionar</button>
       </form>
-      <h2 className="pedidos_lista-title">Pedidos</h2>
-      {listaPedidos.length > 0 ? (
-        <ul className="pedidos_lista">
+      <div className="global-list_container">
+        <div>
+          <h2 className="global-list_title">Pedidos</h2>
+        </div>
+        <ul className="global-list">
           {listaPedidos.map((dadosPedido, index) => (
             <Item key={index} {...dadosPedido} />
           ))}
         </ul>
-      ) : (
-        <img
-          src="assets/Tissue.png"
-          alt="Ilustração de um rolo de papel higiênico vazio"
-          className="pedidos_vazio"
-        />
-      )}
+      </div>
       <Navegacao />
     </>
   );

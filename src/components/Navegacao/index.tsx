@@ -1,10 +1,7 @@
-
-
 import { Link } from "react-router-dom";
-import { FaUserTie, FaClipboardList } from "react-icons/fa";
-// import { MdExitToApp } from "react-icons/md";
-import "./style.css";
 import { IconContext } from "react-icons";
+import { BsPeopleFill, BsCartCheckFill, BsFileEarmarkTextFill } from "react-icons/bs";
+import "./style.scss";
 
 export default function Navegacao() {
 
@@ -12,18 +9,18 @@ export default function Navegacao() {
     {
       url: "/clientes",
       text: "Clientes",
-      icon: <IconContext.Provider value={{color: "#FFFFFF"}}><FaUserTie size={20} /></IconContext.Provider>
+      icon: <IconContext.Provider value={{color: "#FFFFFF"}}><BsPeopleFill size={20} /></IconContext.Provider>
     },
     {
       url: "/pedidos",
       text: "Pedidos",
-      icon: <IconContext.Provider value={{color: "#FFFFFF"}}><FaClipboardList size={20} /></IconContext.Provider>
+      icon: <IconContext.Provider value={{color: "#FFFFFF"}}><BsCartCheckFill size={20} /></IconContext.Provider>
     },
-    // {
-    //   url: "/sair",
-    //   text: "Sair",
-    //   icon: <IconContext.Provider value={{color: "#FFFFFF"}}><MdExitToApp size={20} /></IconContext.Provider>
-    // }
+    {
+      url: "/extrato",
+      text: "Extrato",
+      icon: <IconContext.Provider value={{color: "#FFFFFF"}}><BsFileEarmarkTextFill size={20} /></IconContext.Provider>
+    }
   ];
 
   return (

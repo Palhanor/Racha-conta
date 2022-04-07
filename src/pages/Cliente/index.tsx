@@ -3,7 +3,7 @@ import Navegacao from "../../components/Navegacao";
 import ICliente from "../../interfaces/cliente";
 import NotFound from "../NotFound";
 import Item from "./Item";
-import "./style.css";
+import "../../styles/global.scss";
 
 export default function Cliente({
   listaClientes,
@@ -12,7 +12,7 @@ export default function Cliente({
 }) {
   const { id } = useParams();
   const cliente = listaClientes.find(
-    (dadosCliente) => dadosCliente.id === Number(id)
+    (dadosCliente) => dadosCliente.id === id
   );
 
   if (!cliente) {
@@ -21,11 +21,13 @@ export default function Cliente({
 
   return (
     <>
-      <div className="cliente_container">
-        <h1 className="cliente_title">{cliente.nome}</h1>
-        <div className="cliente_dados">
-          <span className="cliente_num-pedidos">{cliente.pedidos.length} Pedido</span>
-          <span className="cliente_container-custo">
+      <div className="global-item_container">
+        <h1 className="global-item_container-title">{cliente.nome}</h1>
+        <div className="global-util_horizontal-align">
+          <span className="global-list_item-text">
+            {cliente.pedidos.length} Pedido
+          </span>
+          <span className="global-list_item-cost">
             R${" "}
             {cliente.pedidos
               .reduce(
@@ -36,12 +38,14 @@ export default function Cliente({
           </span>
         </div>
       </div>
-      <h2 className="cliente_pedidos-title">Consumo</h2>
-      <ul className="cliente_pedidos-lista">
-        {cliente.pedidos.map((pedido, index) => (
-          <Item key={index} pedido={pedido} />
-        ))}
-      </ul>
+      <div className="global-list_container">
+        <h2 className="global-list_title">Consumo</h2>
+        <ul className="global-list">
+          {cliente.pedidos.map((pedido, index) => (
+            <Item key={index} pedido={pedido} />
+          ))}
+        </ul>
+      </div>
       <Navegacao />
     </>
   );

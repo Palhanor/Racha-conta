@@ -1,22 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import IPedido from "../../../interfaces/pedido";
-import "./style.css";
+import "../../../styles/global.scss"
 
-export default function Item({ nome, preco, autores }: IPedido) {
+export default function Item({ nome, preco, autores, id }: IPedido) {
   const navigate = useNavigate();
 
   return (
     <li
-      className="pedidos_item"
+      className="global-list_item"
       onClick={() =>
-        navigate(`/pedido/${nome.toLowerCase().replace(" ", "-")}`)
+        navigate(`/pedido/${id}`)
       }
     >
-      <div className="pedidos_nome-custo">
-        <strong>{nome}</strong>
-        <span className="pedidos_custo">R$ {preco.toFixed(2)}</span>
+      <div className="global-util_horizontal-align global-util_margin-bottom">
+        <strong className="global-list_item-title">{nome}</strong>
+        <span className="global-list_item-cost">R$ {preco.toFixed(2)}</span>
       </div>
-      <div className="pedidos_nomes-autores">
+      <div className="global-list_item-text">
         {autores.map((autor) => autor).join(", ")}
       </div>
     </li>
