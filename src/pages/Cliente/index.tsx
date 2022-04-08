@@ -1,17 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
-import ICliente from "../../interfaces/cliente";
 import NotFound from "../NotFound";
 import Item from "./Item";
 import "../../styles/global.scss";
+import { IClienteProps } from "../../interfaces/props";
 
-export default function Cliente({
-  listaClientes,
-  setListaClientes,
-}: {
-  listaClientes: ICliente[];
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
-}) {
+export default function Cliente(props: IClienteProps) {
+  const { listaClientes, setListaClientes } = props;
   const { id } = useParams();
   const cliente = listaClientes.find((dadosCliente) => dadosCliente.id === id);
 
@@ -58,8 +53,8 @@ export default function Cliente({
       <div className="global-list_container">
         <h2 className="global-list_title">Consumo</h2>
         <ul className="global-list">
-          {cliente.pedidos.map((pedido, index) => (
-            <Item key={index} pedido={pedido} />
+          {cliente.pedidos.map(pedido => (
+            <Item key={pedido.id} {...pedido} />
           ))}
         </ul>
       </div>

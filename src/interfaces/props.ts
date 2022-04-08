@@ -1,7 +1,7 @@
 import ICliente from "./cliente";
 import IPedido from "./pedido";
 
-export interface IFormularioInicialProps {
+export interface IInicioProps {
   mesa: string;
   setMesa: React.Dispatch<React.SetStateAction<string>>;
   nome: string;
@@ -31,4 +31,15 @@ export interface IExtratoProps {
   setNome: React.Dispatch<React.SetStateAction<string>>;
   setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
   setListaPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>;
+}
+
+export interface IClienteProps {
+  listaClientes: ICliente[];
+  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>
+}
+
+export interface IPedidoProps {
+  listaPedidos: IPedido[];
+  setListaPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>;
+  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
 }

@@ -134,8 +134,8 @@ export default function Pedidos(props: IPedidosProps) {
           <h2 className="global-list_title">Pedidos</h2>
         </div>
         <ul className="global-list">
-          {listaPedidos.map((dadosPedido, index) => (
-            <Item key={index} {...dadosPedido} />
+          {listaPedidos.map(dadosPedido => (
+            <Item key={dadosPedido.id} {...dadosPedido} />
           ))}
         </ul>
       </div>

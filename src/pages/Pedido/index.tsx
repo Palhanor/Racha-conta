@@ -1,20 +1,12 @@
-import IPedido from "../../interfaces/pedido";
 import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "../NotFound";
 import "../../styles/global.scss";
 import Item from "./Item";
 import Navegacao from "../../components/Navegacao";
-import ICliente from "../../interfaces/cliente";
+import { IPedidoProps } from "../../interfaces/props";
 
-export default function Cliente({
-  listaPedidos,
-  setListaPedidos,
-  setListaClientes,
-}: {
-  listaPedidos: IPedido[];
-  setListaPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>;
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
-}) {
+export default function Cliente(props: IPedidoProps) {
+  const { listaPedidos, setListaPedidos, setListaClientes } = props;
   const { pageId } = useParams();
   const pedido = listaPedidos.find((dadosPedido) => dadosPedido.id === pageId);
   const navigate = useNavigate();

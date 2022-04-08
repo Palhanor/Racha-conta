@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import ICliente from "../../../interfaces/cliente";
 import "../../../styles/global.scss"
 
-export default function Item({ nome, pedidos, id }: ICliente) {
+export default function Item(props: ICliente) {
+  const { nome, pedidos, id } = props;
   const [custo, setCusto] = useState<number>(0);
   const navigate = useNavigate();
 

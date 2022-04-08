@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Inicio from "./pages/Inicio";
 import Clientes from "./pages/Clientes";
 import Pedidos from "./pages/Pedidos";
@@ -16,79 +16,37 @@ function App() {
   const [listaClientes, setListaClientes] = useState<ICliente[]>([]);
   const [listaPedidos, setListaPedidos] = useState<IPedido[]>([]);
 
+  const pedidosProps = {
+    mesa,
+    listaPedidos,
+    setListaPedidos,
+    listaClientes,
+    setListaClientes,
+  };
+  const extratoProps = {
+    listaClientes,
+    listaPedidos,
+    mesa,
+    setMesa,
+    setNome,
+    setListaClientes,
+    setListaPedidos,
+  };
+  const inicioProps = { mesa, setMesa, nome, setNome, setListaClientes };
+  const clientesProps = { mesa, listaClientes, setListaClientes };
+  const clienteProps = { listaClientes, setListaClientes };
+  const pedidoProps = { listaPedidos, setListaPedidos, setListaClientes };
+
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Inicio
-              mesa={mesa}
-              setMesa={setMesa}
-              nome={nome}
-              setNome={setNome}
-              setListaClientes={setListaClientes}
-            />
-          }
-        />
-        <Route
-          path="clientes"
-          element={
-            <Clientes
-              mesa={mesa}
-              listaClientes={listaClientes}
-              setListaClientes={setListaClientes}
-            />
-          }
-        />
-        <Route
-          path="pedidos"
-          element={
-            <Pedidos
-              mesa={mesa}
-              listaPedidos={listaPedidos}
-              setListaPedidos={setListaPedidos}
-              listaClientes={listaClientes}
-              setListaClientes={setListaClientes}
-            />
-          }
-        />
-        <Route
-          path="cliente/:id"
-          element={
-            <Cliente
-              listaClientes={listaClientes}
-              setListaClientes={setListaClientes}
-            />
-          }
-        />
-        <Route
-          path="pedido/:pageId"
-          element={
-            <Pedido
-              listaPedidos={listaPedidos}
-              setListaPedidos={setListaPedidos}
-              setListaClientes={setListaClientes}
-            />
-          }
-        />
-        <Route
-          path="extrato"
-          element={
-            <Extrato
-              listaClientes={listaClientes}
-              listaPedidos={listaPedidos}
-              mesa={mesa}
-              setMesa={setMesa}
-              setNome={setNome}
-              setListaClientes={setListaClientes}
-              setListaPedidos={setListaPedidos}
-            />
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<Inicio {...inicioProps} />} />
+      <Route path="clientes" element={<Clientes {...clientesProps} />} />
+      <Route path="pedidos" element={<Pedidos {...pedidosProps} />} />
+      <Route path="cliente/:id" element={<Cliente {...clienteProps} />} />
+      <Route path="pedido/:pageId" element={<Pedido {...pedidoProps} />} />
+      <Route path="extrato" element={<Extrato {...extratoProps} />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
   );
 }
 

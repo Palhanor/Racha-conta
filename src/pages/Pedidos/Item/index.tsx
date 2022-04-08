@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import IPedido from "../../../interfaces/pedido";
 import "../../../styles/global.scss"
 
-export default function Item({ nome, preco, autores, id }: IPedido) {
+export default function Item(props: IPedido) {
+  const { nome, preco, autores, id }= props;
   const navigate = useNavigate();
 
   return (
