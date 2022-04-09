@@ -20,7 +20,7 @@ export default function Item(props: ICliente) {
     <li className="global-list_item" onClick={() => navigate(`/cliente/${id}`)} >
       <div className="global-util_horizontal-align global-util_margin-bottom">
         <strong className="global-list_item-title">{nome}</strong>
-        <span className="global-list_item-cost">R$ {custo.toFixed(2)}</span>
+        <span className="global-list_item-cost">R$ {custo.toLocaleString("BRL")}</span>
       </div>
       <span className="global-list_item-text">
         {pedidos.length} Pedido{pedidos.length === 1 ? "" : "s"}

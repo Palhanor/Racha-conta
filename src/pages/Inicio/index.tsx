@@ -3,17 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { IInicioProps } from "../../interfaces/props";
 import "../../styles/global.scss";
 import { v4 as uuidv4 } from "uuid";
-import {
-  titleProps,
-  imgProps,
-  formProps,
-  formTitleProps,
-  labelMesaProps,
-  inputMesaProps,
-  labelNomeProps,
-  inputNomeProps,
-  buttonProps,
-} from "./props";
+import * as Exattrs from "./Exattrs";
 const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
@@ -33,25 +23,23 @@ export default function Inicio(props: IInicioProps) {
 
   return (
     <>
-      <h1 {...titleProps}>Racha conta</h1>
-      <img {...imgProps} src={ilustracao} alt="Ilustracao do Racha conta" />
-      <form {...formProps} onSubmit={(e) => criaMesa(e)}>
-        <h2 {...formTitleProps}>Nova mesa</h2>
-        <label {...labelMesaProps}>Nome da mesa</label>
+      <h1 {...Exattrs.title}>Racha conta</h1>
+      <img {...Exattrs.image} src={ilustracao} alt="Ilustracao do Racha conta" />
+      <form {...Exattrs.form} onSubmit={(e) => criaMesa(e)}>
+        <h2 {...Exattrs.formTitle}>Nova mesa</h2>
+        <label {...Exattrs.labelMesa}>Nome da mesa</label>
         <input
-          {...inputMesaProps}
+          {...Exattrs.inputMesa}
           value={mesa}
           onChange={(e) => setMesa(e.target.value)}
         />
-        <label {...labelNomeProps}>Nome do usuário</label>
+        <label {...Exattrs.labelNome}>Nome do usuário</label>
         <input
-          {...inputNomeProps}
+          {...Exattrs.inputNome}
           value={nome}
           onChange={(e) => setNome(e.target.value)}
         />
-        <button {...buttonProps}>
-          Criar
-        </button>
+        <button {...Exattrs.button}>Criar</button>
       </form>
     </>
   );

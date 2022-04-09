@@ -15,7 +15,7 @@ export default function Item(props: IPedido) {
     >
       <div className="global-util_horizontal-align global-util_margin-bottom">
         <strong className="global-list_item-title">{nome}</strong>
-        <span className="global-list_item-cost">R$ {preco.toFixed(2)}</span>
+        <span className="global-list_item-cost">R$ {(preco).toLocaleString("BRL")}</span>
       </div>
       <div className="global-list_item-text">
         {autores.map((autor) => autor).join(", ")}

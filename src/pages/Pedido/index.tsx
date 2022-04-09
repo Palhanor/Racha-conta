@@ -45,7 +45,7 @@ export default function Cliente(props: IPedidoProps) {
             {pedido.autores.length === 1 ? "" : "es"}
           </span>
           <span className="global-list_item-cost">
-            R$ {pedido.preco.toFixed(2)}
+            R$ {pedido.preco.toLocaleString("BRL")}
           </span>
         </div>
         <div>

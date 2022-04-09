@@ -11,11 +11,11 @@ export default function Item(props: IPedido) {
           <strong className="global-list_item-title">{nome}</strong>{" "}
           &#183;{" "}
           <span className="global-list_item-text">
-            R$ {preco.toFixed(2)}
+            R$ {preco.toLocaleString("BRL")}
           </span>
         </div>
         <span className="global-list_item-cost">
-          R$ {(preco / autores.length).toFixed(2)}
+          R$ {(preco / autores.length).toLocaleString("BRL")}
         </span>
       </div>
     </li>

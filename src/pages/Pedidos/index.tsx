@@ -18,7 +18,7 @@ export default function Pedidos(props: IPedidosProps) {
   } = props;
 
   const [nomePedido, setNomePedido] = useState<string>("");
-  const [precoPedido, setPrecoPedido] = useState<number>(0);
+  const [precoPedido, setPrecoPedido] = useState<number | null>(0);
   const [autoresPedido, setAutoresPedido] = useState<string[]>([]);
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ export default function Pedidos(props: IPedidosProps) {
       borderRadius: "5px",
       marginBottom: "1rem",
       padding: ".5rem",
-      fontFamily: 'Marcellus SC',
+      fontFamily: "Marcellus SC",
     },
     chips: {
       // Tag contendo o valor selecionado
@@ -52,15 +52,19 @@ export default function Pedidos(props: IPedidosProps) {
     e.preventDefault();
 
     if (autoresPedido.length === 0) {
-      alert("Adicione ao menos um autor para o pedido")
+      alert("Adicione ao menos um autor para o pedido");
+      return;
+    }
+    if (!precoPedido) {
+      alert("Adicione um preço para o pedido");
       return;
     }
 
     const novoPedido = {
       nome: nomePedido,
-      preco: precoPedido,
+      preco: precoPedido / 100,
       autores: [...autoresPedido],
-      id: uuidv4()
+      id: uuidv4(),
     };
     setListaPedidos([...listaPedidos, novoPedido]);
 
@@ -79,6 +83,21 @@ export default function Pedidos(props: IPedidosProps) {
 
     setNomePedido("");
     setPrecoPedido(0);
+  }
+
+  function mascaraPreco(valor: number | null) {
+    if (!valor) valor = 0;
+    const valorStr = valor.toString().padStart(3, "0");
+    const valorArr = valorStr.split("");
+    const newNumInt = valorArr.slice(0, valorArr.length - 2);
+    const newNumFloat = valorArr.slice(valorArr.length - 2, valorArr.length);
+    return `R$ ${newNumInt.join("")},${newNumFloat.join("")}`;
+  }
+
+  function pegaPreco(valor: string) {
+    const removeMascaraMonetaria = valor.replace("R$ ", "").replace(",", "");
+    const valorDoInputStr = parseInt(removeMascaraMonetaria);
+    return valorDoInputStr;
   }
 
   return (
@@ -117,14 +136,18 @@ export default function Pedidos(props: IPedidosProps) {
           Preco do pedido
         </label>
         <input
-          type="number"
+          type="text"
           name="precoPedido"
           id="precoPedido"
           className="global-element_input"
           step={0.01}
           min="0.01"
-          value={precoPedido}
-          onChange={(e) => setPrecoPedido(Number(e.target.value))}
+          value={mascaraPreco(precoPedido)}
+          onChange={(e) => setPrecoPedido(pegaPreco(e.target.value))}
+          onFocus={(e) => {
+            const valueLength = e.target.value.length * 2;
+            e.target.setSelectionRange(valueLength, valueLength);
+          }}
           required
         />
         <button className="global-element_button">Adicionar</button>
@@ -134,7 +157,7 @@ export default function Pedidos(props: IPedidosProps) {
           <h2 className="global-list_title">Pedidos</h2>
         </div>
         <ul className="global-list">
-          {listaPedidos.map(dadosPedido => (
+          {listaPedidos.map((dadosPedido) => (
             <Item key={dadosPedido.id} {...dadosPedido} />
           ))}
         </ul>

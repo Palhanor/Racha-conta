@@ -38,7 +38,7 @@ export default function Cliente(props: IClienteProps) {
                 (total, item) => item.preco / item.autores.length + total,
                 0
               )
-              .toFixed(2)}
+              .toLocaleString("BRL")}
           </span>
         </div>
         <div>
