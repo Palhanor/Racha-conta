@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
-import { IClientesProps } from "../../interfaces/props";
+import { IConsumidoresProps } from "../../interfaces/props";
 import { v4 as uuidv4 } from "uuid";
-import Item from "./Item";
+import ItemConsumidor from "./ItemConsumidor";
 import "../../styles/global.scss";
 
-export default function Clientes(props: IClientesProps) {
-  const { mesa, listaClientes, setListaClientes } = props;
-  const [cliente, setCliente] = useState<string>("");
+export default function Consumidores(props: IConsumidoresProps) {
+  const { conta, listaConsumidores, setListaConsumidores } = props;
+  const [novoConsumidor, setNovoConsumidor] = useState<string>("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (mesa === "") {
+    if (conta === "") {
       navigate("/");
     }
   });
@@ -20,17 +20,21 @@ export default function Clientes(props: IClientesProps) {
   function novoCliente(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if ((listaClientes.find((clienteVirificado) => clienteVirificado.nome === cliente))) {
+    if (
+      listaConsumidores.find(
+        (clienteVirificado) => clienteVirificado.nome === novoConsumidor
+      )
+    ) {
       alert("O nome dos clientes devem ser diferentes entre si");
-      setCliente("");
+      setNovoConsumidor("");
       return;
     }
 
-    setListaClientes([
-      ...listaClientes,
-      { nome: cliente, pedidos: [], id: uuidv4() },
+    setListaConsumidores([
+      ...listaConsumidores,
+      { nome: novoConsumidor, pedidos: [], id: uuidv4() },
     ]);
-    setCliente("");
+    setNovoConsumidor("");
   }
 
   return (
@@ -39,29 +43,27 @@ export default function Clientes(props: IClientesProps) {
         className="global-form_container global-form_container--top"
         onSubmit={(e) => novoCliente(e)}
       >
-        <h1 className="global-form_title">Novo cliente</h1>
+        <h1 className="global-form_title">Novo consumidor</h1>
         <label htmlFor="cliente" className="global-element_label">
-          Novo cliente
+          Novo consumidor
         </label>
         <input
           type="text"
           name="cliente"
           id="cliente"
-          placeholder="Nome do cliente"
+          placeholder="Nome do consumidor"
           className="global-element_input"
-          value={cliente}
-          onChange={(e) => setCliente(e.target.value)}
+          value={novoConsumidor}
+          onChange={(e) => setNovoConsumidor(e.target.value)}
           required
         />
         <button className="global-element_button">Adicionar</button>
       </form>
       <div className="global-list_container">
-        <div>
-          <h2 className="global-list_title">Clientes</h2>
-        </div>
+        <h2 className="global-list_title">Consumidores</h2>
         <ul className="global-list">
-          {listaClientes.map((dadosCliente) => (
-            <Item key={dadosCliente.id} {...dadosCliente} />
+          {listaConsumidores.map((dadosCliente) => (
+            <ItemConsumidor key={dadosCliente.id} {...dadosCliente} />
           ))}
         </ul>
       </div>

@@ -1,45 +1,45 @@
-import ICliente from "./cliente";
-import IPedido from "./pedido";
+import IConsumidor from "./consumidor";
+import ICompra from "./compra";
 
 export interface IInicioProps {
-  mesa: string;
-  setMesa: React.Dispatch<React.SetStateAction<string>>;
-  nome: string;
-  setNome: React.Dispatch<React.SetStateAction<string>>;
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
+  conta: string;
+  setConta: React.Dispatch<React.SetStateAction<string>>;
+  consumidor: string;
+  setConsumidor: React.Dispatch<React.SetStateAction<string>>;
+  setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>;
 }
 
-export interface IClientesProps {
-  mesa: string;
-  listaClientes: ICliente[];
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
+export interface IConsumidoresProps {
+  conta: string;
+  listaConsumidores: IConsumidor[];
+  setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>;
 }
 
-export interface IPedidosProps {
-  mesa: string;
-  listaPedidos: IPedido[];
-  setListaPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>;
-  listaClientes: ICliente[];
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
+export interface IComprasProps {
+  conta: string;
+  listaCompras: ICompra[];
+  setListaCompras: React.Dispatch<React.SetStateAction<ICompra[]>>;
+  listaConsumidores: IConsumidor[];
+  setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>;
+}
+
+export interface IConsumidorProps {
+  listaConsumidores: IConsumidor[];
+  setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>
+}
+
+export interface ICompraProps {
+  listaCompras: ICompra[];
+  setListaCompras: React.Dispatch<React.SetStateAction<ICompra[]>>;
+  setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>;
 }
 
 export interface IExtratoProps {
-  listaClientes: ICliente[];
-  listaPedidos: IPedido[];
-  mesa: string;
-  setMesa: React.Dispatch<React.SetStateAction<string>>;
+  listaConsumidores: IConsumidor[];
+  listaCompras: ICompra[];
+  conta: string;
+  setConta: React.Dispatch<React.SetStateAction<string>>;
   setNome: React.Dispatch<React.SetStateAction<string>>;
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
-  setListaPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>;
-}
-
-export interface IClienteProps {
-  listaClientes: ICliente[];
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>
-}
-
-export interface IPedidoProps {
-  listaPedidos: IPedido[];
-  setListaPedidos: React.Dispatch<React.SetStateAction<IPedido[]>>;
-  setListaClientes: React.Dispatch<React.SetStateAction<ICliente[]>>;
+  setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>;
+  setListaCompras: React.Dispatch<React.SetStateAction<ICompra[]>>;
 }

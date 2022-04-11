@@ -8,17 +8,17 @@ const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
 export default function Inicio(props: IInicioProps) {
-  const { mesa, setMesa, nome, setNome, setListaClientes } = props;
+  const { conta, setConta, consumidor, setConsumidor, setListaConsumidores } = props;
 
   const navigate = useNavigate();
 
   function criaMesa(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setListaClientes((listaAnterior) => [
+    setListaConsumidores((listaAnterior) => [
       ...listaAnterior,
-      { nome: nome, pedidos: [], total: 0, id: uuidv4() },
+      { nome: consumidor, pedidos: [], total: 0, id: uuidv4() },
     ]);
-    navigate("/clientes", { replace: true });
+    navigate("/consumidores", { replace: true });
   }
 
   return (
@@ -26,18 +26,18 @@ export default function Inicio(props: IInicioProps) {
       <h1 {...Exattrs.title}>Racha conta</h1>
       <img {...Exattrs.image} src={ilustracao} alt="Ilustracao do Racha conta" />
       <form {...Exattrs.form} onSubmit={(e) => criaMesa(e)}>
-        <h2 {...Exattrs.formTitle}>Nova mesa</h2>
-        <label {...Exattrs.labelMesa}>Nome da mesa</label>
+        <h2 {...Exattrs.formTitle}>Nova conta</h2>
+        <label {...Exattrs.labelMesa}>Nome da conta</label>
         <input
           {...Exattrs.inputMesa}
-          value={mesa}
-          onChange={(e) => setMesa(e.target.value)}
+          value={conta}
+          onChange={(e) => setConta(e.target.value)}
         />
-        <label {...Exattrs.labelNome}>Nome do usuário</label>
+        <label {...Exattrs.labelNome}>Nome do consumidor</label>
         <input
           {...Exattrs.inputNome}
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+          value={consumidor}
+          onChange={(e) => setConsumidor(e.target.value)}
         />
         <button {...Exattrs.button}>Criar</button>
       </form>

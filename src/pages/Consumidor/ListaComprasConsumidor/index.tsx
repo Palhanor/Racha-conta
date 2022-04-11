@@ -1,7 +1,7 @@
-import IPedido from "../../../interfaces/pedido";
+import ICompra from "../../../interfaces/compra";
 import "../../../styles/global.scss";
 
-export default function Item(props: IPedido) {
+export default function ListaComprasConsumidor(props: ICompra) {
   const { nome, preco, autores, id } = props
 
   return (

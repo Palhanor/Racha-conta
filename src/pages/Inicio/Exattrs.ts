@@ -17,29 +17,29 @@ export const formTitle: React.HTMLAttributes<HTMLHeadingElement> = {
 };
 
 export const labelMesa: React.LabelHTMLAttributes<HTMLLabelElement> = {
-  htmlFor: "mesa",
+  htmlFor: "conta",
   className: "global-element_label",
 };
 
 export const inputMesa: React.InputHTMLAttributes<HTMLInputElement> = {
   className: "global-element_input",
   type: "text",
-  name: "mesa",
-  id: "mesa",
-  placeholder: "Insira o nome da mesa",
+  name: "conta",
+  id: "conta",
+  placeholder: "Insira o nome da conta",
   required: true,
 };
 
 export const labelNome: React.LabelHTMLAttributes<HTMLLabelElement> = {
-  htmlFor: "nome",
+  htmlFor: "consumidor",
   className: "global-element_label",
 };
 
 export const inputNome: React.InputHTMLAttributes<HTMLInputElement> = {
   className: "global-element_input",
   type: "text",
-  name: "nome",
-  id: "nome",
+  name: "consumidor",
+  id: "consumidor",
   placeholder: "Insira seu nome",
   required: true,
 };

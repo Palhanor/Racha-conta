@@ -1,14 +1,14 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { IConsumidorProps } from "../../interfaces/props";
+import ListaComprasConsumidor from "./ListaComprasConsumidor";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
-import Item from "./Item";
 import "../../styles/global.scss";
-import { IClienteProps } from "../../interfaces/props";
 
-export default function Cliente(props: IClienteProps) {
-  const { listaClientes, setListaClientes } = props;
-  const { id } = useParams();
-  const cliente = listaClientes.find((dadosCliente) => dadosCliente.id === id);
+export default function Consumidor(props: IConsumidorProps) {
+  const { listaConsumidores, setListaConsumidores } = props;
+  const { ID } = useParams();
+  const cliente = listaConsumidores.find((dadosCliente) => dadosCliente.id === ID);
 
   const navigate = useNavigate();
 
@@ -17,10 +17,10 @@ export default function Cliente(props: IClienteProps) {
   }
 
   function apagarCliente() {
-    setListaClientes((velhaLista) =>
-      velhaLista.filter(velhoCliente => velhoCliente.id !== id || velhoCliente.pedidos.length > 0)
+    setListaConsumidores((velhaLista) =>
+      velhaLista.filter(velhoCliente => velhoCliente.id !== ID || velhoCliente.pedidos.length > 0)
     );
-    navigate("/clientes");
+    navigate("/consumidores");
   }
 
   return (
@@ -29,7 +29,7 @@ export default function Cliente(props: IClienteProps) {
         <h1 className="global-item_container-title">{cliente.nome}</h1>
         <div className="global-util_horizontal-align">
           <span className="global-list_item-text">
-            {cliente.pedidos.length} Pedido
+            {cliente.pedidos.length} Compra{cliente.pedidos.length === 1 ? "" : "s"}
           </span>
           <span className="global-list_item-cost">
             R${" "}
@@ -51,10 +51,10 @@ export default function Cliente(props: IClienteProps) {
         </div>
       </div>
       <div className="global-list_container">
-        <h2 className="global-list_title">Consumo</h2>
+        <h2 className="global-list_title">Compras</h2>
         <ul className="global-list">
           {cliente.pedidos.map(pedido => (
-            <Item key={pedido.id} {...pedido} />
+            <ListaComprasConsumidor key={pedido.id} {...pedido} />
           ))}
         </ul>
       </div>

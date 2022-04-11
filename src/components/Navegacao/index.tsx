@@ -16,11 +16,11 @@ export default function Navegacao() {
   const navData = [
     {
       id: 0,
-      url: "/clientes",
-      text: "Clientes",
+      url: "/consumidores",
+      text: "Consumidores",
       icon: (
         <IconContext.Provider
-          value={{ color: pathname === "/clientes" ? tema : branco }}
+          value={{ color: pathname === "/consumidores" ? tema : branco }}
         >
           <BsPeopleFill size={20} />
         </IconContext.Provider>
@@ -28,11 +28,11 @@ export default function Navegacao() {
     },
     {
       id: 1,
-      url: "/pedidos",
-      text: "Pedidos",
+      url: "/compras",
+      text: "Compras",
       icon: (
         <IconContext.Provider
-          value={{ color: pathname === "/pedidos" ? tema : branco }}
+          value={{ color: pathname === "/compras" ? tema : branco }}
         >
           <BsCartCheckFill size={20} />
         </IconContext.Provider>
@@ -56,9 +56,9 @@ export default function Navegacao() {
         <Link
           to={item.url}
           className={`navegacao_link ${
-            pathname === "/clientes" && item.id === 0
+            pathname === "/consumidores" && item.id === 0
               ? "navegacao_link--active"
-              : pathname === "/pedidos" && item.id === 1
+              : pathname === "/compras" && item.id === 1
               ? "navegacao_link--active"
               : ""
           }`}

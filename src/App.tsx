@@ -1,49 +1,61 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import IConsumidor from "./interfaces/consumidor";
+import ICompra from "./interfaces/compra";
 import Inicio from "./pages/Inicio";
-import Clientes from "./pages/Clientes";
-import Pedidos from "./pages/Pedidos";
-import NotFound from "./pages/NotFound";
-import ICliente from "./interfaces/cliente";
-import IPedido from "./interfaces/pedido";
-import Cliente from "./pages/Cliente";
-import Pedido from "./pages/Pedido";
+import Consumidores from "./pages/Consumidores";
+import Consumidor from "./pages/Consumidor";
+import Compras from "./pages/Compras";
+import Compra from "./pages/Compra";
 import Extrato from "./pages/Extrato";
+import NotFound from "./pages/NotFound";
 
 function App() {
-  const [mesa, setMesa] = useState<string>("");
-  const [nome, setNome] = useState<string>("");
-  const [listaClientes, setListaClientes] = useState<ICliente[]>([]);
-  const [listaPedidos, setListaPedidos] = useState<IPedido[]>([]);
+  const [conta, setConta] = useState<string>("");
+  const [consumidor, setConsumidor] = useState<string>("");
+  const [listaConsumidores, setListaConsumidores] = useState<IConsumidor[]>([]);
+  const [listaCompras, setListaCompras] = useState<ICompra[]>([]);
 
-  const pedidosProps = {
-    mesa,
-    listaPedidos,
-    setListaPedidos,
-    listaClientes,
-    setListaClientes,
+  const comprasProps = {
+    conta,
+    listaCompras,
+    setListaCompras,
+    listaConsumidores,
+    setListaConsumidores,
   };
   const extratoProps = {
-    listaClientes,
-    listaPedidos,
-    mesa,
-    setMesa,
-    setNome,
-    setListaClientes,
-    setListaPedidos,
+    listaConsumidores,
+    listaCompras,
+    conta,
+    setConta,
+    setNome: setConsumidor,
+    setListaConsumidores,
+    setListaCompras,
   };
-  const inicioProps = { mesa, setMesa, nome, setNome, setListaClientes };
-  const clientesProps = { mesa, listaClientes, setListaClientes };
-  const clienteProps = { listaClientes, setListaClientes };
-  const pedidoProps = { listaPedidos, setListaPedidos, setListaClientes };
+  const inicioProps = {
+    conta,
+    setConta,
+    consumidor,
+    setConsumidor,
+    setListaConsumidores,
+  };
+  const consumidoresProps = { conta, listaConsumidores, setListaConsumidores };
+  const consumidorProps = { listaConsumidores, setListaConsumidores };
+  const compraProps = { listaCompras, setListaCompras, setListaConsumidores };
 
   return (
     <Routes>
       <Route path="/" element={<Inicio {...inicioProps} />} />
-      <Route path="clientes" element={<Clientes {...clientesProps} />} />
-      <Route path="pedidos" element={<Pedidos {...pedidosProps} />} />
-      <Route path="cliente/:id" element={<Cliente {...clienteProps} />} />
-      <Route path="pedido/:pageId" element={<Pedido {...pedidoProps} />} />
+      <Route
+        path="consumidores"
+        element={<Consumidores {...consumidoresProps} />}
+      />
+      <Route path="compras" element={<Compras {...comprasProps} />} />
+      <Route
+        path="consumidor/:ID"
+        element={<Consumidor {...consumidorProps} />}
+      />
+      <Route path="compra/:ID" element={<Compra {...compraProps} />} />
       <Route path="extrato" element={<Extrato {...extratoProps} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
