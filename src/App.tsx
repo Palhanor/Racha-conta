@@ -9,6 +9,7 @@ import Compras from "./pages/Compras";
 import Compra from "./pages/Compra";
 import Extrato from "./pages/Extrato";
 import NotFound from "./pages/NotFound";
+import Historico from "./pages/Historico";
 
 function App() {
   const [conta, setConta] = useState<string>("");
@@ -57,6 +58,7 @@ function App() {
       />
       <Route path="compra/:ID" element={<Compra {...compraProps} />} />
       <Route path="extrato" element={<Extrato {...extratoProps} />} />
+      <Route path="historico" element={<Historico />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

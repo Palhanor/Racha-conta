@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { IconContext } from "react-icons";
+// import { RiHistoryFill } from "react-icons/ri"
 import {
   BsPeopleFill,
   BsCartCheckFill,
@@ -14,37 +15,45 @@ export default function Navegacao() {
   const tema = "#a7c2c9";
 
   const navData = [
+    // {
+    //   id: 3,
+    //   url: "/historico",
+    //   icon: (
+    //     <IconContext.Provider
+    //       value={{ color: pathname === "/consumidores" ? tema : branco }}
+    //     >
+    //       <RiHistoryFill size={22} />
+    //     </IconContext.Provider>
+    //   ),
+    // },
     {
       id: 0,
       url: "/consumidores",
-      text: "Consumidores",
       icon: (
         <IconContext.Provider
           value={{ color: pathname === "/consumidores" ? tema : branco }}
         >
-          <BsPeopleFill size={20} />
+          <BsPeopleFill size={22} />
         </IconContext.Provider>
       ),
     },
     {
       id: 1,
       url: "/compras",
-      text: "Compras",
       icon: (
         <IconContext.Provider
           value={{ color: pathname === "/compras" ? tema : branco }}
         >
-          <BsCartCheckFill size={20} />
+          <BsCartCheckFill size={22} />
         </IconContext.Provider>
       ),
     },
     {
       id: 2,
       url: "/extrato",
-      text: "Extrato",
       icon: (
-        <IconContext.Provider value={{ color: branco }}>
-          <BsFileEarmarkTextFill size={20} />
+        <IconContext.Provider value={{ color: pathname === "/extrato" ? tema : branco }}>
+          <BsFileEarmarkTextFill size={22} />
         </IconContext.Provider>
       ),
     },
@@ -55,17 +64,10 @@ export default function Navegacao() {
       {navData.map((item) => (
         <Link
           to={item.url}
-          className={`navegacao_link ${
-            pathname === "/consumidores" && item.id === 0
-              ? "navegacao_link--active"
-              : pathname === "/compras" && item.id === 1
-              ? "navegacao_link--active"
-              : ""
-          }`}
+          className={`navegacao_link`}
           key={item.id}
         >
           {item.icon}
-          <span>{item.text}</span>
         </Link>
       ))}
     </div>

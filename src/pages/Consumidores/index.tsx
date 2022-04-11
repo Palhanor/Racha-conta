@@ -12,9 +12,7 @@ export default function Consumidores(props: IConsumidoresProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (conta === "") {
-      navigate("/");
-    }
+    if (!conta) navigate("/")
   });
 
   function novoCliente(e: React.FormEvent<HTMLFormElement>) {

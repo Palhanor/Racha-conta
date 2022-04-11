@@ -24,7 +24,13 @@
 **ROTAS DE NAVEGAÇÃO**
 - [ ] Resolver a questao da condiçao para exibiçao do ```<Navegacao />``` apenas em Clientes, Pedidos, Cliente e Pedido
 ***
-**RREFATORAÇÃO**
+**NOVA PÁGINA (HISTÓRICO)**
+- [ ] Desenvolver a página de histórico de contas com dados e estilização
+***
+**ESTILIZAÇÃO**
+- [ ] Aplicar um sistema de estilo usando o [CSS Modules](https://www.npmjs.com/package/typescript-plugin-css-modules), [Styled Components](https://www.npmjs.com/package/styled-components) ou [Tailwind](https://www.npmjs.com/package/tailwindcss)
+***
+**REFATORAÇÃO**
 - [ ] Aplicar sistema de atributos externos (Exattrs)
 - [ ] Organizar fluxo de dados
 - [ ] Mitigar duplicação de código (funções, componentes, estilos)
@@ -36,16 +42,14 @@
 - [ ] Usar hooks customizados para extrair funções entre outros
 ***
 **OUTROS**
-1. Refatorar os nomes Cliente para Consumidor e Pedido para Compra, e alterar as nomenclaturas no sistema
-2. Adicionar o sistema de quantidade de produtos logo ao lado do campo de preço
-3. Criar limitador de tamanho do input de preço e adicionar os pontos nos milhares
-4. Pensar em usar [CSS Modules](https://www.npmjs.com/package/typescript-plugin-css-modules), [Styled Components](https://www.npmjs.com/package/styled-components) ou [Tailwind](https://www.npmjs.com/package/tailwindcss)
-5. Permitir que apague um cliente que já tem pedidos, desde que não seja pedido único
-6. Permitir edição do nome do cliente ou dos autores, nome e preço do pedido (não pode deixar sem autores)
-7. Criar ordenamento de exibição das listas de clientes e pedidos por preço maior, preço menos, mais antigo, mais novo, entre outros
-8. Existem problemas de responsividade com os React Icons e com o Multiselect
-9. Adicionar o uso de localStorage para persistência dos dados (principalmente do histórico de contas)
-10. Criar página de histórico usando localStorage
-11. Problemas do HeshRouter usado para o deploy no Github
-12. Tentar adicionar graficos no extato final (usar uma biblioteca)
-13. Corrigir os dados de consumidores dentro do pedido e dados dos pedidos dentro do consumidor
+1. Adicionar o sistema de quantidade de produtos logo ao lado do campo de preço
+2. Criar limitador de tamanho do input de preço e adicionar os pontos nos milhares
+3. Permitir que apague um cliente que já tem pedidos, desde que não seja pedido único
+4. Permitir edição do nome do cliente ou dos autores, nome e preço do pedido (não pode deixar sem autores)
+5. Criar ordenamento de exibição das listas de clientes e pedidos por preço maior, preço menos, mais antigo, mais novo, entre outros
+6.  Corrigir os dados de consumidores dentro do pedido e dados dos pedidos dentro do consumidor
+7.  Tentar adicionar graficos no extato final (usar uma biblioteca)
+***
+**DETALHES**
+* Existem problemas de responsividade com os React Icons e com o Multiselect
+* Problemas do HeshRouter usado para o deploy no Github

@@ -29,7 +29,7 @@ export const formTitle = {
 
 export const multiselect = {
   isObject: false,
-  placeholder: "Autores da compra",
+  placeholder: "Selecione os compradores",
   style: {
     searchBox: {
       // Input e container das tags

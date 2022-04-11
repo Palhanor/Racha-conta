@@ -4,6 +4,7 @@ import { IExtratoProps } from "../../interfaces/props";
 import * as Exattrs from "./Exattrs";
 import "../../styles/global.scss";
 import "./Extrato.scss";
+import Navegacao from "../../components/Navegacao";
 
 export default function Extrato(props: IExtratoProps) {
   const {
@@ -29,12 +30,27 @@ export default function Extrato(props: IExtratoProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (conta === "") {
-      navigate("/");
-    }
+    if (!conta) navigate("/")
   });
 
   function finalizarMesa() {
+
+    const objetoConta = {
+      nome: conta,
+      consumidores: listaConsumidores,
+      compras: listaCompras
+    }
+
+    if (!localStorage.getItem("historicoContas")) {
+      const arrObjetoConta = [objetoConta];
+      localStorage.setItem("historicoContas", JSON.stringify(arrObjetoConta))
+    } else {
+      const historicoContas = localStorage.getItem("historicoContas");
+      const historicoContasObj  = JSON.parse(historicoContas as string)
+      historicoContasObj.push(objetoConta)
+      localStorage.setItem("historicoContas", JSON.stringify(historicoContasObj))
+    }
+
     setConta("");
     setNome("");
     setListaConsumidores([]);
@@ -44,7 +60,7 @@ export default function Extrato(props: IExtratoProps) {
 
   return (
     <>
-      <div {...Exattrs.container}>
+      <div {...Exattrs.containerLista}>
         <h2 {...Exattrs.title}>Consumidores</h2>
         <ul {...Exattrs.lista}>
           {listaConsumidores.map((dadosCliente, index) => (
@@ -64,9 +80,7 @@ export default function Extrato(props: IExtratoProps) {
             </li>
           ))}
         </ul>
-      </div>
-
-      <div {...Exattrs.container}>
+        <br />
         <h2 {...Exattrs.title}>Compras</h2>
         <ul {...Exattrs.lista}>
           {listaCompras.map((dadosPedido) => (
@@ -85,18 +99,17 @@ export default function Extrato(props: IExtratoProps) {
           ))}
         </ul>
       </div>
-      <div {...Exattrs.container}>
+      <div {...Exattrs.containerTotal}>
+        <h1 {...Exattrs.conta}>{conta}</h1>
         <h2 {...Exattrs.title}>
-          {conta}:{" "}
+          Total:{" "}
           <span {...Exattrs.total}>R$ {total.toLocaleString("BRL")}</span>
         </h2>
-        <button {...Exattrs.retornarBotao} onClick={() => navigate(-1)}>
-          Retornar
-        </button>
         <button {...Exattrs.finalizarBotao} onClick={() => finalizarMesa()}>
           Finalizar
         </button>
       </div>
+      <Navegacao />
     </>
   );
 }

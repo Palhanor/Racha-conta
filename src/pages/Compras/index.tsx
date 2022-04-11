@@ -24,7 +24,7 @@ export default function Compras(props: IComprasProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (conta === "") navigate("/");
+    if (!conta) navigate("/");
   });
 
   const atribuirPedido = (e: React.FormEvent<HTMLFormElement>) => {

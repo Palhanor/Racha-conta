@@ -1,6 +1,6 @@
 
-export const container = {
-    className: "extrato_container"
+export const containerLista = {
+    className: "extrato_container extrato_container-lista"
 }
 
 export const title = {
@@ -27,12 +27,16 @@ export const porcentagem = {
     className: "global-list_item-text"
 }
 
-export const total = {
-    className: "extrato_total"
+export const containerTotal = {
+    className: "extrato_container extrato_container-total"
 }
 
-export const retornarBotao = {
-    className: "global-element_button"
+export const conta = {
+    className: "extrato_conta"
+}
+
+export const total = {
+    className: "extrato_total"
 }
 
 export const finalizarBotao = {

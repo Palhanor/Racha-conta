@@ -10,32 +10,35 @@
         background: $white;
         padding: 1rem;
         box-sizing: border-box;
-        overflow-y: scroll;
-        max-height: 80vh;
-        scrollbar-width: thin;
-        border: 1px double $white;
 
-        @include desktop() {
-            margin-right: 2rem;
-
-            &::-webkit-scrollbar { /* width */
-                width: 8px;
-            }
-            
-            &::-webkit-scrollbar-track { /* Track */
-                background: rgba($black, .3); 
-                border-radius: 10px;
-            }
-            
-            &::-webkit-scrollbar-thumb { /* Handle */
-                background: rgba($white, .3);
-                border-radius: 10px;
-
-                &:hover {
-                    background: rgba($white, .25);
-                }
+        &-total {
+            @include desktop() {
+                order: 2;
+                height: 75vh;
+                border-radius: 0 10px 10px 0;
+                margin: 0 3% 0 0;
+                padding: 3rem;
+                width: 50vw;
             }
         }
+    
+        &-lista {
+            @include desktop() {
+                order: 3;
+                max-height: 90vh;
+                margin: 0;
+                width: 40vw;
+                overflow-y: scroll;
+                padding: 2rem;
+                scrollbar-width: thin;
+            }
+        }
+    }
+
+    &_conta {
+        font-size: 1.8rem;
+        margin: 0 0 1rem;
+        font-weight: 600;
     }
 
     &_title {
