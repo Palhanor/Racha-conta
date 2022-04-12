@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import "../../styles/global.scss";
-import * as Exattrs from "./Exattrs";
+import { Botao, Image, Titulo } from "../../components/Styled";
+
 const erro: string = require("../../assets/ErrorIllustration.svg").default;
 
 export default function NotFound() {
@@ -8,11 +8,11 @@ export default function NotFound() {
 
   return (
     <main>
-      <h1 {...Exattrs.titulo}>Página não encontrada!</h1>
-      <img src={erro} alt="Imagem de erro 404" {...Exattrs.imagem} />
-      <button {...Exattrs.botao} onClick={() => navigate(-1)}>
+      <Titulo>Página não encontrada!</Titulo>
+      <Image src={erro} alt="Imagem de erro 404" />
+      <Botao secondary onClick={() => navigate(-1)}>
         Retornar
-      </button>
+      </Botao>
     </main>
   );
 }

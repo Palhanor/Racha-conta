@@ -1,10 +1,18 @@
 import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "../NotFound";
-import "../../styles/global.scss";
 import Navegacao from "../../components/Navegacao";
 import { ICompraProps } from "../../interfaces/props";
-import * as Exattrs from "./Exattrs";
 import ListaAutoresCompra from "./ListaAutoresCompra";
+import {
+  Botao,
+  Titulo,
+  ItemCusto,
+  ItemTexto,
+  ListaContainer,
+  ListaTitulo,
+  Container,
+  Inline,
+} from "../../components/Styled";
 
 export default function Compra(props: ICompraProps) {
   const { listaCompras, setListaCompras, setListaConsumidores } = props;
@@ -37,27 +45,25 @@ export default function Compra(props: ICompraProps) {
 
   return (
     <>
-      <div {...Exattrs.container}>
-        <h1 {...Exattrs.titulo}>{pedido.nome}</h1>
-        <div {...Exattrs.footer}>
-          <span {...Exattrs.texto}>
+      <Container>
+        <Titulo secondary>{pedido.nome}</Titulo>
+        <Inline>
+          <ItemTexto>
             {pedido.autores.length} Consumidor
             {pedido.autores.length === 1 ? "" : "es"}
-          </span>
-          <span {...Exattrs.custo}>
-            R$ {pedido.preco.toLocaleString("BRL")}
-          </span>
-        </div>
+          </ItemTexto>
+          <ItemCusto>R$ {pedido.preco.toLocaleString("BRL")}</ItemCusto>
+        </Inline>
         <div>
-          <button {...Exattrs.botaoApagar} onClick={() => apagarPedido()}>
+          <Botao danger onClick={() => apagarPedido()}>
             Apagar
-          </button>
+          </Botao>
         </div>
-      </div>
-      <div {...Exattrs.containerLista}>
-        <h2 {...Exattrs.tituloLista}>Consumidores</h2>
+      </Container>
+      <ListaContainer>
+        <ListaTitulo>Consumidores</ListaTitulo>
         {<ListaAutoresCompra pedido={pedido} />}
-      </div>
+      </ListaContainer>
       <Navegacao />
     </>
   );

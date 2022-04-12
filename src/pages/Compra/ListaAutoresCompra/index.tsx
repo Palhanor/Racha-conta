@@ -1,20 +1,19 @@
 import ICompra from "../../../interfaces/compra";
-import * as Exattrs from "./Exattrs";
-import "../../../styles/global.scss";
+import { Lista, Item, ItemNome, ItemCusto, Inline } from "../../../components/Styled";
 
 export default function ListaAutoresCompra({ pedido }: { pedido: ICompra }) {
   return (
-    <ul {...Exattrs.lista}>
+    <Lista>
       {pedido.autores.map((autor, index) => (
-        <li {...Exattrs.item} key={index}>
-          <div {...Exattrs.header}>
-            <strong {...Exattrs.titulo}>{autor}</strong>
-            <span {...Exattrs.custo}>
+        <Item key={index}>
+          <Inline>
+            <ItemNome>{autor}</ItemNome>
+            <ItemCusto>
               R$ {(pedido.preco / pedido.autores.length).toLocaleString("BRL")}
-            </span>
-          </div>
-        </li>
+            </ItemCusto>
+          </Inline>
+        </Item>
       ))}
-    </ul>
+    </Lista>
   );
 }

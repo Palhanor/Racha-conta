@@ -26,12 +26,9 @@
 ***
 **NOVA PÁGINA (HISTÓRICO)**
 - [ ] Desenvolver a página de histórico de contas com dados e estilização
-***
-**ESTILIZAÇÃO**
-- [ ] Aplicar um sistema de estilo usando o [CSS Modules](https://www.npmjs.com/package/typescript-plugin-css-modules), [Styled Components](https://www.npmjs.com/package/styled-components) ou [Tailwind](https://www.npmjs.com/package/tailwindcss)
+- [ ] Criar um estilo comum para Extrato e Historico ou Conta
 ***
 **REFATORAÇÃO**
-- [ ] Aplicar sistema de atributos externos (Exattrs)
 - [ ] Organizar fluxo de dados
 - [ ] Mitigar duplicação de código (funções, componentes, estilos)
 - [ ] Fazer comentários necessários

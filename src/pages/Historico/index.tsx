@@ -1,4 +1,5 @@
 import Navegacao from "../../components/Navegacao";
+import { Titulo, Lista } from "../../components/Styled";
 import IConta from "../../interfaces/conta";
 
 export default function Historico() {
@@ -12,32 +13,32 @@ export default function Historico() {
     <>
       {historicoContasObj.length > 0 ? (
         <>
-          <h1>Histórico</h1>
-          <ul>
-            {historicoContasObj.map((conta, index) => (
-              <li key={index}>
+          <Titulo>Histórico</Titulo>
+          <Lista>
+            {historicoContasObj.map((conta) => (
+              <li key={conta.id}>
                 <span>{conta.nome}</span>
                 <br />
                 <span>Consumidores</span>
-                <ul>
+                <Lista>
                   {conta.consumidores.map((consumidor) => (
                     <li key={consumidor.id}>{consumidor.nome}</li>
                   ))}
-                </ul>
+                </Lista>
                 <span>Compras</span>
-                <ul>
+                <Lista>
                   {conta.compras.map((compra) => (
                     <li key={compra.id}>
                       {compra.nome} - R$ {compra.preco.toLocaleString("BRL")}
                     </li>
                   ))}
-                </ul>
+                </Lista>
               </li>
             ))}
-          </ul>
+          </Lista>
         </>
       ) : (
-        <h1>Histórico vazio</h1>
+        <Titulo>Histórico vazio</Titulo>
       )}
       <Navegacao />
     </>

@@ -1,23 +1,23 @@
+import { Item, ItemNome, ItemCusto, ItemTexto, Inline } from "../../../components/Styled";
 import ICompra from "../../../interfaces/compra";
-import "../../../styles/global.scss";
 
 export default function ListaComprasConsumidor(props: ICompra) {
-  const { nome, preco, autores, id } = props
+  const { nome, preco, autores } = props
 
   return (
-    <li className="global-list_item">
-      <div className="global-util_horizontal-align">
+    <Item>
+      <Inline>
         <div>
-          <strong className="global-list_item-title">{nome}</strong>{" "}
+          <ItemNome>{nome}</ItemNome>{" "}
           &#183;{" "}
-          <span className="global-list_item-text">
+          <ItemTexto>
             R$ {preco.toLocaleString("BRL")}
-          </span>
+          </ItemTexto>
         </div>
-        <span className="global-list_item-cost">
+        <ItemCusto>
           R$ {(preco / autores.length).toLocaleString("BRL")}
-        </span>
-      </div>
-    </li>
+        </ItemCusto>
+      </Inline>
+    </Item>
   );
 }

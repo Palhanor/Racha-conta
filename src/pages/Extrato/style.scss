@@ -1,5 +1,4 @@
-@import "../../styles/colors";
-@import "../../styles/breakpoints";
+@import "../../styles/index";
 
 .extrato {
     &_container {
@@ -52,6 +51,9 @@
         border-bottom: none;
         padding: .4rem;
         box-sizing: border-box;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
         &:last-child {
             border-bottom: 1px dashed $gray;

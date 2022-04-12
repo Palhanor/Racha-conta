@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { IExtratoProps } from "../../interfaces/props";
-import * as Exattrs from "./Exattrs";
-import "../../styles/global.scss";
-import "./Extrato.scss";
+import "./style.scss";
 import Navegacao from "../../components/Navegacao";
+import { v4 as uuidv4 } from "uuid";
+import { Botao, Lista, ItemCusto, ItemTexto } from "../../components/Styled";
+// TO DO: import { randomUUID } from "crypto";
 
 export default function Extrato(props: IExtratoProps) {
   const {
@@ -38,7 +39,8 @@ export default function Extrato(props: IExtratoProps) {
     const objetoConta = {
       nome: conta,
       consumidores: listaConsumidores,
-      compras: listaCompras
+      compras: listaCompras,
+      id: uuidv4()
     }
 
     if (!localStorage.getItem("historicoContas")) {
@@ -60,54 +62,54 @@ export default function Extrato(props: IExtratoProps) {
 
   return (
     <>
-      <div {...Exattrs.containerLista}>
-        <h2 {...Exattrs.title}>Consumidores</h2>
-        <ul {...Exattrs.lista}>
+      <div className="extrato_container extrato_container-lista">
+        <h2 className="extrato_title">Consumidores</h2>
+        <Lista>
           {listaConsumidores.map((dadosCliente, index) => (
-            <li key={dadosCliente.id} {...Exattrs.item}>
-              <strong {...Exattrs.nome}>{dadosCliente.nome}</strong>
+            <li key={dadosCliente.id} className="extrato_item">
+              <strong className="extrato_item-title">{dadosCliente.nome}</strong>
               <div>
-                <span {...Exattrs.custo}>
+                <ItemCusto>
                   R$ {gastosClientes[index].toLocaleString("BRL")}
-                </span>
+                </ItemCusto>
                 {listaConsumidores[index].pedidos.length > 0 && (
-                  <span {...Exattrs.porcentagem}>
+                  <ItemTexto>
                     {" "}
                     &#183; {(percentualClientes[index] * 100).toFixed(2)}%
-                  </span>
+                  </ItemTexto>
                 )}
               </div>
             </li>
           ))}
-        </ul>
+        </Lista>
         <br />
-        <h2 {...Exattrs.title}>Compras</h2>
-        <ul {...Exattrs.lista}>
+        <h2 className="extrato_title">Compras</h2>
+        <Lista>
           {listaCompras.map((dadosPedido) => (
-            <li key={dadosPedido.id} {...Exattrs.item}>
-              <strong {...Exattrs.nome}>{dadosPedido.nome}</strong>
+            <li key={dadosPedido.id} className="extrato_item">
+              <strong className="extrato_item-title">{dadosPedido.nome}</strong>
               <div>
-                <span {...Exattrs.custo}>
+                <ItemCusto>
                   R$ {dadosPedido.preco.toLocaleString("BRL")}
-                </span>{" "}
+                </ItemCusto>{" "}
                 &#183;{" "}
-                <span {...Exattrs.porcentagem}>
+                <ItemTexto>
                   {((dadosPedido.preco / total) * 100).toFixed(2)}%
-                </span>
+                </ItemTexto>
               </div>
             </li>
           ))}
-        </ul>
+        </Lista>
       </div>
-      <div {...Exattrs.containerTotal}>
-        <h1 {...Exattrs.conta}>{conta}</h1>
-        <h2 {...Exattrs.title}>
+      <div className="extrato_container extrato_container-total">
+        <h1 className="extrato_conta">{conta}</h1>
+        <h2 className="extrato_title">
           Total:{" "}
-          <span {...Exattrs.total}>R$ {total.toLocaleString("BRL")}</span>
+          <span className="extrato_total">R$ {total.toLocaleString("BRL")}</span>
         </h2>
-        <button {...Exattrs.finalizarBotao} onClick={() => finalizarMesa()}>
+        <Botao danger onClick={() => finalizarMesa()}>
           Finalizar
-        </button>
+        </Botao>
       </div>
       <Navegacao />
     </>

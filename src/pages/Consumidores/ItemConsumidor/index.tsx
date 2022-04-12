@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IConsumidor from "../../../interfaces/consumidor";
-import "../../../styles/global.scss"
+import {
+  Item,
+  ItemNome,
+  ItemCusto,
+  ItemTexto,
+  Inline,
+} from "../../../components/Styled";
 
 export default function ItemConsumidor(props: IConsumidor) {
   const { nome, pedidos, id } = props;
@@ -17,14 +23,14 @@ export default function ItemConsumidor(props: IConsumidor) {
   }, [pedidos]);
 
   return (
-    <li className="global-list_item" onClick={() => navigate(`/consumidor/${id}`)} >
-      <div className="global-util_horizontal-align global-util_margin-bottom">
-        <strong className="global-list_item-title">{nome}</strong>
-        <span className="global-list_item-cost">R$ {custo.toLocaleString("BRL")}</span>
-      </div>
-      <span className="global-list_item-text">
+    <Item onClick={() => navigate(`/consumidor/${id}`)}>
+      <Inline mb>
+        <ItemNome>{nome}</ItemNome>
+        <ItemCusto>R$ {custo.toLocaleString("BRL")}</ItemCusto>
+      </Inline>
+      <ItemTexto>
         {pedidos.length} Compra{pedidos.length === 1 ? "" : "s"}
-      </span>
-    </li>
+      </ItemTexto>
+    </Item>
   );
 }
