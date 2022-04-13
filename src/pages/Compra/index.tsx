@@ -12,7 +12,7 @@ import {
   ListaTitulo,
   Container,
   Inline,
-} from "../../components/Styled";
+} from "../../components/StyledComponents";
 
 export default function Compra(props: ICompraProps) {
   const { listaCompras, setListaCompras, setListaConsumidores } = props;
@@ -45,7 +45,7 @@ export default function Compra(props: ICompraProps) {
 
   return (
     <>
-      <Container>
+      <Container default>
         <Titulo secondary>{pedido.nome}</Titulo>
         <Inline>
           <ItemTexto>
@@ -55,7 +55,7 @@ export default function Compra(props: ICompraProps) {
           <ItemCusto>R$ {pedido.preco.toLocaleString("BRL")}</ItemCusto>
         </Inline>
         <div>
-          <Botao danger onClick={() => apagarPedido()}>
+          <Botao danger onClick={apagarPedido}>
             Apagar
           </Botao>
         </div>

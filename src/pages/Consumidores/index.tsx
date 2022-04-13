@@ -10,11 +10,11 @@ import {
   Input,
   Label,
   Titulo,
-  Form,
+  Container,
   Lista,
   ListaContainer,
   ListaTitulo
-} from "../../components/Styled";
+} from "../../components/StyledComponents";
 
 export default function Consumidores(props: IConsumidoresProps) {
   const { conta, listaConsumidores, setListaConsumidores } = props;
@@ -47,20 +47,22 @@ export default function Consumidores(props: IConsumidoresProps) {
 
   return (
     <>
-      <Form top onSubmit={(e) => novoCliente(e)}>
-        <Titulo secondary>Novo consumidor</Titulo>
-        <Label htmlFor="cliente">Novo consumidor</Label>
-        <Input
-          type="text"
-          name="cliente"
-          id="cliente"
-          placeholder="Nome do consumidor"
-          value={novoConsumidor}
-          onChange={(e) => setNovoConsumidor(e.target.value)}
-          required
-        />
-        <Botao>Adicionar</Botao>
-      </Form>
+      <Container top>
+        <form onSubmit={(e) => novoCliente(e)}>
+          <Titulo secondary>Novo consumidor</Titulo>
+          <Label htmlFor="cliente">Novo consumidor</Label>
+          <Input
+            type="text"
+            name="cliente"
+            id="cliente"
+            placeholder="Nome do consumidor"
+            value={novoConsumidor}
+            onChange={(e) => setNovoConsumidor(e.target.value)}
+            required
+          />
+          <Botao>Adicionar</Botao>
+        </form>
+      </Container>
       <ListaContainer>
         <ListaTitulo>Consumidores</ListaTitulo>
         <Lista>

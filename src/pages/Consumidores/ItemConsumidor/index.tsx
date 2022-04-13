@@ -7,7 +7,7 @@ import {
   ItemCusto,
   ItemTexto,
   Inline,
-} from "../../../components/Styled";
+} from "../../../components/StyledComponents";
 
 export default function ItemConsumidor(props: IConsumidor) {
   const { nome, pedidos, id } = props;

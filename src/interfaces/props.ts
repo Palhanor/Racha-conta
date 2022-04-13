@@ -39,7 +39,7 @@ export interface IExtratoProps {
   listaCompras: ICompra[];
   conta: string;
   setConta: React.Dispatch<React.SetStateAction<string>>;
-  setNome: React.Dispatch<React.SetStateAction<string>>;
+  setConsumidor: React.Dispatch<React.SetStateAction<string>>;
   setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>;
   setListaCompras: React.Dispatch<React.SetStateAction<ICompra[]>>;
 }

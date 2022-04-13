@@ -1,5 +1,5 @@
 import ICompra from "../../../interfaces/compra";
-import { Lista, Item, ItemNome, ItemCusto, Inline } from "../../../components/Styled";
+import { Lista, Item, ItemNome, ItemCusto, Inline } from "../../../components/StyledComponents";
 
 export default function ListaAutoresCompra({ pedido }: { pedido: ICompra }) {
   return (

@@ -14,7 +14,7 @@ import {
   ListaTitulo,
   Container,
   Inline
-} from "../../components/Styled";
+} from "../../components/StyledComponents";
 
 export default function Consumidor(props: IConsumidorProps) {
   const { listaConsumidores, setListaConsumidores } = props;
@@ -41,7 +41,7 @@ export default function Consumidor(props: IConsumidorProps) {
 
   return (
     <>
-      <Container>
+      <Container default>
         <Titulo secondary>{cliente.nome}</Titulo>
         <Inline>
           <ItemTexto>
@@ -59,7 +59,7 @@ export default function Consumidor(props: IConsumidorProps) {
           </ItemCusto>
         </Inline>
         <div>
-          <Botao danger onClick={() => apagarCliente()}>
+          <Botao danger onClick={apagarCliente}>
             Apagar
           </Botao>
         </div>

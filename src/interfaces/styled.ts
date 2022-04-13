@@ -1,17 +1,18 @@
-export interface BotaoProps {
+export interface IBotaoProps {
     secondary?: boolean,
     danger?: boolean
 }
 
-export interface TituloProps {
+export interface ITituloProps {
     secondary?: boolean
 }
 
-export interface FormProps {
+export interface IContainerProps {
     top?: boolean,
-    bottom?: boolean
+    bottom?: boolean,
+    default?: boolean
 }
 
-export interface InlineProps {
+export interface IInlineProps {
     mb?: boolean
 }

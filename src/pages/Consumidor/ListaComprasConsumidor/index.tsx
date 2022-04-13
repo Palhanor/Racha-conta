@@ -1,4 +1,4 @@
-import { Item, ItemNome, ItemCusto, ItemTexto, Inline } from "../../../components/Styled";
+import { Item, ItemNome, ItemCusto, ItemTexto, Inline } from "../../../components/StyledComponents";
 import ICompra from "../../../interfaces/compra";
 
 export default function ListaComprasConsumidor(props: ICompra) {

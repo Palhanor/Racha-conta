@@ -11,10 +11,10 @@ import {
   Input,
   Label,
   Titulo,
-  Form,
+  Container,
   ListaContainer,
   ListaTitulo,
-} from "../../components/Styled";
+} from "../../components/StyledComponents";
 
 export default function Compras(props: IComprasProps) {
   const {
@@ -56,7 +56,7 @@ export default function Compras(props: IComprasProps) {
     },
   };
 
-  const atribuirPedido = (e: React.FormEvent<HTMLFormElement>) => {
+  function atribuirPedido(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (autoresPedido.length === 0) {
@@ -92,60 +92,62 @@ export default function Compras(props: IComprasProps) {
     setListaConsumidores(novaListaClientes);
     setNomePedido("");
     setPrecoPedido(0);
-  };
+  }
 
-  const mascaraPreco = (valor: number | null) => {
+  function mascaraPreco(valor: number | null) {
     if (!valor) valor = 0;
     const valorStr = valor.toString().padStart(3, "0");
     const valorArr = valorStr.split("");
     const newNumInt = valorArr.slice(0, valorArr.length - 2);
     const newNumFloat = valorArr.slice(valorArr.length - 2, valorArr.length);
     return `R$ ${newNumInt.join("")},${newNumFloat.join("")}`;
-  };
+  }
 
-  const pegaPreco = (valor: string) => {
+  function pegaPreco(valor: string) {
     const removeMascaraMonetaria = valor.replace("R$ ", "").replace(",", "");
     const valorDoInputStr = parseInt(removeMascaraMonetaria);
     return valorDoInputStr;
-  };
+  }
 
   return (
     <>
-      <Form top onSubmit={(e) => atribuirPedido(e)}>
-        <Titulo secondary>Nova compra</Titulo>
-        <Multiselect
-          isObject={false}
-          style={multiselectStyle}
-          placeholder="Selecione os compradores"
-          onRemove={(e) => setAutoresPedido(e)}
-          onSelect={(e) => setAutoresPedido(e)}
-          options={listaConsumidores.map((cliente) => cliente.nome)}
-        />
-        <Label htmlFor="nomeCompra">Nome da compra</Label>
-        <Input
-          type="text"
-          name="nomeCompra"
-          id="nomeCompra"
-          placeholder="Nome da compra"
-          required
-          value={nomePedido}
-          onChange={(e) => setNomePedido(e.target.value)}
-        />
-        <Label htmlFor="precoCompra">Preço da compra</Label>
-        <Input
-          type="text"
-          name="precoCompra"
-          id="precoCompra"
-          onFocus={(e) => {
-            const valueLength = e.target.value.length * 2;
-            e.target.setSelectionRange(valueLength, valueLength);
-          }}
-          required
-          value={mascaraPreco(precoPedido)}
-          onChange={(e) => setPrecoPedido(pegaPreco(e.target.value))}
-        />
-        <Botao>Adicionar</Botao>
-      </Form>
+      <Container top>
+        <form onSubmit={(e) => atribuirPedido(e)}>
+          <Titulo secondary>Nova compra</Titulo>
+          <Multiselect
+            isObject={false}
+            style={multiselectStyle}
+            placeholder="Selecione os compradores"
+            onRemove={(e) => setAutoresPedido(e)}
+            onSelect={(e) => setAutoresPedido(e)}
+            options={listaConsumidores.map((cliente) => cliente.nome)}
+          />
+          <Label htmlFor="nomeCompra">Nome da compra</Label>
+          <Input
+            type="text"
+            name="nomeCompra"
+            id="nomeCompra"
+            placeholder="Nome da compra"
+            required
+            value={nomePedido}
+            onChange={(e) => setNomePedido(e.target.value)}
+          />
+          <Label htmlFor="precoCompra">Preço da compra</Label>
+          <Input
+            type="text"
+            name="precoCompra"
+            id="precoCompra"
+            onFocus={(e) => {
+              const valueLength = e.target.value.length * 2;
+              e.target.setSelectionRange(valueLength, valueLength);
+            }}
+            required
+            value={mascaraPreco(precoPedido)}
+            onChange={(e) => setPrecoPedido(pegaPreco(e.target.value))}
+          />
+          <Botao>Adicionar</Botao>
+        </form>
+      </Container>
       <ListaContainer>
         <ListaTitulo>Compras</ListaTitulo>
         {<ListaCompras listaPedidos={listaCompras} />}

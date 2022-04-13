@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
-import { BotaoProps, FormProps, InlineProps, TituloProps } from '../../interfaces/styled';
+import { IBotaoProps, IContainerProps, IInlineProps, ITituloProps } from '../../interfaces/styled';
 import { brkpt, color } from "../../styles"
 
 export const Botao = styled.button`
     display: block;
-    margin: 2.5rem auto 0;
+    margin: 2rem auto 0;
     width: 100%;
     padding: 0.8rem;
     border: none;
@@ -19,13 +19,13 @@ export const Botao = styled.button`
         padding: 1rem;
     }
 
-    ${(props: BotaoProps) => props.secondary && css`
+    ${(props: IBotaoProps) => props.secondary && css`
         border: 2px solid ${color.white};
         width: 60%;
-        margin: 2rem auto;
+        margin: 2rem auto 1rem;
     `};
 
-    ${(props: BotaoProps) => props.danger && css`
+    ${(props: IBotaoProps) => props.danger && css`
         border: 2px solid ${color.red};
         background-color: ${color.white};
         color: ${color.red};
@@ -91,7 +91,7 @@ export const Titulo = styled.h1`
         text-align: left;
     }
 
-    ${(props: TituloProps) => props.secondary && css`
+    ${(props: ITituloProps) => props.secondary && css`
         color: ${color.black};
         font-size: 1.6rem;
         margin: 0 0 2rem;
@@ -105,36 +105,59 @@ export const Titulo = styled.h1`
     `};
 `
 
-export const Form = styled.form`
-    width: 100%;
-    background: ${color.white};
-    padding: 3rem 2rem;
+export const Container = styled.div`
+    background-color: ${color.white};
     box-sizing: border-box;
+    padding: 3rem 2rem;
+    width: 100%;
 
     @media (min-width: ${brkpt.tablet}) {
+        border-radius: 15px;
         width: 90%;
     }
 
-    ${(props: FormProps) => props.top && css`
+    @media (min-width: ${brkpt.desktop}) {
+        margin: 0 3% 0 0;
+        order: 2;
+        padding: 3rem;
+    }
+
+    ${(props: IContainerProps) => props.default && css`
+        width: 90%;
+        margin: 2rem auto;
+        border-radius: 10px;
+        padding: 1rem;
+
+        @media (min-width: ${brkpt.tablet}) {
+            margin: 3rem auto;
+            padding: 2rem;
+        }
+
+        @media (min-width: ${brkpt.desktop}) {
+            border-radius: 0 10px 10px 0;
+            width: 50vw;
+            height: 75vh;
+            margin: 0 3% 0 0;
+        }
+    `}
+
+    ${(props: IContainerProps) => props.top && css`
         margin: 0 auto 2rem;
         border-radius: 0 0 40px 40px;
 
         @media (min-width: ${brkpt.tablet}) {
             margin: 3rem auto;
-            border-radius: 15px;
         }
 
         @media (min-width: ${brkpt.desktop}) {
-            margin: 0 3% 0 0;
             border-radius: 0 10px 10px 0;
             width: 50vw;
-            order: 2;
             height: 75vh;
-            padding: 3rem;
+            margin: 0 3% 0 0;
         }
     `};
 
-    ${(props: FormProps) => props.bottom && css`
+    ${(props: IContainerProps) => props.bottom && css`
         position: absolute;
         bottom: 0;
         border-radius: 40px 40px 0 0;
@@ -144,16 +167,12 @@ export const Form = styled.form`
             margin: 0;
             bottom: 3rem;
             left: 2rem;
-            border-radius: 15px;
         }
 
         @media (min-width: ${brkpt.desktop}) {
-            margin: 0 3% 0 0;
             border-radius: 10px;
             width: 40vw;
-            order: 2;
             height: 65vh;
-            padding: 3rem;
         }
     `};
 `
@@ -200,7 +219,7 @@ export const ListaTitulo = styled.h2`
         margin: 1rem 5% 2rem;
     }
 
-    @media (min-width: ${brkpt.tablet}) {
+    @media (min-width: ${brkpt.desktop}) {
         margin: 0 0 2rem;
     }
 `
@@ -253,37 +272,12 @@ export const ItemTexto = styled.span`
     }
 `
 
-// Tem grandes semelhanças com o Form... Pode ser melhor trabalhado
-export const Container = styled.div`
-    width: 90%;
-    background-color: ${color.white};
-    margin: 2rem auto;
-    border-radius: 10px;
-    background: ${color.white};
-    padding: 1rem;
-    box-sizing: border-box;
-
-    @media (min-width: ${brkpt.tablet}) {
-        margin: 3rem auto;
-        padding: 2rem;
-    }
-
-    @media (min-width: ${brkpt.desktop}) {
-        order: 2;
-        height: 75vh;
-        margin: 0 3% 0 0;
-        border-radius: 0 10px 10px 0;
-        width: 50vw;
-        padding: 3rem;
-    }
-`
-
 export const Inline = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    ${(props: InlineProps) => props.mb && css`
+    ${(props: IInlineProps) => props.mb && css`
         margin-bottom: .5rem;
 
         @media (min-width: ${brkpt.desktop}) {
