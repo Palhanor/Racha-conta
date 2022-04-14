@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
-import { IConsumidoresProps } from "../../interfaces/props";
 import { v4 as uuidv4 } from "uuid";
 import ItemConsumidor from "./ItemConsumidor";
 
@@ -13,11 +12,15 @@ import {
   Container,
   Lista,
   ListaContainer,
-  ListaTitulo
+  ListaTitulo,
 } from "../../components/StyledComponents";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { consumidores, nomeConta } from "../../states/atom";
 
-export default function Consumidores(props: IConsumidoresProps) {
-  const { conta, listaConsumidores, setListaConsumidores } = props;
+export default function Consumidores() {
+
+  const conta = useRecoilValue(nomeConta);
+  const [listaConsumidores, setListaConsumidores] = useRecoilState(consumidores)
   const [novoConsumidor, setNovoConsumidor] = useState<string>("");
   const navigate = useNavigate();
 

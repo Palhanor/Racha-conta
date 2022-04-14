@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navegacao from "../../components/Navegacao";
+import { brkpt, color } from "../../styles";
+import { getHistorico } from "../../utils/localStorage"
 import {
   Titulo,
   Lista,
@@ -10,20 +12,16 @@ import {
   ItemCusto,
   ListaTitulo,
 } from "../../components/StyledComponents";
-import IConta from "../../interfaces/conta";
-import { brkpt, color } from "../../styles";
 
 const TituloMobile = styled(Titulo)`
   @media (min-width: ${brkpt.desktop}) {
     display: none;
   }
 `;
-
 const TituloDesktop = styled(Titulo)`
   order: 3;
   margin-left: 2%;
 `;
-
 const NavegacaoPlaceholder = styled.div`
   display: none;
 
@@ -36,7 +34,6 @@ const NavegacaoPlaceholder = styled.div`
     background-color: ${color.themeDarker};
   }
 `;
-
 const ListaResponsiva = styled(Lista)`
   @media (min-width: ${brkpt.desktop}) {
     order: 3;
@@ -47,7 +44,6 @@ const ListaResponsiva = styled(Lista)`
     scrollbar-width: thin;
   }
 `;
-
 const ListaTituloResponsivo = styled(ListaTitulo)`
   display: none;
 
@@ -57,22 +53,17 @@ const ListaTituloResponsivo = styled(ListaTitulo)`
 `;
 
 export default function Historico() {
-  let historicoContasObj: IConta[] = [];
-  const historicoContas = localStorage.getItem("historicoContas");
-  if (historicoContas) {
-    historicoContasObj = [...JSON.parse(historicoContas)];
-  }
-
+  const historico = getHistorico()
   const navigate = useNavigate();
 
   return (
     <>
-      {historicoContasObj.length > 0 ? (
+      {historico.length > 0 ? (
         <>
           <TituloMobile>Histórico</TituloMobile>
           <ListaResponsiva>
             <ListaTituloResponsivo>Histórico</ListaTituloResponsivo>
-            {historicoContasObj.map((conta) => (
+            {historico.map((conta) => (
               <Item
                 key={conta.id}
                 onClick={() => navigate(`/conta/${conta.id}`)}

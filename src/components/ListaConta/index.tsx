@@ -1,9 +1,10 @@
-import { IListaContaProps } from "../../interfaces/props";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import IConta from "../../interfaces/conta";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
+import { adicionarConta, excluirConta } from "../../utils/localStorage";
+import { useRecoilState } from "recoil";
+import { compras, consumidores, nomeConta } from "../../states/atom";
 import {
   Botao,
   Lista,
@@ -74,17 +75,11 @@ const ListaTituloExtrato = styled(ListaTitulo)`
   margin: 0 0 1rem 0;
 `;
 
-export default function ListaConta(props: IListaContaProps) {
-  const {
-    listaConsumidores,
-    listaCompras,
-    conta,
-    setConta,
-    setConsumidor,
-    setListaConsumidores,
-    setListaCompras,
-  } = props;
+export default function ListaConta() {
 
+  const [conta, setConta] = useRecoilState(nomeConta)
+  const [listaConsumidores, setListaConsumidores] = useRecoilState(consumidores)
+  const [listaCompras, setListaCompras] = useRecoilState(compras)
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { ID } = useParams();
@@ -100,9 +95,14 @@ export default function ListaConta(props: IListaContaProps) {
     (gasto) => gasto / total
   );
 
-  function finalizarMesa() {
+  function resetStates() {
+    setConta("");
+    setListaConsumidores([]);
+    setListaCompras([]);
+    navigate("/");
+  }
 
-    if (!setConta || !setConsumidor || !setListaConsumidores || !setListaCompras) return;
+  function finalizar() {
 
     const objetoConta = {
       nome: conta,
@@ -111,34 +111,15 @@ export default function ListaConta(props: IListaContaProps) {
       id: uuidv4(),
     };
 
-    if (!localStorage.getItem("historicoContas")) {
-      const arrObjetoConta = [objetoConta];
-      localStorage.setItem("historicoContas", JSON.stringify(arrObjetoConta));
-    } else {
-      const historicoContas = localStorage.getItem("historicoContas");
-      const historicoContasObj = JSON.parse(historicoContas as string);
-      historicoContasObj.push(objetoConta);
-      localStorage.setItem(
-        "historicoContas",
-        JSON.stringify(historicoContasObj)
-      );
-    }
+    const novaConta = adicionarConta(objetoConta)
+    localStorage.setItem("historicoContas", novaConta)
 
-    setConta("");
-    setConsumidor("");
-    setListaConsumidores([]);
-    setListaCompras([]);
-    navigate("/");
+    resetStates()
   }
 
-  function excluirMesa() {
-    let historicoContasObj: IConta[] = [];
-    const historicoContas = localStorage.getItem("historicoContas");
-    if (historicoContas) {
-      historicoContasObj = [...JSON.parse(historicoContas)];
-    }
-    const novoHistorico = historicoContasObj.filter((conta) => conta.id !== ID);
-    localStorage.setItem("historicoContas", JSON.stringify(novoHistorico));
+  function excluir() {
+    const novoHistorico = excluirConta(ID)
+    localStorage.setItem("historicoContas", novoHistorico);
     navigate("/historico");
   }
 
@@ -189,11 +170,11 @@ export default function ListaConta(props: IListaContaProps) {
           <TotalCusto>R$ {total.toLocaleString("BRL")}</TotalCusto>
         </Inline>
         {pathname === "/extrato" ? (
-          <Botao danger onClick={finalizarMesa}>
+          <Botao danger onClick={finalizar}>
             Finalizar
           </Botao>
         ) : (
-          <Botao danger onClick={excluirMesa}>
+          <Botao danger onClick={excluir}>
             Excluir
           </Botao>
         )}

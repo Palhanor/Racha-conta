@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IInicioProps } from "../../interfaces/props";
 import { v4 as uuidv4 } from "uuid";
 import { Botao, Input, Label, Image, Titulo, Container } from "../../components/StyledComponents";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { nomeConta, consumidores } from "../../states/atom";
 const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
 // TO DO: Fazer um sistema que, caso já haja uma conta cadastrada, retorne para a página anterior
-export default function Inicio(props: IInicioProps) {
-  const { conta, setConta, consumidor, setConsumidor, setListaConsumidores } =
-    props;
+export default function Inicio() {
+
+    const [conta, setConta] = useRecoilState(nomeConta)
+    const setListaConsumidores = useSetRecoilState(consumidores)
+    const [consumidor, setConsumidor] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -19,6 +22,7 @@ export default function Inicio(props: IInicioProps) {
       ...listaAnterior,
       { nome: consumidor, pedidos: [], total: 0, id: uuidv4() },
     ]);
+    setConsumidor("")
     navigate("/consumidores", { replace: true });
   }
 

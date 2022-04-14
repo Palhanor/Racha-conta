@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import Navegacao from "../../components/Navegacao";
-import { IComprasProps } from "../../interfaces/props";
 import IConsumidor from "../../interfaces/consumidor";
 import { v4 as uuidv4 } from "uuid";
 import ListaCompras from "./ListaCompras";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { nomeConta, consumidores, compras } from "../../states/atom";
 import {
   Botao,
   Input,
@@ -16,14 +17,11 @@ import {
   ListaTitulo,
 } from "../../components/StyledComponents";
 
-export default function Compras(props: IComprasProps) {
-  const {
-    conta,
-    listaCompras,
-    setListaCompras,
-    listaConsumidores,
-    setListaConsumidores,
-  } = props;
+export default function Compras() {
+
+  const conta = useRecoilValue(nomeConta);
+  const [listaConsumidores, setListaConsumidores] = useRecoilState(consumidores)
+  const [listaCompras, setListaCompras] = useRecoilState(compras)
 
   const [nomePedido, setNomePedido] = useState<string>("");
   const [precoPedido, setPrecoPedido] = useState<number | null>(0);

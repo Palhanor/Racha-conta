@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { IConsumidorProps } from "../../interfaces/props";
 import ListaComprasConsumidor from "./ListaComprasConsumidor";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
@@ -15,9 +14,11 @@ import {
   Container,
   Inline
 } from "../../components/StyledComponents";
+import { useRecoilState } from "recoil";
+import { consumidores } from "../../states/atom";
 
-export default function Consumidor(props: IConsumidorProps) {
-  const { listaConsumidores, setListaConsumidores } = props;
+export default function Consumidor() {
+  const [listaConsumidores, setListaConsumidores] = useRecoilState(consumidores)
   const { ID } = useParams();
   const cliente = listaConsumidores.find(
     (dadosCliente) => dadosCliente.id === ID

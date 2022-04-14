@@ -1,21 +1,14 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { IExtratoProps } from "../../interfaces/props";
 import Navegacao from "../../components/Navegacao";
 import ListaConta from "../../components/ListaConta";
+import { useRecoilValue } from "recoil";
+import { nomeConta } from "../../states/atom";
 // TO DO: import { randomUUID } from "crypto";
 
-export default function Extrato(props: IExtratoProps) {
-  const {
-    listaConsumidores,
-    listaCompras,
-    conta,
-    setConta,
-    setConsumidor,
-    setListaConsumidores,
-    setListaCompras,
-  } = props;
+export default function Extrato() {
 
+  const conta = useRecoilValue(nomeConta);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,15 +17,7 @@ export default function Extrato(props: IExtratoProps) {
 
   return (
     <>
-      <ListaConta
-        listaConsumidores={listaConsumidores}
-        listaCompras={listaCompras}
-        conta={conta}
-        setConta={setConta}
-        setConsumidor={setConsumidor}
-        setListaConsumidores={setListaConsumidores}
-        setListaCompras={setListaCompras}
-      ></ListaConta>
+      <ListaConta></ListaConta>
       <Navegacao />
     </>
   );

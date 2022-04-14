@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "../NotFound";
 import Navegacao from "../../components/Navegacao";
-import { ICompraProps } from "../../interfaces/props";
 import ListaAutoresCompra from "./ListaAutoresCompra";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { compras, consumidores } from "../../states/atom";
 import {
   Botao,
   Titulo,
@@ -14,8 +15,10 @@ import {
   Inline,
 } from "../../components/StyledComponents";
 
-export default function Compra(props: ICompraProps) {
-  const { listaCompras, setListaCompras, setListaConsumidores } = props;
+export default function Compra() {
+
+  const setListaConsumidores = useSetRecoilState(consumidores)
+  const [listaCompras, setListaCompras] = useRecoilState(compras)
   const { ID } = useParams();
   const pedido = listaCompras.find((dadosPedido) => dadosPedido.id === ID);
   const navigate = useNavigate();

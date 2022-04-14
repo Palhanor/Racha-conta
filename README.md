@@ -1,7 +1,6 @@
 # TO DO
-**GESTÃO DE DADOS**
-- [ ] Usar um sistema de gestão de dados global através de ```Recoil``` ou ```Redux```
-***
+**BUG**
+* O sistema de histórico não está passando para a conta os dados necessários para exibir a informação através do ListaConta. Em compensação o sistema está renderizando o extrato da conta atual, pegando os dados diretamente pelo estadop global. Isso pode ser resolvido com a passagem de props dos compoenntes pais (Conta e Extrato), passando os dados necessários para o componente filho (ListaConta).
 **OUTROS**
 1. Adicionar o sistema de quantidade de produtos logo ao lado do campo de preço
 2. Criar limitador de tamanho do input de preço e adicionar os pontos nos milhares
