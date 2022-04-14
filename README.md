@@ -20,12 +20,15 @@
 - [ ] Componentizar mais elementos das páginas
 - [ ] Compartilhar componentes (item de lista)
 - [ ] Usar hooks customizados para extrair funções entre outros
+- [ ] Corrigir problemas no output do HTML no build
 ***
 **DETALHES**
 * Existem problemas de responsividade com os React Icons e com o Multiselect
 * Problemas do HeshRouter usado para o deploy no Github
 * O componente de Navegacao está sendo renderizado em cada rota separadamente
 * A atual logo e nome são bem feios e precisam de um rebranding
+* É legal padronizar mais alguns estilos como bordas, margens, paddings e tal
+* Considerar o uso da biblioteca [Shortid](https://www.npmjs.com/package/shortid) no lugar da [UUID](https://www.npmjs.com/package/uuid)
 
 ***
 # Documentação

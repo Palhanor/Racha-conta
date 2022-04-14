@@ -17,7 +17,12 @@ const TituloMobile = styled(Titulo)`
   @media (min-width: ${brkpt.desktop}) {
     display: none;
   }
-`
+`;
+
+const TituloDesktop = styled(Titulo)`
+  order: 3;
+  margin-left: 2%;
+`;
 
 const NavegacaoPlaceholder = styled.div`
   display: none;
@@ -30,7 +35,7 @@ const NavegacaoPlaceholder = styled.div`
     border-radius: 0 10px 10px 0;
     background-color: ${color.themeDarker};
   }
-`
+`;
 
 const ListaResponsiva = styled(Lista)`
   @media (min-width: ${brkpt.desktop}) {
@@ -41,7 +46,7 @@ const ListaResponsiva = styled(Lista)`
     width: 90%;
     scrollbar-width: thin;
   }
-`
+`;
 
 const ListaTituloResponsivo = styled(ListaTitulo)`
   display: none;
@@ -49,7 +54,7 @@ const ListaTituloResponsivo = styled(ListaTitulo)`
   @media (min-width: ${brkpt.desktop}) {
     display: block;
   }
-`
+`;
 
 export default function Historico() {
   let historicoContasObj: IConta[] = [];
@@ -68,17 +73,25 @@ export default function Historico() {
           <ListaResponsiva>
             <ListaTituloResponsivo>Histórico</ListaTituloResponsivo>
             {historicoContasObj.map((conta) => (
-              <Item key={conta.id} onClick={() => navigate(`/conta/${conta.id}`)}>
+              <Item
+                key={conta.id}
+                onClick={() => navigate(`/conta/${conta.id}`)}
+              >
                 <Inline>
                   <ItemNome>{conta.nome}</ItemNome>
-                  <ItemCusto>R$ {conta.compras.reduce((total, compra) => total + compra.preco, 0).toLocaleString("BRL")}</ItemCusto>
+                  <ItemCusto>
+                    R${" "}
+                    {conta.compras
+                      .reduce((total, compra) => total + compra.preco, 0)
+                      .toLocaleString("BRL")}
+                  </ItemCusto>
                 </Inline>
               </Item>
             ))}
           </ListaResponsiva>
         </>
       ) : (
-        <Titulo>Histórico vazio</Titulo>
+        <TituloDesktop>Histórico vazio</TituloDesktop>
       )}
       <NavegacaoPlaceholder></NavegacaoPlaceholder>
       <Navegacao />

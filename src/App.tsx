@@ -44,12 +44,6 @@ function App() {
   const consumidoresProps = { conta, listaConsumidores, setListaConsumidores };
   const consumidorProps = { listaConsumidores, setListaConsumidores };
   const compraProps = { listaCompras, setListaCompras, setListaConsumidores };
-  const contaProps = {
-    setConta,
-    setConsumidor,
-    setListaCompras,
-    setListaConsumidores,
-  };
 
   return (
     <Routes>
@@ -66,7 +60,7 @@ function App() {
       <Route path="compra/:ID" element={<Compra {...compraProps} />} />
       <Route path="extrato" element={<Extrato {...extratoProps} />} />
       <Route path="historico" element={<Historico />} />
-      <Route path="conta/:ID" element={<Conta {...contaProps} />} />
+      <Route path="conta/:ID" element={<Conta />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

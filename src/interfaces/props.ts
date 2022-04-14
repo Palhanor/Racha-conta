@@ -34,10 +34,20 @@ export interface ICompraProps {
   setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>;
 }
 
-export interface IExtratoProps {
+export interface IExtratoProps extends ISetters {
   listaConsumidores: IConsumidor[];
   listaCompras: ICompra[];
   conta: string;
+}
+
+export interface IListaContaProps extends Partial<ISetters> {
+  listaConsumidores: IConsumidor[];
+  listaCompras: ICompra[];
+  conta: string;
+}
+
+
+interface ISetters {
   setConta: React.Dispatch<React.SetStateAction<string>>;
   setConsumidor: React.Dispatch<React.SetStateAction<string>>;
   setListaConsumidores: React.Dispatch<React.SetStateAction<IConsumidor[]>>;

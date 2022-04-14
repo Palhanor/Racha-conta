@@ -1,4 +1,4 @@
-import { IExtratoProps } from "../../interfaces/props";
+import { IListaContaProps } from "../../interfaces/props";
 import { v4 as uuidv4 } from "uuid";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import IConta from "../../interfaces/conta";
@@ -74,7 +74,7 @@ const ListaTituloExtrato = styled(ListaTitulo)`
   margin: 0 0 1rem 0;
 `;
 
-export default function ListaConta(props: IExtratoProps) {
+export default function ListaConta(props: IListaContaProps) {
   const {
     listaConsumidores,
     listaCompras,
@@ -101,6 +101,9 @@ export default function ListaConta(props: IExtratoProps) {
   );
 
   function finalizarMesa() {
+
+    if (!setConta || !setConsumidor || !setListaConsumidores || !setListaCompras) return;
+
     const objetoConta = {
       nome: conta,
       consumidores: listaConsumidores,
