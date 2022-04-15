@@ -1,6 +1,4 @@
 # TO DO
-**BUG**
-* O sistema de histórico não está passando para a conta os dados necessários para exibir a informação através do ListaConta. Em compensação o sistema está renderizando o extrato da conta atual, pegando os dados diretamente pelo estadop global. Isso pode ser resolvido com a passagem de props dos compoenntes pais (Conta e Extrato), passando os dados necessários para o componente filho (ListaConta).
 **OUTROS**
 1. Adicionar o sistema de quantidade de produtos logo ao lado do campo de preço
 2. Criar limitador de tamanho do input de preço e adicionar os pontos nos milhares
@@ -8,18 +6,19 @@
 4. Permitir edição do nome do cliente ou dos autores, nome e preço do pedido (não pode deixar sem autores)
 5. Criar ordenamento de exibição das listas de clientes e pedidos por preço maior, preço menos, mais antigo, mais novo, entre outros
 6. Corrigir os dados de consumidores dentro do pedido e dados dos pedidos dentro do consumidor
-7. Tentar adicionar graficos no extato final (usar uma biblioteca)
+7. Tentar adicionar graficos no extato final (usar uma biblioteca ou tentar criar um componente Grafico)
+8. Implementar uma forma de reabrir uma conta que estava fechada
 ***
 **REFATORAÇÃO**
-- [ ] Organizar fluxo de dados
-- [ ] Mitigar duplicação de código (funções, componentes, estilos)
+- [x] Organizar fluxo de dados
 - [ ] Fazer comentários necessários
+- [ ] Corrigir problemas no output do HTML no build
 - [ ] Rever a estilização global e de componentes
 - [ ] Analizar escopo das funções e estados
 - [ ] Componentizar mais elementos das páginas
 - [ ] Compartilhar componentes (item de lista)
+- [ ] Mitigar duplicação de código (funções, componentes, estilos)
 - [ ] Usar hooks customizados para extrair funções entre outros
-- [ ] Corrigir problemas no output do HTML no build
 ***
 **DETALHES**
 * Existem problemas de responsividade com os React Icons e com o Multiselect
@@ -30,6 +29,7 @@
 * Considerar o uso da biblioteca [Shortid](https://www.npmjs.com/package/shortid) no lugar da [UUID](https://www.npmjs.com/package/uuid)
 
 ***
+
 # Documentação
 ## Bibliotecas
 * [UUID](https://www.npmjs.com/package/uuid)

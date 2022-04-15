@@ -3,7 +3,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
 import { adicionarConta, excluirConta } from "../../utils/localStorage";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { compras, consumidores, nomeConta } from "../../states/atom";
 import {
   Botao,
@@ -16,6 +16,8 @@ import {
   Inline,
   ListaTitulo,
 } from "../../components/StyledComponents";
+import IConsumidor from "../../interfaces/consumidor";
+import ICompra from "../../interfaces/compra";
 
 // Parece muito com o Container global
 const ContainerConta = styled.div`
@@ -75,11 +77,17 @@ const ListaTituloExtrato = styled(ListaTitulo)`
   margin: 0 0 1rem 0;
 `;
 
-export default function ListaConta() {
-
-  const [conta, setConta] = useRecoilState(nomeConta)
-  const [listaConsumidores, setListaConsumidores] = useRecoilState(consumidores)
-  const [listaCompras, setListaCompras] = useRecoilState(compras)
+// Transformar no recebimento de props do tipo IConta
+export default function ListaConta(props: {
+  conta: string,
+  listaConsumidores: IConsumidor[],
+  listaCompras: ICompra[]
+}
+) {
+  const { conta, listaConsumidores, listaCompras } = props;
+  const setConta = useSetRecoilState(nomeConta)
+  const setListaConsumidores = useSetRecoilState(consumidores)
+  const setListaCompras = useSetRecoilState(compras)
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { ID } = useParams();

@@ -15,7 +15,11 @@ export default function Conta() {
 
   return (
     <>
-      <ListaConta></ListaConta>
+      <ListaConta
+        conta={contaSelecionada.nome}
+        listaConsumidores={contaSelecionada.consumidores}
+        listaCompras={contaSelecionada.compras}
+      ></ListaConta>
       <Navegacao></Navegacao>
     </>
   );
