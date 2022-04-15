@@ -4,7 +4,6 @@ import Navegacao from "../../components/Navegacao";
 import ListaConta from "../../components/ListaConta";
 import { useRecoilValue } from "recoil";
 import { compras, consumidores, nomeConta } from "../../states/atom";
-// TO DO: import { randomUUID } from "crypto";
 
 export default function Extrato() {
 

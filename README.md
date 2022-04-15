@@ -1,50 +1,43 @@
-# TO DO
-**OUTROS**
-1. Adicionar o sistema de quantidade de produtos logo ao lado do campo de preço
-2. Criar limitador de tamanho do input de preço e adicionar os pontos nos milhares
-3. Permitir que apague um cliente que já tem pedidos, desde que não seja pedido único
-4. Permitir edição do nome do cliente ou dos autores, nome e preço do pedido (não pode deixar sem autores)
-5. Criar ordenamento de exibição das listas de clientes e pedidos por preço maior, preço menos, mais antigo, mais novo, entre outros
-6. Corrigir os dados de consumidores dentro do pedido e dados dos pedidos dentro do consumidor
-7. Tentar adicionar graficos no extato final (usar uma biblioteca ou tentar criar um componente Grafico)
-8. Implementar uma forma de reabrir uma conta que estava fechada
-***
-**REFATORAÇÃO**
-- [x] Organizar fluxo de dados
-- [ ] Fazer comentários necessários
-- [ ] Corrigir problemas no output do HTML no build
-- [ ] Rever a estilização global e de componentes
-- [ ] Analizar escopo das funções e estados
-- [ ] Componentizar mais elementos das páginas
-- [ ] Compartilhar componentes (item de lista)
-- [ ] Mitigar duplicação de código (funções, componentes, estilos)
-- [ ] Usar hooks customizados para extrair funções entre outros
-***
-**DETALHES**
-* Existem problemas de responsividade com os React Icons e com o Multiselect
-* Problemas do HeshRouter usado para o deploy no Github
-* O componente de Navegacao está sendo renderizado em cada rota separadamente
-* A atual logo e nome são bem feios e precisam de um rebranding
-* É legal padronizar mais alguns estilos como bordas, margens, paddings e tal
-* Considerar o uso da biblioteca [Shortid](https://www.npmjs.com/package/shortid) no lugar da [UUID](https://www.npmjs.com/package/uuid)
-
+# Refatoração
+1. Fazer comentários necessários
+2. Corrigir problemas no output do HTML no build
+3. Rever a estilização global e de componentes
+4. Analizar escopo das funções e estados
+5. Componentizar mais elementos das páginas
+6. Compartilhar componentes (item de lista)
+7. Mitigar duplicação de código (funções, componentes, estilos)
+8. Usar hooks customizados para extrair funções entre outros
+9. Corrigir fluxo de dados (consumidores dentro do IPedido e de pedidos dentro de IConsumidor)
+10. Adicionar um ESLint para padronização
 ***
 
 # Documentação
-## Bibliotecas
-* [UUID](https://www.npmjs.com/package/uuid)
-* [Multiselect Dropdown](https://www.npmjs.com/package/multiselect-react-dropdown)
-* [React Icons](https://www.npmjs.com/package/react-icons)
-***
-## Ilustrações
-* [PixelTrue](https://www.pixeltrue.com/free-packs/)
-***
-## Componentes
+## Racha conta
+Link de acesso para o [Racha conta](https://palhanor.github.io/Racha-conta/#/)
+## Design
+Link de acesso para o design da aplicação no Figma: **Adicionar o link**
+
+## Estrutura
+### Estados
 ...
 ***
-## Estilos
+### Componentes
 ...
 ***
-## Estados
+### Estilos
 ...
+## Materiais Externos
+### Bibliotecas
+* Linguagem: [TypeScript](https://www.npmjs.com/package/typescript)
+* Roteamento: [React Router DOM](https://www.npmjs.com/package/react-router-dom)
+* Gerenciamento global: [Recoil](https://www.npmjs.com/package/recoil)
+* Deploy: [gh-pages](https://www.npmjs.com/package/gh-pages)
+* Input multiselect: [Multiselect React Dropdown](https://www.npmjs.com/package/multiselect-react-dropdown)
+* Gerador de Ids: [UUID](https://www.npmjs.com/package/uuid)
+* Icones: [React Icons](https://www.npmjs.com/package/react-icons)
+* Estilização: [Styled Components](https://www.npmjs.com/package/styled-components)
+* Estilização: [SASS](https://www.npmjs.com/package/sass)
+* Estilização: [Normalize.css](https://www.npmjs.com/package/normalize.css)
+### Assets
+* Ilustrações: [PixelTrue](https://www.pixeltrue.com/free-packs/)
 ***

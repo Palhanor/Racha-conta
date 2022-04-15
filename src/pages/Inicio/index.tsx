@@ -7,7 +7,6 @@ import { nomeConta, consumidores } from "../../states/atom";
 const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
-// TO DO: Fazer um sistema que, caso já haja uma conta cadastrada, retorne para a página anterior
 export default function Inicio() {
 
     const [conta, setConta] = useRecoilState(nomeConta)
@@ -16,7 +15,7 @@ export default function Inicio() {
 
   const navigate = useNavigate();
 
-  function criaMesa(e: React.FormEvent<HTMLFormElement>) {
+  function criarConta(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setListaConsumidores((listaAnterior) => [
       ...listaAnterior,
@@ -31,8 +30,7 @@ export default function Inicio() {
       <Titulo>Racha conta</Titulo>
       <Image src={ilustracao} alt="Ilustracao do Racha conta" />
       <Container bottom>
-        <form onSubmit={(e) => criaMesa(e)}>
-          {/*TO DO: Mudar para um h2*/}
+        <form onSubmit={(e) => criarConta(e)}>
           <Titulo secondary>Nova conta</Titulo>
           <Label htmlFor="conta">Nome da conta</Label>
           <Input

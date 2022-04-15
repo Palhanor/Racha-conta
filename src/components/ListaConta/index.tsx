@@ -77,7 +77,7 @@ const ListaTituloExtrato = styled(ListaTitulo)`
   margin: 0 0 1rem 0;
 `;
 
-// Transformar no recebimento de props do tipo IConta
+// TO DO: Transformar no recebimento de props do tipo IConta
 export default function ListaConta(props: {
   conta: string,
   listaConsumidores: IConsumidor[],
