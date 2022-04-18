@@ -3,18 +3,18 @@
   "name": "Racha conta",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src": "favicon-white.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/svg"
     },
     {
-      "src": "favicon.svg",
-      "type": "image/png",
+      "src": "favicon-white.svg",
+      "type": "image/svg",
       "sizes": "192x192"
     },
     {
-      "src": "favicon.svg",
-      "type": "image/png",
+      "src": "favicon-white.svg",
+      "type": "image/svg",
       "sizes": "512x512"
     }
   ],
