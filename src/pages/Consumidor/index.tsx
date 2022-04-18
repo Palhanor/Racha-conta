@@ -22,13 +22,11 @@ export default function Consumidor() {
   const removerConsumidor = useRemoveConsumidor();
   const { ID } = useParams();
   const navigate = useNavigate();
-  const cliente = listaConsumidores.find(
-    (dadosCliente) => dadosCliente.id === ID
+  const consumidor = listaConsumidores.find(
+    (dadosConsumidor) => dadosConsumidor.id === ID
   );
 
-  if (!cliente) {
-    return <NotFound />;
-  }
+  if (!consumidor) return <NotFound />;
 
   function apagar(): void {
     removerConsumidor(ID);
@@ -38,15 +36,15 @@ export default function Consumidor() {
   return (
     <>
       <Container default>
-        <Titulo secondary>{cliente.nome}</Titulo>
+        <Titulo secondary>{consumidor.nome}</Titulo>
         <Inline>
           <ItemTexto>
-            {cliente.pedidos.length} Compra
-            {cliente.pedidos.length === 1 ? "" : "s"}
+            {consumidor.pedidos.length} Compra
+            {consumidor.pedidos.length === 1 ? "" : "s"}
           </ItemTexto>
           <ItemCusto>
             R${" "}
-            {cliente.pedidos
+            {consumidor.pedidos
               .reduce(
                 (total, item) => item.preco / item.autores.length + total,
                 0
@@ -63,8 +61,8 @@ export default function Consumidor() {
       <ListaContainer>
         <ListaTitulo>Compras</ListaTitulo>
         <Lista>
-          {cliente.pedidos.map((pedido) => (
-            <ListaComprasConsumidor key={pedido.id} {...pedido} />
+          {consumidor.pedidos.map((compra) => (
+            <ListaComprasConsumidor key={compra.id} {...compra} />
           ))}
         </Lista>
       </ListaContainer>

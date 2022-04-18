@@ -1,28 +1,37 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import { Botao, Input, Label, Image, Titulo, Container } from "../../components/StyledComponents";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { nomeConta, consumidores } from "../../states/atom";
+import {
+  Botao,
+  Input,
+  Label,
+  Image,
+  Titulo,
+  Container,
+} from "../../components/StyledComponents";
+import { useRecoilState } from "recoil";
+import { nomeConta } from "../../states/atom";
+import useAdicionaConsumidor from "../../hooks/useAdicionaConsumidor";
 const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
 export default function Inicio() {
-
-    const [conta, setConta] = useRecoilState(nomeConta)
-    const setListaConsumidores = useSetRecoilState(consumidores)
-    const [consumidor, setConsumidor] = useState<string>("");
+  const [conta, setConta] = useRecoilState(nomeConta);
+  const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
+  const adicionaConsumidor = useAdicionaConsumidor();
 
   const navigate = useNavigate();
 
   function criarConta(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setListaConsumidores((listaAnterior) => [
-      ...listaAnterior,
-      { nome: consumidor, pedidos: [], total: 0, id: uuidv4() },
-    ]);
-    setConsumidor("")
-    navigate("/consumidores", { replace: true });
+
+    try {
+      adicionaConsumidor(nomeConsumidor);
+      setNomeConsumidor("");
+      navigate("/consumidores", { replace: true });
+    } catch (err) {
+      alert(err);
+    }
+
   }
 
   return (
@@ -49,8 +58,8 @@ export default function Inicio() {
             id="consumidor"
             placeholder="Insira seu nome"
             required
-            value={consumidor}
-            onChange={(e) => setConsumidor(e.target.value)}
+            value={nomeConsumidor}
+            onChange={(e) => setNomeConsumidor(e.target.value)}
           />
           <Botao type="submit">Criar</Botao>
         </form>

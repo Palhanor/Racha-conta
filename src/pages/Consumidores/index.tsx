@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
-import { v4 as uuidv4 } from "uuid";
 import ItemConsumidor from "./ItemConsumidor";
-
+import { useRecoilValue } from "recoil";
+import { consumidores, nomeConta } from "../../states/atom";
+import useAdicionaConsumidor from "../../hooks/useAdicionaConsumidor";
 import {
   Botao,
   Input,
@@ -14,52 +15,42 @@ import {
   ListaContainer,
   ListaTitulo,
 } from "../../components/StyledComponents";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { consumidores, nomeConta } from "../../states/atom";
 
 export default function Consumidores() {
   const conta = useRecoilValue(nomeConta);
-  const [listaConsumidores, setListaConsumidores] =
-    useRecoilState(consumidores);
-  const [novoConsumidor, setNovoConsumidor] = useState<string>("");
+  const listaConsumidores = useRecoilValue(consumidores);
+  const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
   const navigate = useNavigate();
+  const adicionaConsumidor = useAdicionaConsumidor();
 
   useEffect(() => {
     if (!conta) navigate("/");
   });
 
-  function novoCliente(e: React.FormEvent<HTMLFormElement>) {
+  function adicionar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const nomeDuplicado = listaConsumidores.find(
-      (clienteVirificado) => clienteVirificado.nome === novoConsumidor
-    );
 
-    if (nomeDuplicado) {
-      alert("O nome dos clientes devem ser diferentes entre si");
-      setNovoConsumidor("");
-      return;
+    try {
+      adicionaConsumidor(nomeConsumidor);
+      setNomeConsumidor("");
+    } catch (err) {
+      alert(err);
     }
-
-    setListaConsumidores([
-      ...listaConsumidores,
-      { nome: novoConsumidor, pedidos: [], id: uuidv4() },
-    ]);
-    setNovoConsumidor("");
   }
 
   return (
     <>
       <Container top>
-        <form onSubmit={(e) => novoCliente(e)}>
+        <form onSubmit={adicionar}>
           <Titulo secondary>Novo consumidor</Titulo>
-          <Label htmlFor="cliente">Novo consumidor</Label>
+          <Label htmlFor="consumidor">Novo consumidor</Label>
           <Input
             type="text"
-            name="cliente"
-            id="cliente"
+            name="consumidor"
+            id="consumidor"
             placeholder="Nome do consumidor"
-            value={novoConsumidor}
-            onChange={(e) => setNovoConsumidor(e.target.value)}
+            value={nomeConsumidor}
+            onChange={(e) => setNomeConsumidor(e.target.value)}
             required
           />
           <Botao>Adicionar</Botao>
@@ -68,8 +59,8 @@ export default function Consumidores() {
       <ListaContainer>
         <ListaTitulo>Consumidores</ListaTitulo>
         <Lista>
-          {listaConsumidores.map((dadosCliente) => (
-            <ItemConsumidor key={dadosCliente.id} {...dadosCliente} />
+          {listaConsumidores.map((dadosConsumidor) => (
+            <ItemConsumidor key={dadosConsumidor.id} {...dadosConsumidor} />
           ))}
         </Lista>
       </ListaContainer>

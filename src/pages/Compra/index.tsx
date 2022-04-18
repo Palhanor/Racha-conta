@@ -2,8 +2,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import NotFound from "../NotFound";
 import Navegacao from "../../components/Navegacao";
 import ListaAutoresCompra from "./ListaAutoresCompra";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { compras, consumidores } from "../../states/atom";
+import { useRecoilValue } from "recoil";
+import { compras } from "../../states/atom";
 import {
   Botao,
   Titulo,
@@ -14,58 +14,42 @@ import {
   Container,
   Inline,
 } from "../../components/StyledComponents";
+import useRemoveCompra from "../../hooks/useRemoveCompra";
 
 export default function Compra() {
-
-  const setListaConsumidores = useSetRecoilState(consumidores)
-  const [listaCompras, setListaCompras] = useRecoilState(compras)
+  const listaCompras = useRecoilValue(compras);
   const { ID } = useParams();
-  const pedido = listaCompras.find((dadosPedido) => dadosPedido.id === ID);
+  const compra = listaCompras.find((dadosCompra) => dadosCompra.id === ID);
   const navigate = useNavigate();
+  const removeCompra = useRemoveCompra();
 
-  if (!pedido) {
-    return <NotFound />;
-  }
+  if (!compra) return <NotFound />;
 
-  function apagarPedido(): void {
-    setListaConsumidores((velhaListaClientes) =>
-      velhaListaClientes.map((dadosCliente) => {
-        const { nome, pedidos, id } = dadosCliente;
-        const novosPedidos = pedidos.filter((pedido) => pedido.id !== ID);
-        return {
-          nome: nome,
-          pedidos: novosPedidos,
-          id: id,
-        };
-      })
-    );
-
-    setListaCompras((velhaLista) =>
-      velhaLista.filter((velhoPedido) => velhoPedido.id !== ID)
-    );
+  function apagarCompra(): void {
+    removeCompra(ID);
     navigate("/compras");
   }
 
   return (
     <>
       <Container default>
-        <Titulo secondary>{pedido.nome}</Titulo>
+        <Titulo secondary>{compra.nome}</Titulo>
         <Inline>
           <ItemTexto>
-            {pedido.autores.length} Consumidor
-            {pedido.autores.length === 1 ? "" : "es"}
+            {compra.autores.length} Consumidor
+            {compra.autores.length === 1 ? "" : "es"}
           </ItemTexto>
-          <ItemCusto>R$ {pedido.preco.toLocaleString("BRL")}</ItemCusto>
+          <ItemCusto>R$ {compra.preco.toLocaleString("BRL")}</ItemCusto>
         </Inline>
         <div>
-          <Botao danger onClick={apagarPedido}>
+          <Botao danger onClick={apagarCompra}>
             Apagar
           </Botao>
         </div>
       </Container>
       <ListaContainer>
         <ListaTitulo>Consumidores</ListaTitulo>
-        {<ListaAutoresCompra pedido={pedido} />}
+        {<ListaAutoresCompra compra={compra} />}
       </ListaContainer>
       <Navegacao />
     </>

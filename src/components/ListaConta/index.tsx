@@ -3,8 +3,9 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
 import { adicionarConta, excluirConta } from "../../utils/localStorage";
-import { useSetRecoilState } from "recoil";
-import { compras, consumidores, nomeConta } from "../../states/atom";
+import IConsumidor from "../../interfaces/consumidor";
+import ICompra from "../../interfaces/compra";
+import useResetarConta from "../../hooks/useResetarConta";
 import {
   Botao,
   Lista,
@@ -16,8 +17,6 @@ import {
   Inline,
   ListaTitulo,
 } from "../../components/StyledComponents";
-import IConsumidor from "../../interfaces/consumidor";
-import ICompra from "../../interfaces/compra";
 
 // Parece muito com o Container global
 const ContainerConta = styled.div`
@@ -85,30 +84,21 @@ export default function ListaConta(props: {
 }
 ) {
   const { conta, listaConsumidores, listaCompras } = props;
-  const setConta = useSetRecoilState(nomeConta)
-  const setListaConsumidores = useSetRecoilState(consumidores)
-  const setListaCompras = useSetRecoilState(compras)
+  const resetarConta = useResetarConta();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { ID } = useParams();
 
   const total = listaCompras.reduce((total, item) => item.preco + total, 0);
-  const gastosClientes: number[] = listaConsumidores.map((dadosCliente) =>
-    dadosCliente.pedidos.reduce(
+  const gastosConsumidores: number[] = listaConsumidores.map((dadosConsumidor) =>
+    dadosConsumidor.pedidos.reduce(
       (total, item) => item.preco / item.autores.length + total,
       0
     )
   );
-  const percentualClientes: number[] = gastosClientes.map(
+  const percentualConsumidores: number[] = gastosConsumidores.map(
     (gasto) => gasto / total
   );
-
-  function resetStates(): void {
-    setConta("");
-    setListaConsumidores([]);
-    setListaCompras([]);
-    navigate("/");
-  }
 
   function finalizar(): void {
 
@@ -122,7 +112,8 @@ export default function ListaConta(props: {
     const novaConta = adicionarConta(objetoConta);
     localStorage.setItem("historicoContas", novaConta);
 
-    resetStates();
+    resetarConta()
+    navigate("/");
   }
 
   function excluir(): void {
@@ -136,17 +127,17 @@ export default function ListaConta(props: {
       <ContainerConta>
         <ListaTituloExtrato>Consumidores</ListaTituloExtrato>
         <Lista>
-          {listaConsumidores.map((dadosCliente, index) => (
-            <ItemLista key={dadosCliente.id}>
-              <ItemNome>{dadosCliente.nome}</ItemNome>
+          {listaConsumidores.map((dadosConsumidor, index) => (
+            <ItemLista key={dadosConsumidor.id}>
+              <ItemNome>{dadosConsumidor.nome}</ItemNome>
               <div>
                 <ItemCusto>
-                  R$ {gastosClientes[index].toLocaleString("BRL")}
+                  R$ {gastosConsumidores[index].toLocaleString("BRL")}
                 </ItemCusto>
                 {listaConsumidores[index].pedidos.length > 0 && (
                   <ItemTexto>
                     {" "}
-                    &#183; {(percentualClientes[index] * 100).toFixed(2)}%
+                    &#183; {(percentualConsumidores[index] * 100).toFixed(2)}%
                   </ItemTexto>
                 )}
               </div>
@@ -155,16 +146,16 @@ export default function ListaConta(props: {
         </Lista>
         <ListaTituloExtrato>Compras</ListaTituloExtrato>
         <Lista>
-          {listaCompras.map((dadosPedido) => (
-            <ItemLista key={dadosPedido.id}>
-              <ItemNome>{dadosPedido.nome}</ItemNome>
+          {listaCompras.map((dadosCompra) => (
+            <ItemLista key={dadosCompra.id}>
+              <ItemNome>{dadosCompra.nome}</ItemNome>
               <div>
                 <ItemCusto>
-                  R$ {dadosPedido.preco.toLocaleString("BRL")}
+                  R$ {dadosCompra.preco.toLocaleString("BRL")}
                 </ItemCusto>{" "}
                 &#183;{" "}
                 <ItemTexto>
-                  {((dadosPedido.preco / total) * 100).toFixed(2)}%
+                  {((dadosCompra.preco / total) * 100).toFixed(2)}%
                 </ItemTexto>
               </div>
             </ItemLista>

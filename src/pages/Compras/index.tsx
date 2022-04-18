@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Multiselect from "multiselect-react-dropdown";
 import Navegacao from "../../components/Navegacao";
-import IConsumidor from "../../interfaces/consumidor";
 import { v4 as uuidv4 } from "uuid";
 import ListaCompras from "./ListaCompras";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { nomeConta, consumidores, compras } from "../../states/atom";
+import useAdicionaCompra from "../../hooks/useAdicionaCompra";
+import mascaraMonetaria from "../../utils/mascaraMonetaria";
 import {
   Botao,
   Input,
@@ -18,14 +19,13 @@ import {
 } from "../../components/StyledComponents";
 
 export default function Compras() {
-
   const conta = useRecoilValue(nomeConta);
-  const [listaConsumidores, setListaConsumidores] = useRecoilState(consumidores)
-  const [listaCompras, setListaCompras] = useRecoilState(compras)
-
-  const [nomePedido, setNomePedido] = useState<string>("");
-  const [precoPedido, setPrecoPedido] = useState<number | null>(0);
-  const [autoresPedido, setAutoresPedido] = useState<string[]>([]);
+  const listaConsumidores = useRecoilValue(consumidores);
+  const listaCompras = useRecoilValue(compras);
+  const [nomeCompra, setNomeCompra] = useState<string>("");
+  const [precoCompra, setPrecoCompra] = useState<number | null>(0);
+  const [autoresCompra, setAutoresCompra] = useState<string[]>([]);
+  const adicionaCompra = useAdicionaCompra();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,71 +54,38 @@ export default function Compras() {
     },
   };
 
-  function atribuirPedido(e: React.FormEvent<HTMLFormElement>) {
+  function adicionar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (autoresPedido.length === 0) {
-      alert("Adicione ao menos um autor para o pedido");
-      return;
+    try {
+      const novaCompra = {
+        nome: nomeCompra,
+        preco: (precoCompra as number) / 100,
+        autores: [...autoresCompra],
+        id: uuidv4(),
+      };
+
+      adicionaCompra(novaCompra);
+
+      setNomeCompra("");
+      setPrecoCompra(0);
+    } catch (err) {
+      alert(err);
     }
-    if (!precoPedido) {
-      alert("Adicione um preço para o pedido");
-      return;
-    }
-
-    const novoPedido = {
-      nome: nomePedido,
-      preco: precoPedido / 100,
-      autores: [...autoresPedido],
-      id: uuidv4(),
-    };
-    setListaCompras([...listaCompras, novoPedido]);
-
-    const novaListaClientes: IConsumidor[] = listaConsumidores.map(
-      (dadosCliente) => {
-        const listaDeQuemFezPedido = [...novoPedido.autores];
-        if (listaDeQuemFezPedido.indexOf(dadosCliente.nome) === -1) {
-          return { ...dadosCliente };
-        } else {
-          return {
-            ...dadosCliente,
-            pedidos: [...dadosCliente.pedidos, novoPedido],
-          };
-        }
-      }
-    );
-    setListaConsumidores(novaListaClientes);
-    setNomePedido("");
-    setPrecoPedido(0);
-  }
-
-  function mascaraPreco(valor: number | null) {
-    if (!valor) valor = 0;
-    const valorStr = valor.toString().padStart(3, "0");
-    const valorArr = valorStr.split("");
-    const newNumInt = valorArr.slice(0, valorArr.length - 2);
-    const newNumFloat = valorArr.slice(valorArr.length - 2, valorArr.length);
-    return `R$ ${newNumInt.join("")},${newNumFloat.join("")}`;
-  }
-
-  function pegaPreco(valor: string) {
-    const removeMascaraMonetaria = valor.replace("R$ ", "").replace(",", "");
-    const valorDoInputStr = parseInt(removeMascaraMonetaria);
-    return valorDoInputStr;
   }
 
   return (
     <>
       <Container top>
-        <form onSubmit={(e) => atribuirPedido(e)}>
+        <form onSubmit={adicionar}>
           <Titulo secondary>Nova compra</Titulo>
           <Multiselect
             isObject={false}
             style={multiselectStyle}
             placeholder="Selecione os compradores"
-            onRemove={(e) => setAutoresPedido(e)}
-            onSelect={(e) => setAutoresPedido(e)}
-            options={listaConsumidores.map((cliente) => cliente.nome)}
+            onRemove={(e) => setAutoresCompra(e)}
+            onSelect={(e) => setAutoresCompra(e)}
+            options={listaConsumidores.map((consumidor) => consumidor.nome)}
           />
           <Label htmlFor="nomeCompra">Nome da compra</Label>
           <Input
@@ -127,8 +94,8 @@ export default function Compras() {
             id="nomeCompra"
             placeholder="Nome da compra"
             required
-            value={nomePedido}
-            onChange={(e) => setNomePedido(e.target.value)}
+            value={nomeCompra}
+            onChange={(e) => setNomeCompra(e.target.value)}
           />
           <Label htmlFor="precoCompra">Preço da compra</Label>
           <Input
@@ -140,15 +107,19 @@ export default function Compras() {
               e.target.setSelectionRange(valueLength, valueLength);
             }}
             required
-            value={mascaraPreco(precoPedido)}
-            onChange={(e) => setPrecoPedido(pegaPreco(e.target.value))}
+            value={mascaraMonetaria.adicionaMascaraMonetaria(precoCompra)}
+            onChange={(e) =>
+              setPrecoCompra(
+                mascaraMonetaria.removeMascaraMonetaria(e.target.value)
+              )
+            }
           />
           <Botao>Adicionar</Botao>
         </form>
       </Container>
       <ListaContainer>
         <ListaTitulo>Compras</ListaTitulo>
-        {<ListaCompras listaPedidos={listaCompras} />}
+        {<ListaCompras listaCompras={listaCompras} />}
       </ListaContainer>
       <Navegacao />
     </>
