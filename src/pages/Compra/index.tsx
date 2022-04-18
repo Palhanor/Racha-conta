@@ -27,7 +27,7 @@ export default function Compra() {
     return <NotFound />;
   }
 
-  function apagarPedido() {
+  function apagarPedido(): void {
     setListaConsumidores((velhaListaClientes) =>
       velhaListaClientes.map((dadosCliente) => {
         const { nome, pedidos, id } = dadosCliente;

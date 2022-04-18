@@ -18,9 +18,9 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { consumidores, nomeConta } from "../../states/atom";
 
 export default function Consumidores() {
-
   const conta = useRecoilValue(nomeConta);
-  const [listaConsumidores, setListaConsumidores] = useRecoilState(consumidores)
+  const [listaConsumidores, setListaConsumidores] =
+    useRecoilState(consumidores);
   const [novoConsumidor, setNovoConsumidor] = useState<string>("");
   const navigate = useNavigate();
 
@@ -30,12 +30,11 @@ export default function Consumidores() {
 
   function novoCliente(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const nomeDuplicado = listaConsumidores.find(
+      (clienteVirificado) => clienteVirificado.nome === novoConsumidor
+    );
 
-    if (
-      listaConsumidores.find(
-        (clienteVirificado) => clienteVirificado.nome === novoConsumidor
-      )
-    ) {
+    if (nomeDuplicado) {
       alert("O nome dos clientes devem ser diferentes entre si");
       setNovoConsumidor("");
       return;

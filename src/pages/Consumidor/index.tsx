@@ -2,7 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import ListaComprasConsumidor from "./ListaComprasConsumidor";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
-
+import { useRecoilValue } from "recoil";
+import { consumidores } from "../../states/atom";
+import useRemoveConsumidor from "../../hooks/useRemoveConsumidor";
 import {
   Botao,
   Titulo,
@@ -12,31 +14,24 @@ import {
   ListaContainer,
   ListaTitulo,
   Container,
-  Inline
+  Inline,
 } from "../../components/StyledComponents";
-import { useRecoilState } from "recoil";
-import { consumidores } from "../../states/atom";
 
 export default function Consumidor() {
-  const [listaConsumidores, setListaConsumidores] = useRecoilState(consumidores)
+  const listaConsumidores = useRecoilValue(consumidores);
+  const removerConsumidor = useRemoveConsumidor();
   const { ID } = useParams();
+  const navigate = useNavigate();
   const cliente = listaConsumidores.find(
     (dadosCliente) => dadosCliente.id === ID
   );
-
-  const navigate = useNavigate();
 
   if (!cliente) {
     return <NotFound />;
   }
 
-  function apagarCliente() {
-    setListaConsumidores((velhaLista) =>
-      velhaLista.filter(
-        (velhoCliente) =>
-          velhoCliente.id !== ID || velhoCliente.pedidos.length > 0
-      )
-    );
+  function apagar(): void {
+    removerConsumidor(ID);
     navigate("/consumidores");
   }
 
@@ -60,7 +55,7 @@ export default function Consumidor() {
           </ItemCusto>
         </Inline>
         <div>
-          <Botao danger onClick={apagarCliente}>
+          <Botao danger onClick={apagar}>
             Apagar
           </Botao>
         </div>

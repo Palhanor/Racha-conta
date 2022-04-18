@@ -103,14 +103,14 @@ export default function ListaConta(props: {
     (gasto) => gasto / total
   );
 
-  function resetStates() {
+  function resetStates(): void {
     setConta("");
     setListaConsumidores([]);
     setListaCompras([]);
     navigate("/");
   }
 
-  function finalizar() {
+  function finalizar(): void {
 
     const objetoConta = {
       nome: conta,
@@ -119,14 +119,14 @@ export default function ListaConta(props: {
       id: uuidv4(),
     };
 
-    const novaConta = adicionarConta(objetoConta)
-    localStorage.setItem("historicoContas", novaConta)
+    const novaConta = adicionarConta(objetoConta);
+    localStorage.setItem("historicoContas", novaConta);
 
-    resetStates()
+    resetStates();
   }
 
-  function excluir() {
-    const novoHistorico = excluirConta(ID)
+  function excluir(): void {
+    const novoHistorico = excluirConta(ID);
     localStorage.setItem("historicoContas", novoHistorico);
     navigate("/historico");
   }
