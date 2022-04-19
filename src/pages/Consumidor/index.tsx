@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { consumidores } from "../../states/atom";
+import useRemoveConsumidor from "../../hooks/consumidor/useRemoveConsumidor";
 import ListaComprasConsumidor from "./ListaComprasConsumidor";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
-import { useRecoilValue } from "recoil";
-import { consumidores } from "../../states/atom";
-import useRemoveConsumidor from "../../hooks/useRemoveConsumidor";
 import {
   Botao,
   Titulo,

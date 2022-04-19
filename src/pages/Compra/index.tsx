@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
-import NotFound from "../NotFound";
-import Navegacao from "../../components/Navegacao";
-import ListaAutoresCompra from "./ListaAutoresCompra";
 import { useRecoilValue } from "recoil";
 import { compras } from "../../states/atom";
+import useRemoveCompra from "../../hooks/compra/useRemoveCompra";
+import ListaAutoresCompra from "./ListaAutoresCompra";
+import Navegacao from "../../components/Navegacao";
+import NotFound from "../NotFound";
 import {
   Botao,
   Titulo,
@@ -14,7 +15,6 @@ import {
   Container,
   Inline,
 } from "../../components/StyledComponents";
-import useRemoveCompra from "../../hooks/useRemoveCompra";
 
 export default function Compra() {
   const listaCompras = useRecoilValue(compras);

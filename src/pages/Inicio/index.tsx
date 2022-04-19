@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import useAdicionaConsumidor from "../../hooks/consumidor/useAdicionaConsumidor";
+import useCriaConta from "../../hooks/conta/useCriaConta";
 import {
   Botao,
   Input,
@@ -8,8 +10,6 @@ import {
   Titulo,
   Container,
 } from "../../components/StyledComponents";
-import useAdicionaConsumidor from "../../hooks/useAdicionaConsumidor";
-import useCriaConta from "../../hooks/useCriaConta";
 const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
@@ -20,7 +20,7 @@ export default function Inicio() {
   const adicionaConsumidor = useAdicionaConsumidor();
   const navigate = useNavigate();
 
-  function criar(e: React.FormEvent<HTMLFormElement>) {
+  function criar(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     try {

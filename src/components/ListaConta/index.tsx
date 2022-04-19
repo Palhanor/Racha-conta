@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
-import useResetarConta from "../../hooks/useResetarConta";
-import useAdicionaConta from "../../hooks/useAdicionaConta";
-import useRemoveConta from "../../hooks/useRemoveConta";
-import useAtualizarConta from "../../hooks/useAtualizaConta";
+import useResetarConta from "../../hooks/conta/useResetarConta";
+import useAdicionaConta from "../../hooks/conta/useAdicionaConta";
+import useRemoveConta from "../../hooks/conta/useRemoveConta";
+import useAtualizarConta from "../../hooks/conta/useAtualizaConta";
 import IConta from "../../interfaces/conta";
 import {
   Botao,

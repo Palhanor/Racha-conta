@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import { IBotaoProps, IContainerProps, IInlineProps, ITituloProps } from '../../interfaces/styled';
 import { brkpt, color } from "../../styles"
+import { IBotaoProps, IContainerProps, IInlineProps, ITituloProps } from '../../interfaces/styled';
 
 export const Botao = styled.button`
     display: block;

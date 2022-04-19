@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Multiselect from "multiselect-react-dropdown";
-import Navegacao from "../../components/Navegacao";
-import { v4 as uuidv4 } from "uuid";
-import ListaCompras from "./ListaCompras";
 import { useRecoilValue } from "recoil";
 import { consumidores, compras, contaAtual } from "../../states/atom";
-import useAdicionaCompra from "../../hooks/useAdicionaCompra";
+import useAdicionaCompra from "../../hooks/compra/useAdicionaCompra";
 import mascaraMonetaria from "../../utils/mascaraMonetaria";
+import ListaCompras from "./ListaCompras";
+import Multiselect from "multiselect-react-dropdown";
+import Navegacao from "../../components/Navegacao";
 import {
   Botao,
   Input,
@@ -58,15 +57,7 @@ export default function Compras() {
     e.preventDefault();
 
     try {
-      const novaCompra = {
-        nome: nomeCompra,
-        preco: (precoCompra as number) / 100,
-        autores: [...autoresCompra],
-        id: uuidv4(),
-      };
-
-      adicionaCompra(novaCompra);
-
+      adicionaCompra(nomeCompra, precoCompra, autoresCompra);
       setNomeCompra("");
       setPrecoCompra(0);
     } catch (err) {

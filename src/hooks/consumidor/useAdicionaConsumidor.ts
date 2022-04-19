@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { consumidores } from "../states/atom";
+import { consumidores } from "../../states/atom";
 import { v4 as uuidv4 } from "uuid";
 
 const useAdicionaConsumidor = (): ((

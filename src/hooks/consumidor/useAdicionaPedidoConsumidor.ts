@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
-import ICompra from "../interfaces/compra";
-import { consumidores } from "../states/atom";
+import ICompra from "../../interfaces/compra";
+import { consumidores } from "../../states/atom";
 
 const useAdicionaPedidoConsumidor = () => {
   const [listaConsumidores, setListaConsumidores] =

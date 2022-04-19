@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navegacao from "../../components/Navegacao";
-import ListaConta from "../../components/ListaConta";
 import { useRecoilValue } from "recoil";
 import { compras, consumidores, contaAtual } from "../../states/atom";
+import ListaConta from "../../components/ListaConta";
+import Navegacao from "../../components/Navegacao";
 
 export default function Extrato() {
 

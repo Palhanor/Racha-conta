@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil"
-import { contaAtual } from "../states/atom"
+import { contaAtual } from "../../states/atom"
 import { v4 as uuidv4 } from "uuid";
 
 function useCriaConta() {

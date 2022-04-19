@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Navegacao from "../../components/Navegacao";
 import { brkpt, color } from "../../styles";
+import useHistorico from "../../hooks/conta/useHistorico";
+import Navegacao from "../../components/Navegacao";
 import {
   Titulo,
   Lista,
@@ -11,7 +12,6 @@ import {
   ItemCusto,
   ListaTitulo,
 } from "../../components/StyledComponents";
-import useHistorico from "../../hooks/useHistorico";
 
 const TituloMobile = styled(Titulo)`
   @media (min-width: ${brkpt.desktop}) {

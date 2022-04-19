@@ -1,4 +1,4 @@
-import IConta from "../interfaces/conta";
+import IConta from "../../interfaces/conta";
 
 function useAdicionaConta() {
   return (conta: IConta) => {

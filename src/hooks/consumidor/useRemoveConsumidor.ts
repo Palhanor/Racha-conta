@@ -1,5 +1,5 @@
 import { useSetRecoilState } from "recoil";
-import { consumidores } from "../states/atom";
+import { consumidores } from "../../states/atom";
 
 const useRemoveConsumidor = (): ((id: string | undefined) => void) => {
   const setListaConsumidores = useSetRecoilState(consumidores);

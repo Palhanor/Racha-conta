@@ -1,5 +1,5 @@
 import { useRecoilState, useRecoilValue } from "recoil"
-import { compras, consumidores, contaAtual } from "../states/atom"
+import { compras, consumidores, contaAtual } from "../../states/atom"
 
 function useAtualizarConta() {
     const [conta, setConta] = useRecoilState(contaAtual)

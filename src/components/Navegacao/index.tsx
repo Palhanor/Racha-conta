@@ -1,13 +1,13 @@
 import { Link, useLocation } from "react-router-dom";
-import { IconContext } from "react-icons";
-import { brkpt, color } from "../../styles";
 import styled from "styled-components";
+import { brkpt, color } from "../../styles";
+import { IconContext } from "react-icons";
+import { RiHistoryFill } from "react-icons/ri"
 import {
   BsPeopleFill,
   BsCartCheckFill,
   BsFileEarmarkTextFill,
 } from "react-icons/bs";
-import { RiHistoryFill } from "react-icons/ri"
 
 const Navbar = styled.nav`
   width: 100%;

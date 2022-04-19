@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navegacao from "../../components/Navegacao";
-import ItemConsumidor from "./ItemConsumidor";
 import { useRecoilValue } from "recoil";
 import { consumidores, contaAtual } from "../../states/atom";
-import useAdicionaConsumidor from "../../hooks/useAdicionaConsumidor";
+import useAdicionaConsumidor from "../../hooks/consumidor/useAdicionaConsumidor";
+import ItemConsumidor from "./ItemConsumidor";
+import Navegacao from "../../components/Navegacao";
 import {
   Botao,
   Input,

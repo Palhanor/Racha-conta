@@ -1,6 +1,6 @@
 import { useSetRecoilState } from "recoil";
-import { compras } from "../states/atom";
-import useRemovePedidoConsumidor from "./useRemovePedidoConsumidor";
+import { compras } from "../../states/atom";
+import useRemovePedidoConsumidor from "../consumidor/useRemovePedidoConsumidor";
 
 const useRemoveCompra = () => {
   const setListaCompras = useSetRecoilState(compras);

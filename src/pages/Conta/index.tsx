@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
+import useHistorico from "../../hooks/conta/useHistorico";
 import ListaConta from "../../components/ListaConta";
 import Navegacao from "../../components/Navegacao";
-import useHistorico from "../../hooks/useHistorico";
 import NotFound from "../NotFound";
 
 export default function Conta() {
