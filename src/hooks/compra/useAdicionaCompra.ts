@@ -1,7 +1,8 @@
 import { useSetRecoilState } from "recoil";
 import { compras } from "../../states/atom";
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from "nanoid";
 import useAdicionaPedidoConsumidor from "../consumidor/useAdicionaPedidoConsumidor";
+import { idSize } from "../../utils/idFormat";
 
 const useAdicionaCompra = () => {
   const setListaCompras = useSetRecoilState(compras);
@@ -14,7 +15,7 @@ const useAdicionaCompra = () => {
       nome: nome,
       preco: (preco as number) / 100,
       autores: [...autores],
-      id: uuidv4(),
+      id: nanoid(idSize),
     };
     setListaCompras((listaAntiga) => [...listaAntiga, novaCompra]);
     adicionaPedidoConsumidor(novaCompra);

@@ -11,7 +11,6 @@
   - [Materiais Externos](#materiais-externos)
     - [Bibliotecas](#bibliotecas)
     - [Assets](#assets)
-- [Refatoração](#refatoração)
 
 ## Design
 Link de acesso para o design da aplicação no Figma: **Adicionar o link**
@@ -31,20 +30,11 @@ Link de acesso para o design da aplicação no Figma: **Adicionar o link**
 * Gerenciamento global: [Recoil](https://www.npmjs.com/package/recoil)
 * Deploy: [gh-pages](https://www.npmjs.com/package/gh-pages)
 * Input multiselect: [Multiselect React Dropdown](https://www.npmjs.com/package/multiselect-react-dropdown)
-* Gerador de Ids: [UUID](https://www.npmjs.com/package/uuid)
+* Gerador de Ids: [nanoid](https://www.npmjs.com/package/nanoid)
 * Icones: [React Icons](https://www.npmjs.com/package/react-icons)
 * Estilização: [Styled Components](https://www.npmjs.com/package/styled-components)
 * Estilização: [SASS](https://www.npmjs.com/package/sass)
 * Estilização: [Normalize.css](https://www.npmjs.com/package/normalize.css)
 ### Assets
 * Ilustrações: [PixelTrue](https://www.pixeltrue.com/free-packs/)
-***
-# Refatoração
-1. Fazer comentários necessários
-2. Corrigir problemas no output do HTML no build
-3. Analizar escopo das funções e estados
-4. Componentizar mais elementos das páginas
-5. Compartilhar componentes (item de lista)
-6. Mitigar duplicação de código (funções, componentes, estilos)
-7. Usar hooks customizados para extrair funções entre outros
 ***

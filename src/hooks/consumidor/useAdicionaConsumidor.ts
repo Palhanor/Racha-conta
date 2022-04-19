@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil";
 import { consumidores } from "../../states/atom";
-import { v4 as uuidv4 } from "uuid";
+import { nanoid } from "nanoid";
+import { idSize } from "../../utils/idFormat";
 
 const useAdicionaConsumidor = (): ((
   nomeConsumidor: string
@@ -19,7 +20,7 @@ const useAdicionaConsumidor = (): ((
     const novoConsumidor = {
       nome: nomeConsumidor,
       pedidos: [],
-      id: uuidv4(),
+      id: nanoid(idSize),
     };
 
     setListaConsumidores([...listaConsumidores, novoConsumidor]);
