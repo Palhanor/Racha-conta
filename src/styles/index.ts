@@ -1,3 +1,4 @@
+// https://gs.statcounter.com/screen-resolution-stats
 
 export const brkpt = {
     tablet: "768px",

@@ -1,12 +1,12 @@
 import { useSetRecoilState } from "recoil"
-import { compras, consumidores, nomeConta } from "../states/atom"
+import { compras, consumidores, contaAtual } from "../states/atom"
 
 const useResetarConta = () => {
-    const setConta = useSetRecoilState(nomeConta)
+    const setConta = useSetRecoilState(contaAtual)
     const setListaConsumidores = useSetRecoilState(consumidores)
     const setListaCompras = useSetRecoilState(compras)
     return () => {
-        setConta("");
+        setConta({ nome: "", consumidores: [], compras: [], id: "" });
         setListaConsumidores([]);
         setListaCompras([]);
     }

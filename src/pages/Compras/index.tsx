@@ -5,7 +5,7 @@ import Navegacao from "../../components/Navegacao";
 import { v4 as uuidv4 } from "uuid";
 import ListaCompras from "./ListaCompras";
 import { useRecoilValue } from "recoil";
-import { nomeConta, consumidores, compras } from "../../states/atom";
+import { consumidores, compras, contaAtual } from "../../states/atom";
 import useAdicionaCompra from "../../hooks/useAdicionaCompra";
 import mascaraMonetaria from "../../utils/mascaraMonetaria";
 import {
@@ -19,7 +19,7 @@ import {
 } from "../../components/StyledComponents";
 
 export default function Compras() {
-  const conta = useRecoilValue(nomeConta);
+  const conta = useRecoilValue(contaAtual);
   const listaConsumidores = useRecoilValue(consumidores);
   const listaCompras = useRecoilValue(compras);
   const [nomeCompra, setNomeCompra] = useState<string>("");
@@ -29,7 +29,7 @@ export default function Compras() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!conta) navigate("/");
+    if (!conta.nome) navigate("/");
   });
 
   const multiselectStyle = {

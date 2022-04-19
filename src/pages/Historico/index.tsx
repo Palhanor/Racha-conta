@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navegacao from "../../components/Navegacao";
 import { brkpt, color } from "../../styles";
-import { getHistorico } from "../../utils/localStorage"
 import {
   Titulo,
   Lista,
@@ -12,6 +11,7 @@ import {
   ItemCusto,
   ListaTitulo,
 } from "../../components/StyledComponents";
+import useHistorico from "../../hooks/useHistorico";
 
 const TituloMobile = styled(Titulo)`
   @media (min-width: ${brkpt.desktop}) {
@@ -53,7 +53,7 @@ const ListaTituloResponsivo = styled(ListaTitulo)`
 `;
 
 export default function Historico() {
-  const historico = getHistorico()
+  const historico = useHistorico()();
   const navigate = useNavigate();
 
   return (

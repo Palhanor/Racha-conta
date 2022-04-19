@@ -1,11 +1,11 @@
-import { v4 as uuidv4 } from "uuid";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
-import { adicionarConta, excluirConta } from "../../utils/localStorage";
-import IConsumidor from "../../interfaces/consumidor";
-import ICompra from "../../interfaces/compra";
 import useResetarConta from "../../hooks/useResetarConta";
+import useAdicionaConta from "../../hooks/useAdicionaConta";
+import useRemoveConta from "../../hooks/useRemoveConta";
+import useAtualizarConta from "../../hooks/useAtualizaConta";
+import IConta from "../../interfaces/conta";
 import {
   Botao,
   Lista,
@@ -76,49 +76,36 @@ const ListaTituloExtrato = styled(ListaTitulo)`
   margin: 0 0 1rem 0;
 `;
 
-// TO DO: Transformar no recebimento de props do tipo IConta
-export default function ListaConta(props: {
-  conta: string,
-  listaConsumidores: IConsumidor[],
-  listaCompras: ICompra[]
-}
-) {
-  const { conta, listaConsumidores, listaCompras } = props;
-  const resetarConta = useResetarConta();
-  const navigate = useNavigate();
+export default function ListaConta(contaSelecionada: IConta) {
+  const { nome, consumidores, compras, id } = contaSelecionada;
   const { pathname } = useLocation();
-  const { ID } = useParams();
+  const navigate = useNavigate();
+  const atualizaConta = useAtualizarConta();
+  const adicionaConta = useAdicionaConta();
+  const resetarConta = useResetarConta();
+  const removeConta = useRemoveConta();
 
-  const total = listaCompras.reduce((total, item) => item.preco + total, 0);
-  const gastosConsumidores: number[] = listaConsumidores.map((dadosConsumidor) =>
-    dadosConsumidor.pedidos.reduce(
-      (total, item) => item.preco / item.autores.length + total,
-      0
-    )
+  const total = compras.reduce((total, item) => item.preco + total, 0);
+  const gastosConsumidores: number[] = consumidores.map(
+    (dadosConsumidor) =>
+      dadosConsumidor.pedidos.reduce(
+        (total, item) => item.preco / item.autores.length + total,
+        0
+      )
   );
   const percentualConsumidores: number[] = gastosConsumidores.map(
     (gasto) => gasto / total
   );
 
   function finalizar(): void {
-
-    const objetoConta = {
-      nome: conta,
-      consumidores: listaConsumidores,
-      compras: listaCompras,
-      id: uuidv4(),
-    };
-
-    const novaConta = adicionarConta(objetoConta);
-    localStorage.setItem("historicoContas", novaConta);
-
-    resetarConta()
+    atualizaConta()
+    adicionaConta(contaSelecionada);
+    resetarConta();
     navigate("/");
   }
 
   function excluir(): void {
-    const novoHistorico = excluirConta(ID);
-    localStorage.setItem("historicoContas", novoHistorico);
+    removeConta(id);
     navigate("/historico");
   }
 
@@ -127,14 +114,14 @@ export default function ListaConta(props: {
       <ContainerConta>
         <ListaTituloExtrato>Consumidores</ListaTituloExtrato>
         <Lista>
-          {listaConsumidores.map((dadosConsumidor, index) => (
+          {consumidores.map((dadosConsumidor, index) => (
             <ItemLista key={dadosConsumidor.id}>
               <ItemNome>{dadosConsumidor.nome}</ItemNome>
               <div>
                 <ItemCusto>
                   R$ {gastosConsumidores[index].toLocaleString("BRL")}
                 </ItemCusto>
-                {listaConsumidores[index].pedidos.length > 0 && (
+                {consumidores[index].pedidos.length > 0 && (
                   <ItemTexto>
                     {" "}
                     &#183; {(percentualConsumidores[index] * 100).toFixed(2)}%
@@ -146,7 +133,7 @@ export default function ListaConta(props: {
         </Lista>
         <ListaTituloExtrato>Compras</ListaTituloExtrato>
         <Lista>
-          {listaCompras.map((dadosCompra) => (
+          {compras.map((dadosCompra) => (
             <ItemLista key={dadosCompra.id}>
               <ItemNome>{dadosCompra.nome}</ItemNome>
               <div>
@@ -163,7 +150,7 @@ export default function ListaConta(props: {
         </Lista>
       </ContainerConta>
       <Container default>
-        <TituloConta>{conta}</TituloConta>
+        <TituloConta>{nome}</TituloConta>
         <Inline>
           <TotalTitulo>Total</TotalTitulo>
           <TotalCusto>R$ {total.toLocaleString("BRL")}</TotalCusto>

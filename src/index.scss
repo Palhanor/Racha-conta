@@ -1,5 +1,17 @@
+// As outras variaveis de estilização estão armazenadas no "./styles"
+
 @import url('https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap');
-@import "./styles/index";
+
+// Cores
+$theme: #426D77;
+
+// Breakpoints
+$desktop: 1280px;
+@mixin desktop {
+    @media (min-width: $desktop) { 
+        @content;
+    }
+}
 
 body {
   margin: 0;

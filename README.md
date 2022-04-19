@@ -1,7 +1,7 @@
-# [Racha conta](https://palhanor.github.io/Racha-conta/#/)
+# [Splittyn](https://palhanor.github.io/Racha-conta/#/)
 
 ## Indice
-- [Racha conta](#racha-conta)
+- [Splittyn](#splittyn)
   - [Indice](#indice)
   - [Design](#design)
   - [Estrutura](#estrutura)

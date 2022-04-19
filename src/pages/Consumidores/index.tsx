@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
 import ItemConsumidor from "./ItemConsumidor";
 import { useRecoilValue } from "recoil";
-import { consumidores, nomeConta } from "../../states/atom";
+import { consumidores, contaAtual } from "../../states/atom";
 import useAdicionaConsumidor from "../../hooks/useAdicionaConsumidor";
 import {
   Botao,
@@ -17,14 +17,14 @@ import {
 } from "../../components/StyledComponents";
 
 export default function Consumidores() {
-  const conta = useRecoilValue(nomeConta);
+  const conta = useRecoilValue(contaAtual);
   const listaConsumidores = useRecoilValue(consumidores);
   const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
   const navigate = useNavigate();
   const adicionaConsumidor = useAdicionaConsumidor();
 
   useEffect(() => {
-    if (!conta) navigate("/");
+    if (!conta.nome) navigate("/");
   });
 
   function adicionar(e: React.FormEvent<HTMLFormElement>) {
