@@ -1,9 +1,9 @@
 {
-  "short_name": "Racha conta",
-  "name": "Racha conta",
+  "short_name": "Splittyn",
+  "name": "Splittyn",
   "icons": [
     {
-      "src": "logo.svg",
+      "src": "favicon.svg",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/svg"
     },
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#426D77"
+  "theme_color": "#426D77",
+  "background_color": "#FFFFFF"
 }
