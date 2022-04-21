@@ -1,8 +1,14 @@
+/* IMPORTS */
 import { useRecoilState } from "recoil";
 import { consumidores } from "../../states/atom";
 import { nanoid } from "nanoid";
 import { idSize } from "../../utils/idFormat";
 
+/************************
+O hook recebe o nome do consumidor (string)
+Então valida se há um nome igual na lista de consumidores
+Por fim, caso o nome seja válido, é criado um novo objeto (IConsumidor) e adicionado no fim da lista de consumidores
+************************/
 const useAdicionaConsumidor = (): ((
   nomeConsumidor: string
 ) => void | ErrorConstructor) => {

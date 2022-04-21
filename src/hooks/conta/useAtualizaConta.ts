@@ -1,7 +1,12 @@
+/* IMPORTS */
 import { useRecoilState, useRecoilValue } from "recoil"
 import { compras, consumidores, contaAtual } from "../../states/atom"
 
-function useAtualizarConta() {
+/************************
+O hook atualiza o estado global contaAtual configurado no Recoil
+Para isso ele passa as lista de consumidores e lista de compras
+************************/
+function useAtualizarConta(): () => void {
     const [conta, setConta] = useRecoilState(contaAtual)
     const listaConsumidores = useRecoilValue(consumidores)
     const listaCompras = useRecoilValue(compras)

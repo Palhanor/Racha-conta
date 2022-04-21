@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
@@ -13,6 +14,7 @@ import {
   ListaTitulo,
 } from "../../components/StyledComponents";
 
+/* STYLED COMPONENTS */
 const TituloMobile = styled(Titulo)`
   @media (min-width: ${brkpt.desktop}) {
     display: none;
@@ -52,10 +54,16 @@ const ListaTituloResponsivo = styled(ListaTitulo)`
   }
 `;
 
+/* COMPONENTE */
 export default function Historico() {
-  const historico = useHistorico()();
+
+  /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
 
+  /* HOOK PERSONALIZADO */
+  const historico = useHistorico()();
+
+  /* JSX */
   return (
     <>
       {historico.length > 0 ? (
@@ -85,7 +93,7 @@ export default function Historico() {
         <TituloDesktop>Histórico vazio</TituloDesktop>
       )}
       <NavegacaoPlaceholder></NavegacaoPlaceholder>
-      <Navegacao />
+      <Navegacao /> {/* COMPONENTE */}
     </>
   );
 }

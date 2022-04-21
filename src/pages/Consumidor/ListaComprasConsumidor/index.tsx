@@ -1,3 +1,4 @@
+/* IMPORTS */
 import ICompra from "../../../interfaces/compra";
 import {
   Item,
@@ -7,9 +8,11 @@ import {
   Inline,
 } from "../../../components/StyledComponents";
 
-export default function ListaComprasConsumidor(props: ICompra) {
-  const { nome, preco, autores } = props;
+/* COMPONENTE */
+export default function ListaComprasConsumidor(compra: ICompra) {
+  const { nome, preco, autores } = compra;
 
+  /* JSX */
   return (
     <Item>
       <Inline>

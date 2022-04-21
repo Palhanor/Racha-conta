@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { useNavigate } from "react-router-dom";
 import ICompra from "../../../interfaces/compra";
 import {
@@ -9,13 +10,13 @@ import {
   Inline,
 } from "../../../components/StyledComponents";
 
-export default function ListaCompras({
-  listaCompras,
-}: {
-  listaCompras: ICompra[];
-}) {
+/* COMPONENTE */
+export default function ListaCompras({ listaCompras }: { listaCompras: ICompra[] }) {
+
+  /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
 
+  /* JSX */
   return (
     <Lista>
       {listaCompras.map((compra) => (

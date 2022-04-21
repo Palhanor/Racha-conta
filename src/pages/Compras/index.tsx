@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -17,20 +18,31 @@ import {
   ListaTitulo,
 } from "../../components/StyledComponents";
 
+/* COMPONENTE */
 export default function Compras() {
+
+  /* ESTADO GLOBAIS RECOIL */
   const conta = useRecoilValue(contaAtual);
   const listaConsumidores = useRecoilValue(consumidores);
   const listaCompras = useRecoilValue(compras);
+
+  /* ESTADOS DO COMPONENTE */
   const [nomeCompra, setNomeCompra] = useState<string>("");
   const [precoCompra, setPrecoCompra] = useState<number | null>(0);
   const [autoresCompra, setAutoresCompra] = useState<string[]>([]);
-  const adicionaCompra = useAdicionaCompra();
+
+  /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
 
+  /* HOOK PERSONALIZADO */
+  const adicionaCompra = useAdicionaCompra();
+
+  /* REDIRECIONADOR */
   useEffect(() => {
     if (!conta.nome) navigate("/");
   });
 
+  /* ESTILO DO COMPOENNTE MULTISELECT */
   const multiselectStyle = {
     searchBox: {
       // Input e container das tags
@@ -53,6 +65,7 @@ export default function Compras() {
     },
   };
 
+  /* ADICIONAR COM NA LISTA */
   function adicionar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -65,6 +78,7 @@ export default function Compras() {
     }
   }
 
+  /* JSX */
   return (
     <>
       <Container top>
@@ -112,7 +126,7 @@ export default function Compras() {
         <ListaTitulo>Compras</ListaTitulo>
         {<ListaCompras listaCompras={listaCompras} />}
       </ListaContainer>
-      <Navegacao />
+      <Navegacao /> {/* COMPONENTE */}
     </>
   );
 }

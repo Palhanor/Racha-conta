@@ -1,8 +1,14 @@
+/* IMPORTS */
 import { useSetRecoilState } from "recoil";
 import { compras } from "../../states/atom";
 import useRemovePedidoConsumidor from "../consumidor/useRemovePedidoConsumidor";
 
-const useRemoveCompra = () => {
+/************************
+O Hook recebe o ID (string) de uma compra
+Então passa o ID do pedido para o hook useRemovePedidoConsumidor()
+E por fim filtra a lista de compras para remover o pedido que possúi este mesmo ID
+************************/
+const useRemoveCompra = (): (pedidoID: string | undefined) => void => {
   const setListaCompras = useSetRecoilState(compras);
   const removePedidoConsumidor = useRemovePedidoConsumidor();
   return (pedidoID: string | undefined) => {

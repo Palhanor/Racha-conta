@@ -1,42 +1,28 @@
-// As outras variaveis de estilização estão armazenadas no "./styles"
-
 @import url('https://fonts.googleapis.com/css2?family=Marcellus+SC&display=swap');
 
-// Cores
-$theme: #426D77;
-
-// Breakpoints
-$desktop: 1280px;
-@mixin desktop {
-    @media (min-width: $desktop) { 
-        @content;
-    }
-}
-
+/* ESTILO PADRÃO */
 body {
-  margin: 0;
+  background-color: #426D77;
   font-family: 'Marcellus SC', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $theme;
+  margin: 0;
   margin-bottom: 7rem;
+  min-width: 300px;
 
-  @include desktop() {
-    padding: 2rem;
+  /* PADRÃO NO DESKTOP */
+  @media (min-width: 1280px) {
     box-sizing: border-box;
     overflow: hidden;
+    padding: 2rem;
   }
 
+  /* CONTAINER REACT COM NO DESKTOP */
   #root {
-    @include desktop() {
+    @media (min-width: 1280px) {
       margin-bottom: 0;
       display: flex;
       flex-direction: row;
     }
   }
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

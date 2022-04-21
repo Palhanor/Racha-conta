@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { consumidores } from "../../states/atom";
@@ -17,22 +18,34 @@ import {
   Inline,
 } from "../../components/StyledComponents";
 
+/* COMPONENTE */
 export default function Consumidor() {
+
+  /* ESTADO GLOBAL RECOIL */
   const listaConsumidores = useRecoilValue(consumidores);
-  const removerConsumidor = useRemoveConsumidor();
-  const { ID } = useParams();
+
+  /* HOOKS DO REACT ROUTER */
   const navigate = useNavigate();
+  const { ID } = useParams();
+
+  /* HOOK PERSONALIZADO */
+  const removerConsumidor = useRemoveConsumidor();
+
+  /* CONSUMIDOR SELECIONADO */
   const consumidor = listaConsumidores.find(
     (dadosConsumidor) => dadosConsumidor.id === ID
   );
 
+  /* REDIRECIONADOR */
   if (!consumidor) return <NotFound />;
 
+  /* APAGAR CONSUMIDOR DA LISTA */
   function apagar(): void {
     removerConsumidor(ID);
     navigate("/consumidores");
   }
 
+  /* JSX */
   return (
     <>
       <Container default>
@@ -63,10 +76,10 @@ export default function Consumidor() {
         <Lista>
           {consumidor.pedidos.map((compra) => (
             <ListaComprasConsumidor key={compra.id} {...compra} />
-          ))}
+          ))} {/* COMPONENTE */}
         </Lista>
       </ListaContainer>
-      <Navegacao />
+      <Navegacao /> {/* COMPONENTE */}
     </>
   );
 }

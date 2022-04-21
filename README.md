@@ -1,4 +1,4 @@
-# [Splittyn](https://palhanor.github.io/Racha-conta/#/)
+# [Splittyn](https://palhanor.github.io/Splittyn)
 
 ## Indice
 - [Splittyn](#splittyn)

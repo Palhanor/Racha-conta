@@ -1,10 +1,16 @@
+/* IMPORTS */
 import { useSetRecoilState } from "recoil";
 import { compras } from "../../states/atom";
 import { nanoid } from "nanoid";
 import useAdicionaPedidoConsumidor from "../consumidor/useAdicionaPedidoConsumidor";
 import { idSize } from "../../utils/idFormat";
 
-const useAdicionaCompra = () => {
+/************************
+O Hook recebe o nome (string), preço (number) e os autores (lista de nomes).
+Então verifica se há ao menos um autor, e se o preço é maior que 0, disparando um erro caso contrário.
+Por fim, cria um objeto (ICompra) de compra e o adiciona no fim da lista de compras, enquanto o passar para o hook useAdicionaPedidoConsumidor()
+************************/
+const useAdicionaCompra = (): (nome: string, preco: number | null, autores: string[]) => void | ErrorConstructor => {
   const setListaCompras = useSetRecoilState(compras);
   const adicionaPedidoConsumidor = useAdicionaPedidoConsumidor();
   return (nome: string, preco: number | null, autores: string[]) => {

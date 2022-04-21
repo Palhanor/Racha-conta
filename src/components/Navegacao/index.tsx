@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
@@ -9,6 +10,7 @@ import {
   BsFileEarmarkTextFill,
 } from "react-icons/bs";
 
+/* STYLED COMPONENTS */
 const Navbar = styled.nav`
   width: 100%;
   box-sizing: border-box;
@@ -30,18 +32,21 @@ const Navbar = styled.nav`
     height: 75vh;
   }
 `;
-
 const IconLink = styled(Link)`
   text-decoration: none;
   padding: .5rem;
   border-radius: 5px;
   transition: .2s;
   font-size: .8rem;
-`
+`;
 
+/* COMPONENTE */
 export default function Navegacao() {
+
+  /* HOOK DO REACT ROUTER */
   const { pathname } = useLocation();
 
+  /* DADOS ESTÁTICOS DOS ÍCONES */
   const navData = [
     {
       id: 0,
@@ -96,6 +101,7 @@ export default function Navegacao() {
     },
   ];
 
+  /* JSX */
   return (
     <Navbar>
       {navData.map((item) => (

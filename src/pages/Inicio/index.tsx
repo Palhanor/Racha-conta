@@ -1,4 +1,5 @@
-import { useState, FormEvent } from "react";
+/* IMPORTS */
+import { useState, FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAdicionaConsumidor from "../../hooks/consumidor/useAdicionaConsumidor";
 import useCriaConta from "../../hooks/conta/useCriaConta";
@@ -10,16 +11,33 @@ import {
   Titulo,
   Container,
 } from "../../components/StyledComponents";
+import { useRecoilValue } from "recoil";
+import { contaAtual } from "../../states/atom";
+// Problema de importação
 const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
+/* COMPONENTE */
 export default function Inicio() {
+
+  const contaGlobal = useRecoilValue(contaAtual)
+
+  /* ESTADOS DO COMPONENTE */
   const [conta, setConta] = useState("");
   const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
-  const criaConta = useCriaConta();
-  const adicionaConsumidor = useAdicionaConsumidor();
+
+  /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
 
+  /* HOOKS PERSONALIZADOS */
+  const adicionaConsumidor = useAdicionaConsumidor();
+  const criaConta = useCriaConta();
+
+  useEffect(() => {
+    if (contaGlobal.id !== "") navigate("/consumidores")
+  })
+
+  /* CRIAR NOVA CONTA */
   function criar(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -33,6 +51,7 @@ export default function Inicio() {
     }
   }
 
+  /* JSX */
   return (
     <>
       <Titulo>Splittyn</Titulo>

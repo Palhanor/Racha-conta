@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { compras } from "../../states/atom";
@@ -16,20 +17,32 @@ import {
   Inline,
 } from "../../components/StyledComponents";
 
+/* COMPONENTE */
 export default function Compra() {
+
+  /* ESTADO GLOBAL RECOIL */
   const listaCompras = useRecoilValue(compras);
+
+  /* HOOKS DO REACT ROUTER */
   const { ID } = useParams();
-  const compra = listaCompras.find((dadosCompra) => dadosCompra.id === ID);
   const navigate = useNavigate();
+
+  /* HOOK PERSONALIZADO */
   const removeCompra = useRemoveCompra();
 
+  /* COMPRA SELECIONADA */
+  const compra = listaCompras.find((dadosCompra) => dadosCompra.id === ID);
+
+  /* REDIRECIONADOR */
   if (!compra) return <NotFound />;
 
-  function apagarCompra(): void {
+  /* APAGAR A COMPRA */
+  function apagar(): void {
     removeCompra(ID);
     navigate("/compras");
   }
 
+  /* JSX */
   return (
     <>
       <Container default>
@@ -42,16 +55,16 @@ export default function Compra() {
           <ItemCusto>R$ {compra.preco.toLocaleString("BRL")}</ItemCusto>
         </Inline>
         <div>
-          <Botao danger onClick={apagarCompra}>
+          <Botao danger onClick={apagar}>
             Apagar
           </Botao>
         </div>
       </Container>
       <ListaContainer>
         <ListaTitulo>Consumidores</ListaTitulo>
-        {<ListaAutoresCompra compra={compra} />}
+        {<ListaAutoresCompra {...compra} />} {/* COMPONENTE */}
       </ListaContainer>
-      <Navegacao />
+      <Navegacao /> {/* COMPONENTE */}
     </>
   );
 }

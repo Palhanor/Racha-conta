@@ -1,10 +1,10 @@
-// https://gs.statcounter.com/screen-resolution-stats
-
+/* BREAKPOINTS DE RESPOSIVIDADE */
 export const brkpt = {
     tablet: "768px",
     desktop: "1280px"
 }
 
+/* PALETA DE CORES */
 export const color = {
     themeLighter: "#A7C2C9",
     theme: "#426D77",

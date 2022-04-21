@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { RecoilRoot } from "recoil";
 import { Route, Routes } from "react-router-dom";
 import Inicio from "./pages/Inicio";
@@ -10,6 +11,7 @@ import NotFound from "./pages/NotFound";
 import Historico from "./pages/Historico";
 import Conta from "./pages/Conta";
 
+/* COMPONENTE COM AS ROTAS */
 function App() {
   return (
     <RecoilRoot>

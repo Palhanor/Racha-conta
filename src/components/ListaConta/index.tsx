@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
@@ -18,7 +19,8 @@ import {
   ListaTitulo,
 } from "../../components/StyledComponents";
 
-// Parece muito com o Container global
+/* STYLED COMPONENTS */
+// Parece muito com o Container global (pode ser otimizado)
 const ContainerConta = styled.div`
   width: 90%;
   margin: 2rem auto;
@@ -37,7 +39,6 @@ const ContainerConta = styled.div`
     scrollbar-width: thin;
   }
 `;
-
 const ItemLista = styled.li`
   border: 1px dashed ${color.gray};
   border-bottom: none;
@@ -51,7 +52,6 @@ const ItemLista = styled.li`
     border-bottom: 1px dashed ${color.gray};
   }
 `;
-
 const TituloConta = styled(Titulo)`
   color: ${color.black};
   margin-top: 0;
@@ -61,31 +61,36 @@ const TituloConta = styled(Titulo)`
     margin-bottom: 2rem;
   }
 `;
-
 const TotalTitulo = styled.h2`
   margin: 0;
 `;
-
 const TotalCusto = styled(ItemCusto)`
   font-weight: 700;
   font-size: 1.4rem;
 `;
-
 const ListaTituloExtrato = styled(ListaTitulo)`
   color: ${color.black};
   margin: 0 0 1rem 0;
 `;
 
+/* COMPONENTE */
 export default function ListaConta(contaSelecionada: IConta) {
   const { nome, consumidores, compras, id } = contaSelecionada;
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
+
+  /* HOOKS PERSONALIZADOS */
   const atualizaConta = useAtualizarConta();
   const adicionaConta = useAdicionaConta();
   const resetarConta = useResetarConta();
   const removeConta = useRemoveConta();
 
+  /* HOOKS DO REACT ROUTER */
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  /* GASTO TOTAL */
   const total = compras.reduce((total, item) => item.preco + total, 0);
+
+  /* LISTA DO TOTAL DE GASTOS INDIVIDUAIS */
   const gastosConsumidores: number[] = consumidores.map(
     (dadosConsumidor) =>
       dadosConsumidor.pedidos.reduce(
@@ -93,10 +98,13 @@ export default function ListaConta(contaSelecionada: IConta) {
         0
       )
   );
+
+  /* LISTA DO PERCENTUAL INDIVIDUAL DE GASTOS */
   const percentualConsumidores: number[] = gastosConsumidores.map(
     (gasto) => gasto / total
   );
 
+  /* ENCERRAR A CONTA ATUAL */
   function finalizar(): void {
     atualizaConta()
     adicionaConta(contaSelecionada);
@@ -104,11 +112,13 @@ export default function ListaConta(contaSelecionada: IConta) {
     navigate("/");
   }
 
+  /* EXCLUIR A CONTA DO HISTÓRICO */
   function excluir(): void {
     removeConta(id);
     navigate("/historico");
   }
 
+  /* JSX */
   return (
     <>
       <ContainerConta>

@@ -1,7 +1,9 @@
+/* IMPORTS */
 import styled, { css } from 'styled-components';
 import { brkpt, color } from "../../styles"
 import { IBotaoProps, IContainerProps, IInlineProps, ITituloProps } from '../../interfaces/styled';
 
+/* STYLED COMPONENTS */
 export const Botao = styled.button`
     display: block;
     margin: 2rem auto 0;
@@ -31,8 +33,7 @@ export const Botao = styled.button`
         color: ${color.red};
         margin: 2rem auto 1rem;
     `};
-`
-
+`;
 export const Input = styled.input`
     width: 100%;
     border: none;
@@ -51,12 +52,10 @@ export const Input = styled.input`
     @media (min-width: ${brkpt.tablet}) {
         font-size: 1.2rem;
     }
-`
-
+`;
 export const Label = styled.label`
     display: none;
-`
-
+`;
 export const Image = styled.img`
     display: block;
     margin: auto;
@@ -72,8 +71,7 @@ export const Image = styled.img`
         top: 50%;
         transform: translateY(-50%);
     }
-`
-
+`;
 export const Titulo = styled.h1`
     font-size: 2rem;
     margin: 2rem 0;
@@ -103,8 +101,7 @@ export const Titulo = styled.h1`
             margin: 0 0 2rem;
         }
     `};
-`
-
+`;
 export const Container = styled.div`
     background-color: ${color.white};
     box-sizing: border-box;
@@ -175,13 +172,11 @@ export const Container = styled.div`
             height: 65vh;
         }
     `};
-`
-
+`;
 export const Lista = styled.ul`
     padding: 0;
     list-style: none;
-`
-
+`;
 export const ListaContainer = styled.section`
     @media (min-width: ${brkpt.desktop}) {
         order: 3;
@@ -206,8 +201,7 @@ export const ListaContainer = styled.section`
             }
         }
     }
-`
-
+`;
 export const ListaTitulo = styled.h2`
     font-size: 1.4rem;
     color: ${color.white};
@@ -222,8 +216,7 @@ export const ListaTitulo = styled.h2`
     @media (min-width: ${brkpt.desktop}) {
         margin: 0 0 2rem;
     }
-`
-
+`;
 export const Item = styled.li`
     width: 90%;
     background-color: ${color.white};
@@ -241,8 +234,7 @@ export const Item = styled.li`
         width: 100%;
         border-radius: 5px;
     }
-`
-
+`;
 export const ItemNome = styled.strong`
     font-weight: 700;
     font-size: 1.2rem;
@@ -250,8 +242,7 @@ export const ItemNome = styled.strong`
     @media (min-width: ${brkpt.tablet}) {
         font-size: 1.5rem;
     }
-`
-
+`;
 export const ItemCusto = styled.span`
     color: ${color.red};
     text-align: right;
@@ -261,8 +252,7 @@ export const ItemCusto = styled.span`
     @media (min-width: ${brkpt.tablet}) {
         font-size: 1.2rem;
     }
-`
-
+`;
 export const ItemTexto = styled.span`
     font-size: .9rem;
     color: ${color.gray};
@@ -270,8 +260,7 @@ export const ItemTexto = styled.span`
     @media (min-width: ${brkpt.tablet}) {
         font-size: 1rem;
     }
-`
-
+`;
 export const Inline = styled.div`
     display: flex;
     justify-content: space-between;
@@ -284,4 +273,4 @@ export const Inline = styled.div`
             margin-bottom: .8rem;
         }
     `};
-`
+`;

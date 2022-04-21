@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -16,17 +17,28 @@ import {
   ListaTitulo,
 } from "../../components/StyledComponents";
 
+/* COMPONENTE */
 export default function Consumidores() {
+
+  /* ESTADOS GLOBAIS RECOIL */
   const conta = useRecoilValue(contaAtual);
   const listaConsumidores = useRecoilValue(consumidores);
+
+  /* ESTADO DO COMPONENTE */
   const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
+
+  /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
+
+  /* HOOK PERSONALIZADO */
   const adicionaConsumidor = useAdicionaConsumidor();
 
+  /* REDIRECIONADOR */
   useEffect(() => {
     if (!conta.nome) navigate("/");
   });
 
+  /* ADICIONAR NO CONSUMIDOR À LISTA */
   function adicionar(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -38,6 +50,7 @@ export default function Consumidores() {
     }
   }
 
+  /* JSX */
   return (
     <>
       <Container top>
@@ -61,10 +74,10 @@ export default function Consumidores() {
         <Lista>
           {listaConsumidores.map((dadosConsumidor) => (
             <ItemConsumidor key={dadosConsumidor.id} {...dadosConsumidor} />
-          ))}
+          ))} {/* COMPONENTE */}
         </Lista>
       </ListaContainer>
-      <Navegacao />
+      <Navegacao /> {/* COMPONENTE */}
     </>
   );
 }

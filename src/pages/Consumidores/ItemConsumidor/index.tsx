@@ -1,3 +1,4 @@
+/* IMPORTS */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IConsumidor from "../../../interfaces/consumidor";
@@ -9,11 +10,17 @@ import {
   Inline,
 } from "../../../components/StyledComponents";
 
-export default function ItemConsumidor(props: IConsumidor) {
-  const { nome, pedidos, id } = props;
+/* COMPONENTE */
+export default function ItemConsumidor(consumidor: IConsumidor) {
+  const { nome, pedidos, id } = consumidor;
+
+  /* ESTADODO COMPONENTE */
   const [custo, setCusto] = useState<number>(0);
+
+  /* HOOK DO REACT REOUTER */
   const navigate = useNavigate();
 
+  /* ATUALIZA ESTADO CUSTO */
   useEffect(() => {
     const custoTotal = pedidos.reduce(
       (total, item) => item.preco / item.autores.length + total,
@@ -22,6 +29,7 @@ export default function ItemConsumidor(props: IConsumidor) {
     setCusto(custoTotal);
   }, [pedidos]);
 
+  /* JSX */
   return (
     <Item onClick={() => navigate(`/consumidor/${id}`)}>
       <Inline mb>
