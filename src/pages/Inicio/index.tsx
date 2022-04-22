@@ -20,10 +20,11 @@ const ilustracao: string =
 /* COMPONENTE */
 export default function Inicio() {
 
-  const contaGlobal = useRecoilValue(contaAtual)
+  /* ESTADO GLOBAL RECOIL */
+  const conta = useRecoilValue(contaAtual)
 
   /* ESTADOS DO COMPONENTE */
-  const [conta, setConta] = useState("");
+  const [nomeConta, setNomeConta] = useState("");
   const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
 
   /* HOOK DO REACT ROUTER */
@@ -33,8 +34,9 @@ export default function Inicio() {
   const adicionaConsumidor = useAdicionaConsumidor();
   const criaConta = useCriaConta();
 
+  /* REDIRECIONADOR */
   useEffect(() => {
-    if (contaGlobal.id !== "") navigate("/consumidores")
+    if (conta.id) navigate("/consumidores")
   })
 
   /* CRIAR NOVA CONTA */
@@ -42,7 +44,12 @@ export default function Inicio() {
     e.preventDefault();
 
     try {
-      criaConta(conta)
+      criaConta({
+        nome: nomeConta,
+        consumidores: [],
+        compras: [],
+        id: ""
+      })
       adicionaConsumidor(nomeConsumidor);
       setNomeConsumidor("");
       navigate("/consumidores", { replace: true });
@@ -66,8 +73,8 @@ export default function Inicio() {
             id="conta"
             placeholder="Insira o nome da conta"
             required
-            value={conta}
-            onChange={(e) => setConta(e.target.value)}
+            value={nomeConta}
+            onChange={(e) => setNomeConta(e.target.value)}
           />
           <Label htmlFor="consumidor">Nome do consumidor</Label>
           <Input

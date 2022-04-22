@@ -6,6 +6,7 @@ import useRemoveCompra from "../../hooks/compra/useRemoveCompra";
 import ListaAutoresCompra from "./ListaAutoresCompra";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
+import ICompra from "../../interfaces/compra";
 import {
   Botao,
   Titulo,
@@ -31,10 +32,10 @@ export default function Compra() {
   const removeCompra = useRemoveCompra();
 
   /* COMPRA SELECIONADA */
-  const compra = listaCompras.find((dadosCompra) => dadosCompra.id === ID);
+  const compraSelecionada: (ICompra | undefined) = listaCompras.find((dadosCompra) => dadosCompra.id === ID);
 
   /* REDIRECIONADOR */
-  if (!compra) return <NotFound />;
+  if (!compraSelecionada) return <NotFound />;
 
   /* APAGAR A COMPRA */
   function apagar(): void {
@@ -46,13 +47,13 @@ export default function Compra() {
   return (
     <>
       <Container default>
-        <Titulo secondary>{compra.nome}</Titulo>
+        <Titulo secondary>{compraSelecionada.nome}</Titulo>
         <Inline>
           <ItemTexto>
-            {compra.autores.length} Consumidor
-            {compra.autores.length === 1 ? "" : "es"}
+            {compraSelecionada.autores.length} Consumidor
+            {compraSelecionada.autores.length === 1 ? "" : "es"}
           </ItemTexto>
-          <ItemCusto>R$ {compra.preco.toLocaleString("BRL")}</ItemCusto>
+          <ItemCusto>R$ {compraSelecionada.preco.toLocaleString("BRL")}</ItemCusto>
         </Inline>
         <div>
           <Botao danger onClick={apagar}>
@@ -62,7 +63,7 @@ export default function Compra() {
       </Container>
       <ListaContainer>
         <ListaTitulo>Consumidores</ListaTitulo>
-        {<ListaAutoresCompra {...compra} />} {/* COMPONENTE */}
+        {<ListaAutoresCompra {...compraSelecionada} />} {/* COMPONENTE */}
       </ListaContainer>
       <Navegacao /> {/* COMPONENTE */}
     </>

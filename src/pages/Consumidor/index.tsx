@@ -6,10 +6,10 @@ import useRemoveConsumidor from "../../hooks/consumidor/useRemoveConsumidor";
 import ListaComprasConsumidor from "./ListaComprasConsumidor";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
+import IConsumidor from "../../interfaces/consumidor";
 import {
   Botao,
   Titulo,
-  Lista,
   ItemCusto,
   ItemTexto,
   ListaContainer,
@@ -25,19 +25,19 @@ export default function Consumidor() {
   const listaConsumidores = useRecoilValue(consumidores);
 
   /* HOOKS DO REACT ROUTER */
-  const navigate = useNavigate();
   const { ID } = useParams();
+  const navigate = useNavigate();
 
   /* HOOK PERSONALIZADO */
   const removerConsumidor = useRemoveConsumidor();
 
   /* CONSUMIDOR SELECIONADO */
-  const consumidor = listaConsumidores.find(
+  const consumidorSelecionado: (IConsumidor | undefined) = listaConsumidores.find(
     (dadosConsumidor) => dadosConsumidor.id === ID
   );
 
   /* REDIRECIONADOR */
-  if (!consumidor) return <NotFound />;
+  if (!consumidorSelecionado) return <NotFound />;
 
   /* APAGAR CONSUMIDOR DA LISTA */
   function apagar(): void {
@@ -49,15 +49,15 @@ export default function Consumidor() {
   return (
     <>
       <Container default>
-        <Titulo secondary>{consumidor.nome}</Titulo>
+        <Titulo secondary>{consumidorSelecionado.nome}</Titulo>
         <Inline>
           <ItemTexto>
-            {consumidor.pedidos.length} Compra
-            {consumidor.pedidos.length === 1 ? "" : "s"}
+            {consumidorSelecionado.pedidos.length} Compra
+            {consumidorSelecionado.pedidos.length === 1 ? "" : "s"}
           </ItemTexto>
           <ItemCusto>
             R${" "}
-            {consumidor.pedidos
+            {consumidorSelecionado.pedidos
               .reduce(
                 (total, item) => item.preco / item.autores.length + total,
                 0
@@ -73,11 +73,7 @@ export default function Consumidor() {
       </Container>
       <ListaContainer>
         <ListaTitulo>Compras</ListaTitulo>
-        <Lista>
-          {consumidor.pedidos.map((compra) => (
-            <ListaComprasConsumidor key={compra.id} {...compra} />
-          ))} {/* COMPONENTE */}
-        </Lista>
+        <ListaComprasConsumidor pedidos={consumidorSelecionado.pedidos} /> {/* COMPONENTE */}
       </ListaContainer>
       <Navegacao /> {/* COMPONENTE */}
     </>

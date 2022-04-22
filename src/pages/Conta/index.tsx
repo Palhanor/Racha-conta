@@ -4,6 +4,7 @@ import useHistorico from "../../hooks/conta/useHistorico";
 import ListaConta from "../../components/ListaConta";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
+import IConta from "../../interfaces/conta";
 
 /* COMPONENTE */
 export default function Conta() {
@@ -12,10 +13,10 @@ export default function Conta() {
   const { ID } = useParams();
 
   /* HOOK PERSONALIZADO */
-  const historico = useHistorico()();
+  const historico: IConta[] = useHistorico()();
 
   /* CONTA SELECIONADA */
-  const contaSelecionada = historico.find((conta) => conta.id === ID);
+  const contaSelecionada: (IConta | undefined) = historico.find((conta) => conta.id === ID);
 
   /* REDIRECIONADOR */
   if (!contaSelecionada) return <NotFound />;

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { brkpt, color } from "../../styles";
 import useHistorico from "../../hooks/conta/useHistorico";
 import Navegacao from "../../components/Navegacao";
+import IConta from "../../interfaces/conta";
 import {
   Titulo,
   Lista,
@@ -61,7 +62,7 @@ export default function Historico() {
   const navigate = useNavigate();
 
   /* HOOK PERSONALIZADO */
-  const historico = useHistorico()();
+  const historico: IConta[] = useHistorico()();
 
   /* JSX */
   return (

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { consumidores, contaAtual } from "../../states/atom";
 import useAdicionaConsumidor from "../../hooks/consumidor/useAdicionaConsumidor";
-import ItemConsumidor from "./ItemConsumidor";
+import ListaConsumidores from "./ListaConsumidores";
 import Navegacao from "../../components/Navegacao";
 import {
   Botao,
@@ -12,7 +12,6 @@ import {
   Label,
   Titulo,
   Container,
-  Lista,
   ListaContainer,
   ListaTitulo,
 } from "../../components/StyledComponents";
@@ -71,11 +70,7 @@ export default function Consumidores() {
       </Container>
       <ListaContainer>
         <ListaTitulo>Consumidores</ListaTitulo>
-        <Lista>
-          {listaConsumidores.map((dadosConsumidor) => (
-            <ItemConsumidor key={dadosConsumidor.id} {...dadosConsumidor} />
-          ))} {/* COMPONENTE */}
-        </Lista>
+        <ListaConsumidores listaConsumidores={listaConsumidores} /> {/* COMPONENTE */}
       </ListaContainer>
       <Navegacao /> {/* COMPONENTE */}
     </>

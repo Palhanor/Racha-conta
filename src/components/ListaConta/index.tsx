@@ -20,7 +20,6 @@ import {
 } from "../../components/StyledComponents";
 
 /* STYLED COMPONENTS */
-// Parece muito com o Container global (pode ser otimizado)
 const ContainerConta = styled.div`
   width: 90%;
   margin: 2rem auto;
@@ -88,10 +87,10 @@ export default function ListaConta(contaSelecionada: IConta) {
   const navigate = useNavigate();
 
   /* GASTO TOTAL */
-  const total = compras.reduce((total, item) => item.preco + total, 0);
+  const gastoTotal: number = compras.reduce((total, item) => item.preco + total, 0);
 
   /* LISTA DO TOTAL DE GASTOS INDIVIDUAIS */
-  const gastosConsumidores: number[] = consumidores.map(
+  const gastosIndividuais: number[] = consumidores.map(
     (dadosConsumidor) =>
       dadosConsumidor.pedidos.reduce(
         (total, item) => item.preco / item.autores.length + total,
@@ -100,8 +99,8 @@ export default function ListaConta(contaSelecionada: IConta) {
   );
 
   /* LISTA DO PERCENTUAL INDIVIDUAL DE GASTOS */
-  const percentualConsumidores: number[] = gastosConsumidores.map(
-    (gasto) => gasto / total
+  const percentuaisIndividuais: number[] = gastosIndividuais.map(
+    (gasto) => gasto / gastoTotal
   );
 
   /* ENCERRAR A CONTA ATUAL */
@@ -129,12 +128,12 @@ export default function ListaConta(contaSelecionada: IConta) {
               <ItemNome>{dadosConsumidor.nome}</ItemNome>
               <div>
                 <ItemCusto>
-                  R$ {gastosConsumidores[index].toLocaleString("BRL")}
+                  R$ {gastosIndividuais[index].toLocaleString("BRL")}
                 </ItemCusto>
                 {consumidores[index].pedidos.length > 0 && (
                   <ItemTexto>
                     {" "}
-                    &#183; {(percentualConsumidores[index] * 100).toFixed(2)}%
+                    &#183; {(percentuaisIndividuais[index] * 100).toFixed(2)}%
                   </ItemTexto>
                 )}
               </div>
@@ -152,7 +151,7 @@ export default function ListaConta(contaSelecionada: IConta) {
                 </ItemCusto>{" "}
                 &#183;{" "}
                 <ItemTexto>
-                  {((dadosCompra.preco / total) * 100).toFixed(2)}%
+                  {((dadosCompra.preco / gastoTotal) * 100).toFixed(2)}%
                 </ItemTexto>
               </div>
             </ItemLista>
@@ -163,7 +162,7 @@ export default function ListaConta(contaSelecionada: IConta) {
         <TituloConta>{nome}</TituloConta>
         <Inline>
           <TotalTitulo>Total</TotalTitulo>
-          <TotalCusto>R$ {total.toLocaleString("BRL")}</TotalCusto>
+          <TotalCusto>R$ {gastoTotal.toLocaleString("BRL")}</TotalCusto>
         </Inline>
         {pathname === "/extrato" ? (
           <Botao danger onClick={finalizar}>

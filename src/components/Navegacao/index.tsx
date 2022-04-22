@@ -47,7 +47,7 @@ export default function Navegacao() {
   const { pathname } = useLocation();
 
   /* DADOS ESTÁTICOS DOS ÍCONES */
-  const navData = [
+  const dadosNavegacao = [
     {
       id: 0,
       url: "/historico",
@@ -104,7 +104,7 @@ export default function Navegacao() {
   /* JSX */
   return (
     <Navbar>
-      {navData.map((item) => (
+      {dadosNavegacao.map((item) => (
         <IconLink to={item.url} key={item.id}>
           {item.icon}
         </IconLink>

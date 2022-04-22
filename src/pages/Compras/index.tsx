@@ -108,8 +108,8 @@ export default function Compras() {
             name="precoCompra"
             id="precoCompra"
             onFocus={(e) => {
-              const valueLength = e.target.value.length * 2;
-              e.target.setSelectionRange(valueLength, valueLength);
+              const tamanhoTexto: number = e.target.value.length * 2;
+              e.target.setSelectionRange(tamanhoTexto, tamanhoTexto);
             }}
             required
             value={mascaraMonetaria.adicionaMascaraMonetaria(precoCompra)}
@@ -124,7 +124,7 @@ export default function Compras() {
       </Container>
       <ListaContainer>
         <ListaTitulo>Compras</ListaTitulo>
-        {<ListaCompras listaCompras={listaCompras} />}
+        <ListaCompras listaCompras={listaCompras} /> {/* COMPONENTE */}
       </ListaContainer>
       <Navegacao /> {/* COMPONENTE */}
     </>

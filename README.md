@@ -13,7 +13,7 @@
     - [Assets](#assets)
 
 ## Design
-Link de acesso para o design da aplicação no Figma: **Adicionar o link**
+Link de acesso para o design do [Projeto no Figma](https://www.figma.com/file/IZoxeT1JoxLsVpMmMB53GR/Racha-conta?node-id=146%3A2)
 ***
 ## Estrutura
 ### Estados
