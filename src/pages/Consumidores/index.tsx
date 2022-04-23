@@ -34,8 +34,9 @@ export default function Consumidores() {
 
   /* REDIRECIONADOR */
   useEffect(() => {
-    if (!conta.nome) navigate("/");
-  });
+    if (!conta.id) navigate("/");
+    console.log("Lista de consumidores: ", listaConsumidores)
+  }, [listaConsumidores, conta.id, navigate]);
 
   /* ADICIONAR NO CONSUMIDOR À LISTA */
   function adicionar(e: React.FormEvent<HTMLFormElement>) {

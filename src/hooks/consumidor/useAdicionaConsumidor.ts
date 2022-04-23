@@ -6,9 +6,9 @@ import { idSize } from "../../utils/idFormat";
 import IConsumidor from "../../interfaces/consumidor";
 
 /************************
-O hook recebe o nome do consumidor (string)
-Então valida se há um nome igual na lista de consumidores
-Por fim, caso o nome seja válido, é criado um novo objeto (IConsumidor) e adicionado no fim da lista de consumidores
+Recebe o nome (string) de um novo consumidor
+Então verifica se este nome já foi usado, disparando um erro em caso afirmativo
+Por fim, cria um novo objeto de consumidor e o adiciona dentro da lista de consumidores (setListaConsumidores)
 ************************/
 function useAdicionaConsumidor(): ((
   nomeConsumidor: string
@@ -25,7 +25,6 @@ function useAdicionaConsumidor(): ((
       pedidos: [],
       id: nanoid(idSize),
     };
-
     setListaConsumidores([...listaConsumidores, novoConsumidor]);
   };
 };

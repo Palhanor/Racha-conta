@@ -3,9 +3,8 @@ import { useSetRecoilState } from "recoil";
 import { consumidores } from "../../states/atom";
 
 /************************
-O hook recebeo id (string) de um pedido
-Então pega a lista de consumidores e filtra os pedidos destes considerando o id passado
-Por fim configura a nova lista como oficial
+Recebe o id (string) de um determinado pedido
+Então acessa a lista de consumidores removendo o pedido de dentro de cada consumidor (setListaConsumidores)
 ************************/
 function useRemovePedidoConsumidor(): ((pedidoID: (string | undefined)) => void) {
   const setListaConsumidores = useSetRecoilState(consumidores);
@@ -15,7 +14,7 @@ function useRemovePedidoConsumidor(): ((pedidoID: (string | undefined)) => void)
         return {
           ...dadosConsumidor,
           pedidos: dadosConsumidor.pedidos.filter(
-            (pedido) => pedido.id !== pedidoID
+            (pedido) => pedido !== pedidoID
           )
         };
       })

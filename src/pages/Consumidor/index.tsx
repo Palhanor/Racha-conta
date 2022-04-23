@@ -17,6 +17,7 @@ import {
   Container,
   Inline,
 } from "../../components/StyledComponents";
+import useEncontraCompra from "../../hooks/compra/useEncontraCompra";
 
 /* COMPONENTE */
 export default function Consumidor() {
@@ -25,11 +26,12 @@ export default function Consumidor() {
   const listaConsumidores = useRecoilValue(consumidores);
 
   /* HOOKS DO REACT ROUTER */
-  const { ID } = useParams();
   const navigate = useNavigate();
+  const { ID } = useParams();
 
   /* HOOK PERSONALIZADO */
   const removerConsumidor = useRemoveConsumidor();
+  const encontraCompra = useEncontraCompra()
 
   /* CONSUMIDOR SELECIONADO */
   const consumidorSelecionado: (IConsumidor | undefined) = listaConsumidores.find(
@@ -59,7 +61,7 @@ export default function Consumidor() {
             R${" "}
             {consumidorSelecionado.pedidos
               .reduce(
-                (total, item) => item.preco / item.autores.length + total,
+                (total, item) => encontraCompra(item).preco / encontraCompra(item).autores.length + total,
                 0
               )
               .toLocaleString("BRL")}

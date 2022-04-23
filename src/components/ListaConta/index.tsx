@@ -6,6 +6,7 @@ import useResetarConta from "../../hooks/conta/useResetarConta";
 import useAdicionaConta from "../../hooks/conta/useAdicionaConta";
 import useRemoveConta from "../../hooks/conta/useRemoveConta";
 import useAtualizarConta from "../../hooks/conta/useAtualizaConta";
+import useEncontraCompra from "../../hooks/compra/useEncontraCompra";
 import IConta from "../../interfaces/conta";
 import {
   Botao,
@@ -77,6 +78,7 @@ export default function ListaConta(contaSelecionada: IConta) {
   const { nome, consumidores, compras, id } = contaSelecionada;
 
   /* HOOKS PERSONALIZADOS */
+  const encontraCompra = useEncontraCompra();
   const atualizaConta = useAtualizarConta();
   const adicionaConta = useAdicionaConta();
   const resetarConta = useResetarConta();
@@ -87,15 +89,19 @@ export default function ListaConta(contaSelecionada: IConta) {
   const navigate = useNavigate();
 
   /* GASTO TOTAL */
-  const gastoTotal: number = compras.reduce((total, item) => item.preco + total, 0);
+  const gastoTotal: number = compras.reduce(
+    (total, item) => item.preco + total,
+    0
+  );
 
   /* LISTA DO TOTAL DE GASTOS INDIVIDUAIS */
-  const gastosIndividuais: number[] = consumidores.map(
-    (dadosConsumidor) =>
-      dadosConsumidor.pedidos.reduce(
-        (total, item) => item.preco / item.autores.length + total,
-        0
-      )
+  const gastosIndividuais: number[] = consumidores.map((dadosConsumidor) =>
+    dadosConsumidor.pedidos.reduce(
+      (total, item) =>
+        encontraCompra(item).preco / encontraCompra(item).autores.length +
+        total,
+      0
+    )
   );
 
   /* LISTA DO PERCENTUAL INDIVIDUAL DE GASTOS */
@@ -105,7 +111,7 @@ export default function ListaConta(contaSelecionada: IConta) {
 
   /* ENCERRAR A CONTA ATUAL */
   function finalizar(): void {
-    atualizaConta()
+    atualizaConta();
     adicionaConta(contaSelecionada);
     resetarConta();
     navigate("/");
