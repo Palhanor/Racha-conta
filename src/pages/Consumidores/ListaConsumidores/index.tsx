@@ -9,17 +9,21 @@ import {
   ItemTexto,
   Inline,
 } from "../../../components/StyledComponents";
-import ICompra from "../../../interfaces/compra";
+import useEncontraCompra from "../../../hooks/compra/useEncontraCompra";
 
 /* COMPONENTE */
 export default function ListaConsumidores({listaConsumidores}: {listaConsumidores: IConsumidor[]}) {
 
-  /* HOOK DO REACT REOUTER */
+  /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
 
-  function gastoIndividual(pedidos: ICompra[]): number {
+  /* HOOK PERSONALIZADO */
+  const encontraCompra = useEncontraCompra()
+
+  /* CALCULA GASTO INDIVIDUAL */
+  function gastoIndividual(pedidos: string[]): number {
     return pedidos.reduce(
-      (total, item) => item.preco / item.autores.length + total,
+      (total, item) => encontraCompra(item).preco / encontraCompra(item).autores.length + total,
       0
     )
   }

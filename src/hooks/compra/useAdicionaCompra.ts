@@ -7,9 +7,10 @@ import { idSize } from "../../utils/idFormat";
 import ICompra from "../../interfaces/compra";
 
 /************************
-O Hook recebe o nome (string), preço (number) e os autores (lista de nomes).
-Então verifica se há ao menos um autor, e se o preço é maior que 0, disparando um erro caso contrário.
-Por fim, cria um objeto (ICompra) de compra e o adiciona no fim da lista de compras, enquanto o passar para o hook useAdicionaPedidoConsumidor()
+Recebe três valores referentes à uma compra: nome (string), preço (number | null) e autores (string[])
+Então verifica se está sem autores ou sem preço, disparando um erro em caso afirmativo
+Após isso configura um novo objeto de compra, o adicionando na lista de compras (setListaCompras)
+Por fim, a compra é removida da lista de consumidores (useAdicionaPedidoConsumidor)
 ************************/
 function useAdicionaCompra(): ((nome: string, preco: (number | null), autores: string[]) => (void | ErrorConstructor)) {
   const setListaCompras = useSetRecoilState(compras);

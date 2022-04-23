@@ -39,8 +39,9 @@ export default function Compras() {
 
   /* REDIRECIONADOR */
   useEffect(() => {
-    if (!conta.nome) navigate("/");
-  });
+    if (!conta.id) navigate("/");
+    console.log("Lista de compras: ", listaCompras)
+  }, [listaCompras, conta.id, navigate]);
 
   /* ESTILO DO COMPOENNTE MULTISELECT */
   const multiselectStyle = {

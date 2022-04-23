@@ -5,20 +5,21 @@ import ICompra from "../../interfaces/compra";
 import IConsumidor from "../../interfaces/consumidor";
 
 /************************
-O hook recebe uma compra (ICompra)
-Então cria uma nova lista de consumidores, passando essa nova lista como a lista oficial
-Para criar a nova lista é verificado se o nome de cada consumidor está na lista de autores do pedido, e caso afirmativo a comnpra é adicionada dentro do campo de pedidos
+Recebe uma compra (ICompra)
+Então verifica se o nome de cada autor da compra é igual ao nome do consumidor na lista de consumidores
+Se sim, o id (string) desta compra será adicionado dentro dos pedidos do consumidor
+Após isso, é gerada uma nova lista de consumidores (setListaConsumidores)
 ************************/
 function useAdicionaPedidoConsumidor(): ((compra: ICompra) => void) {
   const [listaConsumidores, setListaConsumidores] =
     useRecoilState(consumidores);
   return (compra: ICompra) => {
+    const listaAutores: string[] = [...compra.autores];
     const novaListaConsumidores: IConsumidor[] = listaConsumidores.map((dadosConsumidor) => {
-      const listaAutores: string[] = [...compra.autores];
-      if (!(listaAutores.some((autor) => autor === dadosConsumidor.nome))) {
+      if (listaAutores.some((autor) => autor === dadosConsumidor.nome)) {
         return {
           ...dadosConsumidor,
-          pedidos: [...dadosConsumidor.pedidos, compra],
+          pedidos: [...dadosConsumidor.pedidos, compra.id],
         };
       }
       return { ...dadosConsumidor };
