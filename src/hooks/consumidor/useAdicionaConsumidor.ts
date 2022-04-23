@@ -16,7 +16,7 @@ function useAdicionaConsumidor(): ((
   const [listaConsumidores, setListaConsumidores] =
     useRecoilState(consumidores);
   return (nomeConsumidor: string) => {
-    const nomeDuplicado: (IConsumidor | undefined) = listaConsumidores.find(
+    const nomeDuplicado: boolean = listaConsumidores.some(
       (consumidorVirificado) => consumidorVirificado.nome === nomeConsumidor
     );
     if (nomeDuplicado) throw new Error("O nome dos consumidores devem ser diferentes entre si");

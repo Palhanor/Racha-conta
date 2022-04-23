@@ -15,14 +15,13 @@ function useAdicionaPedidoConsumidor(): ((compra: ICompra) => void) {
   return (compra: ICompra) => {
     const novaListaConsumidores: IConsumidor[] = listaConsumidores.map((dadosConsumidor) => {
       const listaAutores: string[] = [...compra.autores];
-      if (listaAutores.indexOf(dadosConsumidor.nome) === -1) {
-        return { ...dadosConsumidor };
-      } else {
+      if (!(listaAutores.some((autor) => autor === dadosConsumidor.nome))) {
         return {
           ...dadosConsumidor,
           pedidos: [...dadosConsumidor.pedidos, compra],
         };
       }
+      return { ...dadosConsumidor };
     });
     setListaConsumidores(novaListaConsumidores);
   };
