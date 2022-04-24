@@ -1,5 +1,5 @@
 /* IMPORTS */
-import useEncontraCompra from "../../../hooks/compra/useEncontraCompra";
+import useCompras from "../../../hooks/useCompras";
 import {
   Item,
   ItemNome,
@@ -13,7 +13,7 @@ import {
 export default function ListaComprasConsumidor({pedidos}: {pedidos: string[]}) {
 
   /* HOOK PERSONALIZADO */
-  const encontraCompra = useEncontraCompra()
+  const { encontraCompra } = useCompras();
 
   /* JSX */
   return (

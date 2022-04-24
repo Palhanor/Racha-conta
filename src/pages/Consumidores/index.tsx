@@ -1,11 +1,9 @@
 /* IMPORTS */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { consumidores, contaAtual } from "../../states/atom";
-import useAdicionaConsumidor from "../../hooks/consumidor/useAdicionaConsumidor";
 import ListaConsumidores from "./ListaConsumidores";
 import Navegacao from "../../components/Navegacao";
+import useConsumidores from "../../hooks/useConsumidores";
 import {
   Botao,
   Input,
@@ -15,13 +13,10 @@ import {
   ListaContainer,
   ListaTitulo,
 } from "../../components/StyledComponents";
+import useConta from "../../hooks/useConta";
 
 /* COMPONENTE */
 export default function Consumidores() {
-
-  /* ESTADOS GLOBAIS RECOIL */
-  const conta = useRecoilValue(contaAtual);
-  const listaConsumidores = useRecoilValue(consumidores);
 
   /* ESTADO DO COMPONENTE */
   const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
@@ -30,7 +25,8 @@ export default function Consumidores() {
   const navigate = useNavigate();
 
   /* HOOK PERSONALIZADO */
-  const adicionaConsumidor = useAdicionaConsumidor();
+  const { listaConsumidores, adicionaConsumidor } = useConsumidores();
+  const { conta } = useConta();
 
   /* REDIRECIONADOR */
   useEffect(() => {

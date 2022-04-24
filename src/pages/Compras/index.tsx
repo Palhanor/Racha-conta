@@ -1,13 +1,13 @@
 /* IMPORTS */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { consumidores, compras, contaAtual } from "../../states/atom";
-import useAdicionaCompra from "../../hooks/compra/useAdicionaCompra";
 import mascaraMonetaria from "../../utils/mascaraMonetaria";
 import ListaCompras from "./ListaCompras";
 import Multiselect from "multiselect-react-dropdown";
 import Navegacao from "../../components/Navegacao";
+import useCompras from "../../hooks/useCompras";
+import useConsumidores from "../../hooks/useConsumidores";
+import useConta from "../../hooks/useConta";
 import {
   Botao,
   Input,
@@ -20,22 +20,19 @@ import {
 
 /* COMPONENTE */
 export default function Compras() {
-
-  /* ESTADO GLOBAIS RECOIL */
-  const conta = useRecoilValue(contaAtual);
-  const listaConsumidores = useRecoilValue(consumidores);
-  const listaCompras = useRecoilValue(compras);
-
+  
   /* ESTADOS DO COMPONENTE */
   const [nomeCompra, setNomeCompra] = useState<string>("");
   const [precoCompra, setPrecoCompra] = useState<number | null>(0);
   const [autoresCompra, setAutoresCompra] = useState<string[]>([]);
-
+  
   /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
-
+  
   /* HOOK PERSONALIZADO */
-  const adicionaCompra = useAdicionaCompra();
+  const { conta } = useConta();
+  const { listaCompras, adicionaCompra } = useCompras();
+  const { listaConsumidores } = useConsumidores();
 
   /* REDIRECIONADOR */
   useEffect(() => {

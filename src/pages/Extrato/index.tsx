@@ -1,21 +1,22 @@
 /* IMPORTS */
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { compras, consumidores, contaAtual } from "../../states/atom";
 import ListaConta from "../../components/ListaConta";
 import Navegacao from "../../components/Navegacao";
+import useCompras from "../../hooks/useCompras";
+import useConsumidores from "../../hooks/useConsumidores";
+import useConta from "../../hooks/useConta";
 
 /* COMPONENTE */
 export default function Extrato() {
-
-  /* ESTADOS GLOBAIS RECOIL */
-  const conta = useRecoilValue(contaAtual);
-  const listaConsumidores = useRecoilValue(consumidores);
-  const listaCompras = useRecoilValue(compras);
-
+  
   /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
+  
+  /* HOOK PERSONALIZADO */
+  const { listaConsumidores } = useConsumidores();
+  const { listaCompras } = useCompras();
+  const { conta } = useConta()
 
   /* REDIRECIONADOR */
   useEffect(() => {
