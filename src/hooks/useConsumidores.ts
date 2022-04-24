@@ -9,61 +9,65 @@ function useConsumidores() {
   const [listaConsumidores, setListaConsumidores] =
     useRecoilState(consumidores);
 
-    function adicionaConsumidor(nomeConsumidor: string) {
+  function adicionaConsumidor(nomeConsumidor: string): void | ErrorConstructor {
     const nomeDuplicado: boolean = listaConsumidores.some(
       (consumidorVirificado) => consumidorVirificado.nome === nomeConsumidor
     );
-    if (nomeDuplicado) throw new Error("O nome dos consumidores devem ser diferentes entre si");
+    if (nomeDuplicado)
+      throw new Error("O nome dos consumidores devem ser diferentes entre si");
     const novoConsumidor: IConsumidor = {
       nome: nomeConsumidor,
       pedidos: [],
       id: nanoid(idSize),
     };
     setListaConsumidores([...listaConsumidores, novoConsumidor]);
-  };
+  }
 
-  function removeConsumidor(consumidorID: (string | undefined)) {
+  function removeConsumidor(consumidorID: string | undefined): void {
     setListaConsumidores((listaAnterior) =>
       listaAnterior.filter(
-        (consumidor) => consumidor.id !== consumidorID || consumidor.pedidos.length > 0
+        (consumidor) =>
+          consumidor.id !== consumidorID || consumidor.pedidos.length > 0
       )
     );
-  };
+  }
 
-  function adicionaPedidoConsumidor(compra: ICompra) {
+  function adicionaPedidoConsumidor(compra: ICompra): void {
     const listaAutores: string[] = [...compra.autores];
-    const novaListaConsumidores: IConsumidor[] = listaConsumidores.map((dadosConsumidor) => {
-      if (listaAutores.some((autor) => autor === dadosConsumidor.nome)) {
-        return {
-          ...dadosConsumidor,
-          pedidos: [...dadosConsumidor.pedidos, compra.id],
-        };
+    const novaListaConsumidores: IConsumidor[] = listaConsumidores.map(
+      (dadosConsumidor) => {
+        if (listaAutores.some((autor) => autor === dadosConsumidor.nome)) {
+          return {
+            ...dadosConsumidor,
+            pedidos: [...dadosConsumidor.pedidos, compra.id],
+          };
+        }
+        return { ...dadosConsumidor };
       }
-      return { ...dadosConsumidor };
-    });
+    );
     setListaConsumidores(novaListaConsumidores);
-  };
+  }
 
-  function removePedidoConsumidor(pedidoID: (string | undefined)) {
+  function removePedidoConsumidor(pedidoID: string | undefined): void {
     setListaConsumidores((velhaListaConsumidores) =>
       velhaListaConsumidores.map((dadosConsumidor) => {
         return {
           ...dadosConsumidor,
           pedidos: dadosConsumidor.pedidos.filter(
             (pedido) => pedido !== pedidoID
-          )
+          ),
         };
       })
     );
-  };
+  }
 
   return {
     listaConsumidores,
     adicionaConsumidor,
     removeConsumidor,
     adicionaPedidoConsumidor,
-    removePedidoConsumidor
-  }
-};
+    removePedidoConsumidor,
+  };
+}
 
 export default useConsumidores;
