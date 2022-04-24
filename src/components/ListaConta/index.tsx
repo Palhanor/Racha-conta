@@ -2,12 +2,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
-import useResetarConta from "../../hooks/conta/useResetarConta";
-import useAdicionaConta from "../../hooks/conta/useAdicionaConta";
-import useRemoveConta from "../../hooks/conta/useRemoveConta";
-import useAtualizarConta from "../../hooks/conta/useAtualizaConta";
-import useEncontraCompra from "../../hooks/compra/useEncontraCompra";
 import IConta from "../../interfaces/conta";
+import useCompras from "../../hooks/useCompras";
+import useConta from "../../hooks/useConta";
 import {
   Botao,
   Lista,
@@ -77,16 +74,13 @@ const ListaTituloExtrato = styled(ListaTitulo)`
 export default function ListaConta(contaSelecionada: IConta) {
   const { nome, consumidores, compras, id } = contaSelecionada;
 
-  /* HOOKS PERSONALIZADOS */
-  const encontraCompra = useEncontraCompra();
-  const atualizaConta = useAtualizarConta();
-  const adicionaConta = useAdicionaConta();
-  const resetarConta = useResetarConta();
-  const removeConta = useRemoveConta();
-
   /* HOOKS DO REACT ROUTER */
   const { pathname } = useLocation();
   const navigate = useNavigate();
+
+  /* HOOKS PERSONALIZADOS */
+  const { adicionaConta, atualizaConta, removeConta, resetaConta } = useConta();
+  const { encontraCompra } = useCompras();
 
   /* GASTO TOTAL */
   const gastoTotal: number = compras.reduce(
@@ -113,7 +107,7 @@ export default function ListaConta(contaSelecionada: IConta) {
   function finalizar(): void {
     atualizaConta();
     adicionaConta(contaSelecionada);
-    resetarConta();
+    resetaConta();
     navigate("/");
   }
 

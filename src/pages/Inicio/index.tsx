@@ -1,8 +1,8 @@
 /* IMPORTS */
 import { useState, FormEvent, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useAdicionaConsumidor from "../../hooks/consumidor/useAdicionaConsumidor";
-import useCriaConta from "../../hooks/conta/useCriaConta";
+import useConsumidores from "../../hooks/useConsumidores";
+import useConta from "../../hooks/useConta";
 import {
   Botao,
   Input,
@@ -11,17 +11,12 @@ import {
   Titulo,
   Container,
 } from "../../components/StyledComponents";
-import { useRecoilValue } from "recoil";
-import { contaAtual } from "../../states/atom";
 // Problema de importação
 const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
 /* COMPONENTE */
 export default function Inicio() {
-
-  /* ESTADO GLOBAL RECOIL */
-  const conta = useRecoilValue(contaAtual)
 
   /* ESTADOS DO COMPONENTE */
   const [nomeConta, setNomeConta] = useState("");
@@ -31,8 +26,8 @@ export default function Inicio() {
   const navigate = useNavigate();
 
   /* HOOKS PERSONALIZADOS */
-  const adicionaConsumidor = useAdicionaConsumidor();
-  const criaConta = useCriaConta();
+  const { adicionaConsumidor } = useConsumidores();
+  const { conta, criaConta } = useConta();
 
   /* REDIRECIONADOR */
   useEffect(() => {

@@ -1,12 +1,10 @@
 /* IMPORTS */
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { compras } from "../../states/atom";
-import useRemoveCompra from "../../hooks/compra/useRemoveCompra";
 import ListaAutoresCompra from "./ListaAutoresCompra";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
 import ICompra from "../../interfaces/compra";
+import useCompras from "../../hooks/useCompras";
 import {
   Botao,
   Titulo,
@@ -21,15 +19,12 @@ import {
 /* COMPONENTE */
 export default function Compra() {
 
-  /* ESTADO GLOBAL RECOIL */
-  const listaCompras = useRecoilValue(compras);
-
   /* HOOKS DO REACT ROUTER */
   const { ID } = useParams();
   const navigate = useNavigate();
 
   /* HOOK PERSONALIZADO */
-  const removeCompra = useRemoveCompra();
+  const { listaCompras, removeCompra } = useCompras();
 
   /* COMPRA SELECIONADA */
   const compraSelecionada: (ICompra | undefined) = listaCompras.find((dadosCompra) => dadosCompra.id === ID);

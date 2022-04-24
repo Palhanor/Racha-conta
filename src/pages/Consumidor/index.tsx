@@ -1,12 +1,11 @@
 /* IMPORTS */
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
-import { consumidores } from "../../states/atom";
-import useRemoveConsumidor from "../../hooks/consumidor/useRemoveConsumidor";
 import ListaComprasConsumidor from "./ListaComprasConsumidor";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
 import IConsumidor from "../../interfaces/consumidor";
+import useCompras from "../../hooks/useCompras";
+import useConsumidores from "../../hooks/useConsumidores";
 import {
   Botao,
   Titulo,
@@ -17,21 +16,17 @@ import {
   Container,
   Inline,
 } from "../../components/StyledComponents";
-import useEncontraCompra from "../../hooks/compra/useEncontraCompra";
 
 /* COMPONENTE */
 export default function Consumidor() {
-
-  /* ESTADO GLOBAL RECOIL */
-  const listaConsumidores = useRecoilValue(consumidores);
 
   /* HOOKS DO REACT ROUTER */
   const navigate = useNavigate();
   const { ID } = useParams();
 
   /* HOOK PERSONALIZADO */
-  const removerConsumidor = useRemoveConsumidor();
-  const encontraCompra = useEncontraCompra()
+  const { listaConsumidores, removeConsumidor } = useConsumidores();
+  const { encontraCompra } = useCompras();
 
   /* CONSUMIDOR SELECIONADO */
   const consumidorSelecionado: (IConsumidor | undefined) = listaConsumidores.find(
@@ -43,7 +38,7 @@ export default function Consumidor() {
 
   /* APAGAR CONSUMIDOR DA LISTA */
   function apagar(): void {
-    removerConsumidor(ID);
+    removeConsumidor(ID);
     navigate("/consumidores");
   }
 
