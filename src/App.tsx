@@ -21,8 +21,8 @@ function App() {
         <Route path="compras" element={<Compras />} />
         <Route path="consumidor/:ID" element={<Consumidor />} />
         <Route path="compra/:ID" element={<Compra />} />
-        <Route path="extrato" element={<Extrato />} />
         <Route path="historico" element={<Historico />} />
+        <Route path="extrato" element={<Extrato />} />
         <Route path="conta/:ID" element={<Conta />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

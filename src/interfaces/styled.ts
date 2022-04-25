@@ -1,18 +1,18 @@
 export interface IBotaoProps {
-    secondary?: boolean,
-    danger?: boolean
+  secondary?: boolean;
+  danger?: boolean;
 }
 
 export interface ITituloProps {
-    secondary?: boolean
+  secondary?: boolean;
 }
 
 export interface IContainerProps {
-    top?: boolean,
-    bottom?: boolean,
-    default?: boolean
+  top?: boolean;
+  bottom?: boolean;
+  default?: boolean;
 }
 
 export interface IInlineProps {
-    mb?: boolean
+  mb?: boolean;
 }

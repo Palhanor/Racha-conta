@@ -31,7 +31,7 @@ export default function Consumidores() {
   /* REDIRECIONADOR */
   useEffect(() => {
     if (!conta.id) navigate("/");
-    console.log("Lista de consumidores: ", listaConsumidores)
+    // console.log("Lista de consumidores: ", listaConsumidores)
   }, [listaConsumidores, conta.id, navigate]);
 
   /* ADICIONAR NO CONSUMIDOR À LISTA */

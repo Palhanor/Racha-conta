@@ -8,7 +8,7 @@ function useConta() {
   const [conta, setConta] = useRecoilState(contaAtual);
   const [listaCompras, setListaCompras] = useRecoilState(compras);
   const [listaConsumidores, setListaConsumidores] =
-  useRecoilState(consumidores);
+    useRecoilState(consumidores);
   const historico: IConta[] = listaContas();
 
   function adicionaConta(conta: IConta): void {

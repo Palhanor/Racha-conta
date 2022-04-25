@@ -9,14 +9,13 @@ import useConta from "../../hooks/useConta";
 
 /* COMPONENTE */
 export default function Extrato() {
-  
   /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
-  
+
   /* HOOK PERSONALIZADO */
   const { listaConsumidores } = useConsumidores();
   const { listaCompras } = useCompras();
-  const { conta } = useConta()
+  const { conta } = useConta();
 
   /* REDIRECIONADOR */
   useEffect(() => {
@@ -31,7 +30,8 @@ export default function Extrato() {
         consumidores={listaConsumidores}
         compras={listaCompras}
         id={conta.id}
-      ></ListaConta> {/* COMPONENTE */}
+      ></ListaConta>{" "}
+      {/* COMPONENTE */}
       <Navegacao /> {/* COMPONENTE */}
     </>
   );
