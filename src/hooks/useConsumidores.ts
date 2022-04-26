@@ -4,10 +4,12 @@ import { nanoid } from "nanoid";
 import { idSize } from "../utils/idFormat";
 import IConsumidor from "../interfaces/consumidor";
 import ICompra from "../interfaces/compra";
+import useConta from "./useConta";
 
 function useConsumidores() {
   const [listaConsumidores, setListaConsumidores] =
     useRecoilState(consumidores);
+  const { atualizaContaConsumidores } = useConta();
 
   function adicionaConsumidor(nomeConsumidor: string): void | ErrorConstructor {
     const nomeDuplicado: boolean = listaConsumidores.some(
@@ -20,16 +22,18 @@ function useConsumidores() {
       pedidos: [],
       id: nanoid(idSize),
     };
-    setListaConsumidores([...listaConsumidores, novoConsumidor]);
+    const novaListaConsumidores = [...listaConsumidores, novoConsumidor];
+    setListaConsumidores(novaListaConsumidores);
+    atualizaContaConsumidores(novaListaConsumidores);
   }
 
   function removeConsumidor(consumidorID: string | undefined): void {
-    setListaConsumidores((listaAnterior) =>
-      listaAnterior.filter(
-        (consumidor) =>
-          consumidor.id !== consumidorID || consumidor.pedidos.length > 0
-      )
+    const novaListaConsumidores = listaConsumidores.filter(
+      (consumidor) =>
+        consumidor.id !== consumidorID || consumidor.pedidos.length > 0
     );
+    setListaConsumidores(novaListaConsumidores);
+    atualizaContaConsumidores(novaListaConsumidores);
   }
 
   function adicionaPedidoConsumidor(compra: ICompra): void {
@@ -46,19 +50,20 @@ function useConsumidores() {
       }
     );
     setListaConsumidores(novaListaConsumidores);
+    atualizaContaConsumidores(novaListaConsumidores);
   }
 
   function removePedidoConsumidor(pedidoID: string | undefined): void {
-    setListaConsumidores((velhaListaConsumidores) =>
-      velhaListaConsumidores.map((dadosConsumidor) => {
-        return {
-          ...dadosConsumidor,
-          pedidos: dadosConsumidor.pedidos.filter(
-            (pedido) => pedido !== pedidoID
-          ),
-        };
-      })
-    );
+    const novaListaConsumidores = listaConsumidores.map((dadosConsumidor) => {
+      return {
+        ...dadosConsumidor,
+        pedidos: dadosConsumidor.pedidos.filter(
+          (pedido) => pedido !== pedidoID
+        ),
+      };
+    });
+    setListaConsumidores(novaListaConsumidores);
+    atualizaContaConsumidores(novaListaConsumidores);
   }
 
   return {
