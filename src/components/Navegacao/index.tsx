@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
 import { IconContext } from "react-icons";
+import useConta from "../../hooks/useConta";
 import { RiHistoryFill } from "react-icons/ri"
 import {
   BsPeopleFill,
@@ -45,6 +46,7 @@ export default function Navegacao() {
 
   /* HOOK DO REACT ROUTER */
   const { pathname } = useLocation();
+  const { conta } = useConta()
 
   /* DADOS ESTÁTICOS DOS ÍCONES */
   const dadosNavegacao = [
@@ -88,7 +90,7 @@ export default function Navegacao() {
     },
     {
       id: 3,
-      url: "/extrato",
+      url: `/extrato/${conta.id}`,
       icon: (
         <IconContext.Provider
           value={{

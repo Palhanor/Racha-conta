@@ -4,11 +4,13 @@ import { nanoid } from "nanoid";
 import { idSize } from "../utils/idFormat";
 import ICompra from "../interfaces/compra";
 import useConsumidores from "./useConsumidores";
+import useConta from "./useConta";
 
 function useCompras() {
   const [listaCompras, setListaCompras] = useRecoilState(compras);
   const { adicionaPedidoConsumidor, removePedidoConsumidor } =
     useConsumidores();
+  const { atualizaContaCompras } = useConta();
 
   function adicionaCompra(
     nome: string,
@@ -24,21 +26,27 @@ function useCompras() {
       autores: [...autores],
       id: nanoid(idSize),
     };
-    setListaCompras((listaAntiga) => [...listaAntiga, novaCompra]);
+    const novaListaCompras = [...listaCompras, novaCompra];
+    setListaCompras(novaListaCompras);
     adicionaPedidoConsumidor(novaCompra);
+    atualizaContaCompras(novaListaCompras);
   }
 
-  function encontraCompra(idCompra: string): ICompra {
-    const compraAtual = listaCompras.find((compra) => compra.id === idCompra);
+  function encontraCompra(idCompra: string, compras?: ICompra[]): ICompra {
+    const compraAtual = compras
+      ? compras.find((compra) => compra.id === idCompra)
+      : listaCompras.find((compra) => compra.id === idCompra);
     if (!compraAtual) return { nome: "", preco: 0, autores: [], id: "" };
     return compraAtual;
   }
 
   function removeCompra(pedidoID: string | undefined): void {
     removePedidoConsumidor(pedidoID);
-    setListaCompras((velhaLista) =>
-      velhaLista.filter((velhoCompra) => velhoCompra.id !== pedidoID)
+    const novaListaCompras = listaCompras.filter(
+      (velhoCompra) => velhoCompra.id !== pedidoID
     );
+    setListaCompras(novaListaCompras);
+    atualizaContaCompras(novaListaCompras);
   }
 
   return {

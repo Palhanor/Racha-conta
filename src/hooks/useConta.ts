@@ -1,14 +1,16 @@
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { compras, consumidores, contaAtual } from "../states/atom";
 import { nanoid } from "nanoid";
 import { idSize } from "../utils/idFormat";
 import IConta from "../interfaces/conta";
+import IConsumidor from "../interfaces/consumidor";
+import ICompra from "../interfaces/compra";
 
 function useConta() {
   const [conta, setConta] = useRecoilState(contaAtual);
-  const [listaCompras, setListaCompras] = useRecoilState(compras);
-  const [listaConsumidores, setListaConsumidores] =
-    useRecoilState(consumidores);
+  const setListaCompras = useSetRecoilState(compras);
+  const setListaConsumidores =
+    useSetRecoilState(consumidores);
   const historico: IConta[] = listaContas();
 
   function adicionaConta(conta: IConta): void {
@@ -26,12 +28,20 @@ function useConta() {
     }
   }
 
-  function atualizaConta(): void {
+  function atualizaContaConsumidores(consumidores: IConsumidor[]): void {
     setConta((conta) => {
       return {
         ...conta,
-        consumidores: [...listaConsumidores],
-        compras: [...listaCompras],
+        consumidores: consumidores
+      };
+    });
+  }
+
+  function atualizaContaCompras(compras: ICompra[]): void {
+    setConta((conta) => {
+      return {
+        ...conta,
+        compras: compras
       };
     });
   }
@@ -75,7 +85,8 @@ function useConta() {
     conta,
     historico,
     adicionaConta,
-    atualizaConta,
+    atualizaContaConsumidores,
+    atualizaContaCompras,
     criaConta,
     removeConta,
     resetaConta,

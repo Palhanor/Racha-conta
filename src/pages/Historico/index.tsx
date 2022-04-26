@@ -74,7 +74,7 @@ export default function Historico() {
             {historico.map((conta) => (
               <Item
                 key={conta.id}
-                onClick={() => navigate(`/conta/${conta.id}`)}
+                onClick={() => navigate(`/extrato/${conta.id}`)}
               >
                 <Inline>
                   <ItemNome>{conta.nome}</ItemNome>

@@ -9,7 +9,6 @@ import Compra from "./pages/Compra";
 import Extrato from "./pages/Extrato";
 import NotFound from "./pages/NotFound";
 import Historico from "./pages/Historico";
-import Conta from "./pages/Conta";
 
 /* COMPONENTE COM AS ROTAS */
 function App() {
@@ -22,8 +21,7 @@ function App() {
         <Route path="consumidor/:ID" element={<Consumidor />} />
         <Route path="compra/:ID" element={<Compra />} />
         <Route path="historico" element={<Historico />} />
-        <Route path="extrato" element={<Extrato />} />
-        <Route path="conta/:ID" element={<Conta />} />
+        <Route path="extrato/:ID" element={<Extrato />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </RecoilRoot>
