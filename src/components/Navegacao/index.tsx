@@ -94,7 +94,7 @@ export default function Navegacao() {
       icon: (
         <IconContext.Provider
           value={{
-            color: pathname === "/extrato" ? color.themeLighter : color.white,
+            color: pathname === `/extrato/${conta.id}` ? color.themeLighter : color.white,
           }}
         >
           <BsFileEarmarkTextFill size={22} />
