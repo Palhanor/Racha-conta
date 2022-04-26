@@ -19,26 +19,27 @@ import {
 
 /* COMPONENTE */
 export default function Consumidor() {
-
   /* HOOKS DO REACT ROUTER */
   const navigate = useNavigate();
   const { ID } = useParams();
 
   /* HOOK PERSONALIZADO */
   const { listaConsumidores, removeConsumidor } = useConsumidores();
-  const { encontraCompra } = useCompras();
+  const { encontraCompra, removeAutorCompra } = useCompras();
 
   /* CONSUMIDOR SELECIONADO */
-  const consumidorSelecionado: (IConsumidor | undefined) = listaConsumidores.find(
+  const consumidorSelecionado: IConsumidor = listaConsumidores.find(
     (dadosConsumidor) => dadosConsumidor.id === ID
-  );
+  ) as IConsumidor;
 
   /* REDIRECIONADOR */
   if (!consumidorSelecionado) return <NotFound />;
 
   /* APAGAR CONSUMIDOR DA LISTA */
   function apagar(): void {
-    removeConsumidor(ID);
+    removeConsumidor(consumidorSelecionado.id);
+    // Deveria estar dentro do removeConsumidor()
+    removeAutorCompra(consumidorSelecionado.nome);
     navigate("/consumidores");
   }
 
@@ -56,7 +57,10 @@ export default function Consumidor() {
             R${" "}
             {consumidorSelecionado.pedidos
               .reduce(
-                (total, item) => encontraCompra(item).preco / encontraCompra(item).autores.length + total,
+                (total, item) =>
+                  encontraCompra(item).preco /
+                    encontraCompra(item).autores.length +
+                  total,
                 0
               )
               .toLocaleString("BRL")}
@@ -70,7 +74,8 @@ export default function Consumidor() {
       </Container>
       <ListaContainer>
         <ListaTitulo>Compras</ListaTitulo>
-        <ListaComprasConsumidor pedidos={consumidorSelecionado.pedidos} /> {/* COMPONENTE */}
+        <ListaComprasConsumidor pedidos={consumidorSelecionado.pedidos} />{" "}
+        {/* COMPONENTE */}
       </ListaContainer>
       <Navegacao /> {/* COMPONENTE */}
     </>

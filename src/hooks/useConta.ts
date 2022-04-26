@@ -9,9 +9,21 @@ import ICompra from "../interfaces/compra";
 function useConta() {
   const [conta, setConta] = useRecoilState(contaAtual);
   const setListaCompras = useSetRecoilState(compras);
-  const setListaConsumidores =
-    useSetRecoilState(consumidores);
+  const setListaConsumidores = useSetRecoilState(consumidores);
   const historico: IConta[] = listaContas();
+
+  function criaConta(conta: IConta): void {
+    if (conta.id === "") {
+      setConta({
+        nome: conta.nome,
+        consumidores: [],
+        compras: [],
+        id: nanoid(idSize),
+      });
+    } else {
+      setConta(conta);
+    }
+  }
 
   function adicionaConta(conta: IConta): void {
     if (!localStorage.getItem("historicoContas")) {
@@ -28,47 +40,7 @@ function useConta() {
     }
   }
 
-  function atualizaContaConsumidores(consumidores: IConsumidor[]): void {
-    setConta((conta) => {
-      return {
-        ...conta,
-        consumidores: consumidores
-      };
-    });
-  }
-
-  function atualizaContaCompras(compras: ICompra[]): void {
-    setConta((conta) => {
-      return {
-        ...conta,
-        compras: compras
-      };
-    });
-  }
-
-  function criaConta(conta: IConta): void {
-    if (conta.id === "") {
-      setConta({
-        nome: conta.nome,
-        consumidores: [],
-        compras: [],
-        id: nanoid(idSize),
-      });
-    } else {
-      setConta(conta);
-    }
-  }
-
-  function listaContas(): IConta[] {
-    const dadosArmazenados: string | null =
-      localStorage.getItem("historicoContas");
-    if (!dadosArmazenados) {
-      return [];
-    }
-    return [...JSON.parse(dadosArmazenados)];
-  }
-
-  function removeConta(contaID: string | undefined): void {
+  function removeConta(contaID: string): void {
     const novoHistorico: IConta[] = historico.filter(
       (conta) => conta.id !== contaID
     );
@@ -81,15 +53,42 @@ function useConta() {
     setListaCompras([]);
   }
 
+  function atualizaContaConsumidores(consumidores: IConsumidor[]): void {
+    setConta((conta) => {
+      return {
+        ...conta,
+        consumidores: consumidores,
+      };
+    });
+  }
+
+  function atualizaContaCompras(compras: ICompra[]): void {
+    setConta((conta) => {
+      return {
+        ...conta,
+        compras: compras,
+      };
+    });
+  }
+
+  function listaContas(): IConta[] {
+    const dadosArmazenados: string | null =
+      localStorage.getItem("historicoContas");
+    if (!dadosArmazenados) {
+      return [];
+    }
+    return [...JSON.parse(dadosArmazenados)];
+  }
+
   return {
     conta,
     historico,
-    adicionaConta,
-    atualizaContaConsumidores,
-    atualizaContaCompras,
     criaConta,
+    adicionaConta,
     removeConta,
     resetaConta,
+    atualizaContaConsumidores,
+    atualizaContaCompras,
   };
 }
 

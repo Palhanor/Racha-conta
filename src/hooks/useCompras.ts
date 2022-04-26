@@ -32,15 +32,7 @@ function useCompras() {
     atualizaContaCompras(novaListaCompras);
   }
 
-  function encontraCompra(idCompra: string, compras?: ICompra[]): ICompra {
-    const compraAtual = compras
-      ? compras.find((compra) => compra.id === idCompra)
-      : listaCompras.find((compra) => compra.id === idCompra);
-    if (!compraAtual) return { nome: "", preco: 0, autores: [], id: "" };
-    return compraAtual;
-  }
-
-  function removeCompra(pedidoID: string | undefined): void {
+  function removeCompra(pedidoID: string): void {
     removePedidoConsumidor(pedidoID);
     const novaListaCompras = listaCompras.filter(
       (velhoCompra) => velhoCompra.id !== pedidoID
@@ -49,11 +41,33 @@ function useCompras() {
     atualizaContaCompras(novaListaCompras);
   }
 
+  function encontraCompra(idCompra: string, compras?: ICompra[]): ICompra {
+    const compraAtual = compras
+      ? compras.find((compra) => compra.id === idCompra)
+      : listaCompras.find((compra) => compra.id === idCompra);
+    if (!compraAtual) return { nome: "", preco: 0, autores: [], id: "" };
+    return compraAtual;
+  }
+
+  function removeAutorCompra(consumidorApagado: string) {
+    const novaListaCompras = listaCompras.map((compra) => {
+      return {
+        ...compra,
+        autores: compra.autores.filter((autor) => autor !== consumidorApagado),
+      };
+    });
+    const novaListaComprasLimpa = novaListaCompras.filter(
+      (compra) => compra.autores.length !== 0
+    );
+    setListaCompras(novaListaComprasLimpa);
+  }
+
   return {
     listaCompras,
     adicionaCompra,
-    encontraCompra,
     removeCompra,
+    encontraCompra,
+    removeAutorCompra,
   };
 }
 

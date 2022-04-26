@@ -18,7 +18,6 @@ import {
 
 /* COMPONENTE */
 export default function Compra() {
-
   /* HOOKS DO REACT ROUTER */
   const { ID } = useParams();
   const navigate = useNavigate();
@@ -27,14 +26,16 @@ export default function Compra() {
   const { listaCompras, removeCompra } = useCompras();
 
   /* COMPRA SELECIONADA */
-  const compraSelecionada: (ICompra | undefined) = listaCompras.find((dadosCompra) => dadosCompra.id === ID);
+  const compraSelecionada: ICompra = listaCompras.find(
+    (dadosCompra) => dadosCompra.id === ID
+  ) as ICompra;
 
   /* REDIRECIONADOR */
   if (!compraSelecionada) return <NotFound />;
 
   /* APAGAR A COMPRA */
   function apagar(): void {
-    removeCompra(ID);
+    removeCompra(compraSelecionada.id);
     navigate("/compras");
   }
 
@@ -48,7 +49,9 @@ export default function Compra() {
             {compraSelecionada.autores.length} Consumidor
             {compraSelecionada.autores.length === 1 ? "" : "es"}
           </ItemTexto>
-          <ItemCusto>R$ {compraSelecionada.preco.toLocaleString("BRL")}</ItemCusto>
+          <ItemCusto>
+            R$ {compraSelecionada.preco.toLocaleString("BRL")}
+          </ItemCusto>
         </Inline>
         <div>
           <Botao danger onClick={apagar}>

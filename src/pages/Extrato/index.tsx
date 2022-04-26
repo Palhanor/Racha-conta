@@ -76,25 +76,17 @@ export default function Extrato() {
   const navigate = useNavigate();
   const { ID } = useParams();
   const { encontraCompra } = useCompras();
-  const {
-    conta,
-    historico,
-    adicionaConta,
-    removeConta,
-    resetaConta,
-  } = useConta();
+  const { conta, historico, adicionaConta, removeConta, resetaConta } =
+    useConta();
 
-  const contaSelecionada: IConta | undefined =
+  const contaSelecionada: IConta =
     conta.id === ID
       ? conta
-      : historico.find((conta) => conta.id === (ID as string));
+      : (historico.find((conta) => conta.id === (ID as string)) as IConta);
 
-  useEffect(() => {
-    if (!contaSelecionada?.id) navigate("/");
-  });
-  if (typeof contaSelecionada === "undefined") return <NotFound />;
+  if (!contaSelecionada) return <NotFound />;
+
   const { nome, consumidores, compras, id } = contaSelecionada as IConta;
-  console.log(nome); console.log(consumidores); console.log(compras); console.log(id);
 
   const gastoTotal: number = compras.reduce(
     (total, item) => item.preco + total,
@@ -104,7 +96,8 @@ export default function Extrato() {
   const gastosIndividuais: number[] = consumidores.map((dadosConsumidor) =>
     dadosConsumidor.pedidos.reduce(
       (total, item) =>
-        encontraCompra(item, compras).preco / encontraCompra(item, compras).autores.length +
+        encontraCompra(item, compras).preco /
+          encontraCompra(item, compras).autores.length +
         total,
       0
     )

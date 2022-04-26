@@ -27,10 +27,10 @@ function useConsumidores() {
     atualizaContaConsumidores(novaListaConsumidores);
   }
 
-  function removeConsumidor(consumidorID: string | undefined): void {
+  function removeConsumidor(consumidorID: string): void {
     const novaListaConsumidores = listaConsumidores.filter(
       (consumidor) =>
-        consumidor.id !== consumidorID || consumidor.pedidos.length > 0
+        consumidor.id !== consumidorID
     );
     setListaConsumidores(novaListaConsumidores);
     atualizaContaConsumidores(novaListaConsumidores);
@@ -53,7 +53,7 @@ function useConsumidores() {
     atualizaContaConsumidores(novaListaConsumidores);
   }
 
-  function removePedidoConsumidor(pedidoID: string | undefined): void {
+  function removePedidoConsumidor(pedidoID: string): void {
     const novaListaConsumidores = listaConsumidores.map((dadosConsumidor) => {
       return {
         ...dadosConsumidor,
