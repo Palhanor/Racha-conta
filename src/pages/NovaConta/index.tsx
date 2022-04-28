@@ -16,7 +16,7 @@ const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
 /* COMPONENTE */
-export default function Inicio() {
+export default function NovaConta() {
 
   /* ESTADOS DO COMPONENTE */
   const [nomeConta, setNomeConta] = useState("");
