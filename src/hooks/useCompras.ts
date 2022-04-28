@@ -60,6 +60,7 @@ function useCompras() {
       (compra) => compra.autores.length !== 0
     );
     setListaCompras(novaListaComprasLimpa);
+    atualizaContaCompras(novaListaComprasLimpa);
   }
 
   return {
