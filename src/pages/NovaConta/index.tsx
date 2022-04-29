@@ -27,11 +27,11 @@ export default function NovaConta() {
 
   /* HOOKS PERSONALIZADOS */
   const { adicionaConsumidor } = useConsumidores();
-  const { conta, criaConta } = useConta();
+  const { conta, contaExiste, criaConta } = useConta();
 
   /* REDIRECIONADOR */
   useEffect(() => {
-    if (conta.id) navigate("/consumidores")
+    if (contaExiste) navigate("/consumidores")
   })
 
   /* CRIAR NOVA CONTA */

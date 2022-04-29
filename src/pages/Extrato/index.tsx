@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { brkpt, color } from "../../styles";
 import IConta from "../../interfaces/conta";
 import useCompras from "../../hooks/useCompras";
+// import useConsumidores from "../../hooks/useConsumidores";
 import NotFound from "../NotFound";
 import {
   Botao,
@@ -74,7 +75,8 @@ export default function Extrato() {
   const navigate = useNavigate();
   const { ID } = useParams();
   const { encontraCompra } = useCompras();
-  const { conta, historico, adicionaConta, removeConta, resetaConta } =
+  // const { adicionaConsumidor } = useConsumidores()
+  const { conta, historico, adicionaConta, removeConta, resetaConta, criaConta } =
     useConta();
 
   const contaSelecionada: IConta =
@@ -116,6 +118,15 @@ export default function Extrato() {
     removeConta(id);
     navigate("/historico");
   }
+
+  // function reabrir(): void {
+  //   removeConta(id);
+  //   criaConta(contaSelecionada);
+  //   consumidores.forEach(consumidor => {
+  //     adicionaConsumidor(consumidor.nome)
+  //   })
+  //   navigate("/consumidores");
+  // }
 
   return (
     <>
@@ -168,9 +179,14 @@ export default function Extrato() {
             Finalizar
           </Botao>
         ) : (
-          <Botao danger onClick={excluir}>
-            Excluir
-          </Botao>
+          <>
+            <Botao danger onClick={excluir}>
+              Excluir
+            </Botao>
+            {/* <Botao onClick={reabrir}>
+              Reabrir
+            </Botao> */}
+          </>
         )}
       </Container>
       <Navegacao /> {/* COMPONENTE */}
