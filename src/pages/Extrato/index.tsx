@@ -1,5 +1,3 @@
-// TODO: Corrigir o poroblema de NaN na visualização da conta pelo histórico
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
 import useConta from "../../hooks/useConta";
@@ -89,15 +87,15 @@ export default function Extrato() {
   const { nome, consumidores, compras, id } = contaSelecionada as IConta;
 
   const gastoTotal: number = compras.reduce(
-    (total, item) => item.preco + total,
+    (total, compra) => compra.preco + total,
     0
   );
 
   const gastosIndividuais: number[] = consumidores.map((dadosConsumidor) =>
     dadosConsumidor.pedidos.reduce(
-      (total, item) =>
-        encontraCompra(item, compras).preco /
-          encontraCompra(item, compras).autores.length +
+      (total, compraId) =>
+        encontraCompra(compraId, compras).preco /
+          encontraCompra(compraId, compras).autores.length +
         total,
       0
     )

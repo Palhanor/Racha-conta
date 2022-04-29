@@ -92,8 +92,6 @@ export default function Historico() {
       ) : (
         <TituloDesktop>Histórico vazio</TituloDesktop>
       )}
-      <NavegacaoPlaceholder></NavegacaoPlaceholder>
-      <Navegacao /> {/* COMPONENTE */}
     </>
   );
 }

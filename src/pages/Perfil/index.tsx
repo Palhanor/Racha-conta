@@ -1,4 +1,7 @@
 import { useNavigate } from "react-router-dom"
+import { Botao, Image, Titulo } from "../../components/StyledComponents";
+const ilustracao: string =
+  require("../../assets/WellcomeIllustration.svg").default;
 
 export default function Perfil() {
 
@@ -13,10 +16,14 @@ export default function Perfil() {
     }
 
     return (
+        <>
+        <Titulo>Estávamos com saudades!</Titulo>
+        <Image src={ilustracao} alt="Ilustração de bem-vindo"/>
+        <br />
         <div>
-            <button onClick={novaConta}>Nova conta</button>
-            <br />
-            <button onClick={historico}>Histórico</button>
+            <Botao white onClick={novaConta}>Nova conta</Botao>
+            <Botao secondary onClick={historico}>Histórico</Botao>
         </div>
+        </>
     );
 }
