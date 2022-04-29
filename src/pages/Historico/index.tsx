@@ -2,8 +2,8 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { brkpt, color } from "../../styles";
-import Navegacao from "../../components/Navegacao";
 import useConta from "../../hooks/useConta";
+import Navegacao from "../../components/Navegacao";
 import {
   Titulo,
   Lista,
@@ -24,18 +24,6 @@ const TituloDesktop = styled(Titulo)`
   order: 3;
   margin-left: 2%;
 `;
-const NavegacaoPlaceholder = styled.div`
-  display: none;
-
-  @media (min-width: ${brkpt.desktop}) {
-    display: block;
-    order: 2;
-    height: 75vh;
-    width: 10px;
-    border-radius: 0 10px 10px 0;
-    background-color: ${color.themeDarker};
-  }
-`;
 const ListaResponsiva = styled(Lista)`
   @media (min-width: ${brkpt.desktop}) {
     order: 3;
@@ -53,10 +41,21 @@ const ListaTituloResponsivo = styled(ListaTitulo)`
     display: block;
   }
 `;
+const NavegacaoPlaceholder = styled.div`
+  display: none;
+
+  @media (min-width: ${brkpt.desktop}) {
+    display: block;
+    order: 2;
+    height: 75vh;
+    width: 10px;
+    border-radius: 0 10px 10px 0;
+    background-color: ${color.themeDarker};
+  }
+`;
 
 /* COMPONENTE */
 export default function Historico() {
-
   /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
 
@@ -92,8 +91,8 @@ export default function Historico() {
       ) : (
         <TituloDesktop>Histórico vazio</TituloDesktop>
       )}
-      <NavegacaoPlaceholder></NavegacaoPlaceholder>
-      <Navegacao /> {/* COMPONENTE */}
+      <NavegacaoPlaceholder/>
+      <Navegacao/>
     </>
   );
 }

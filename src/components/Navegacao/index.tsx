@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { brkpt, color } from "../../styles";
 import { IconContext } from "react-icons";
 import useConta from "../../hooks/useConta";
-import { RiHistoryFill } from "react-icons/ri"
+import { CgProfile } from "react-icons/cg"
 import {
   BsPeopleFill,
   BsCartCheckFill,
@@ -52,12 +52,12 @@ export default function Navegacao() {
   const dadosNavegacao = [
     {
       id: 0,
-      url: "/historico",
+      url: "/",
       icon: (
         <IconContext.Provider
-          value={{ color: pathname === "/historico" ? color.themeLighter : color.white }}
+          value={{ color: pathname === "/" ? color.themeLighter : color.white }}
         >
-          <RiHistoryFill size={22} />
+          <CgProfile size={22} />
         </IconContext.Provider>
       ),
     },

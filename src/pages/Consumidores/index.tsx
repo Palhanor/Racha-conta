@@ -26,11 +26,11 @@ export default function Consumidores() {
 
   /* HOOK PERSONALIZADO */
   const { listaConsumidores, adicionaConsumidor } = useConsumidores();
-  const { conta } = useConta();
+  const { conta, contaExiste } = useConta();
 
   /* REDIRECIONADOR */
   useEffect(() => {
-    if (!conta.id) navigate("/");
+    if (!contaExiste) navigate("/");
     // console.log("Lista de consumidores: ", listaConsumidores)
   }, [listaConsumidores, conta.id, navigate]);
 

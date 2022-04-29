@@ -1,5 +1,3 @@
-// TODO: Corrigir o poroblema de NaN na visualização da conta pelo histórico
-import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navegacao from "../../components/Navegacao";
 import useConta from "../../hooks/useConta";
@@ -7,6 +5,7 @@ import styled from "styled-components";
 import { brkpt, color } from "../../styles";
 import IConta from "../../interfaces/conta";
 import useCompras from "../../hooks/useCompras";
+// import useConsumidores from "../../hooks/useConsumidores";
 import NotFound from "../NotFound";
 import {
   Botao,
@@ -76,7 +75,8 @@ export default function Extrato() {
   const navigate = useNavigate();
   const { ID } = useParams();
   const { encontraCompra } = useCompras();
-  const { conta, historico, adicionaConta, removeConta, resetaConta } =
+  // const { adicionaConsumidor } = useConsumidores()
+  const { conta, historico, adicionaConta, removeConta, resetaConta, criaConta } =
     useConta();
 
   const contaSelecionada: IConta =
@@ -89,15 +89,15 @@ export default function Extrato() {
   const { nome, consumidores, compras, id } = contaSelecionada as IConta;
 
   const gastoTotal: number = compras.reduce(
-    (total, item) => item.preco + total,
+    (total, compra) => compra.preco + total,
     0
   );
 
   const gastosIndividuais: number[] = consumidores.map((dadosConsumidor) =>
     dadosConsumidor.pedidos.reduce(
-      (total, item) =>
-        encontraCompra(item, compras).preco /
-          encontraCompra(item, compras).autores.length +
+      (total, compraId) =>
+        encontraCompra(compraId, compras).preco /
+          encontraCompra(compraId, compras).autores.length +
         total,
       0
     )
@@ -118,6 +118,15 @@ export default function Extrato() {
     removeConta(id);
     navigate("/historico");
   }
+
+  // function reabrir(): void {
+  //   removeConta(id);
+  //   criaConta(contaSelecionada);
+  //   consumidores.forEach(consumidor => {
+  //     adicionaConsumidor(consumidor.nome)
+  //   })
+  //   navigate("/consumidores");
+  // }
 
   return (
     <>
@@ -170,9 +179,14 @@ export default function Extrato() {
             Finalizar
           </Botao>
         ) : (
-          <Botao danger onClick={excluir}>
-            Excluir
-          </Botao>
+          <>
+            <Botao danger onClick={excluir}>
+              Excluir
+            </Botao>
+            {/* <Botao onClick={reabrir}>
+              Reabrir
+            </Botao> */}
+          </>
         )}
       </Container>
       <Navegacao /> {/* COMPONENTE */}

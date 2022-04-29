@@ -30,13 +30,13 @@ export default function Compras() {
   const navigate = useNavigate();
   
   /* HOOK PERSONALIZADO */
-  const { conta } = useConta();
+  const { conta, contaExiste } = useConta();
   const { listaCompras, adicionaCompra } = useCompras();
   const { listaConsumidores } = useConsumidores();
 
   /* REDIRECIONADOR */
   useEffect(() => {
-    if (!conta.id) navigate("/");
+    if (!contaExiste) navigate("/");
     // console.log("Lista de compras: ", listaCompras)
   }, [listaCompras, conta.id, navigate]);
 

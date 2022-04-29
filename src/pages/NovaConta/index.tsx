@@ -16,7 +16,7 @@ const ilustracao: string =
   require("../../assets/InitialIllustration.svg").default;
 
 /* COMPONENTE */
-export default function Inicio() {
+export default function NovaConta() {
 
   /* ESTADOS DO COMPONENTE */
   const [nomeConta, setNomeConta] = useState("");
@@ -27,11 +27,11 @@ export default function Inicio() {
 
   /* HOOKS PERSONALIZADOS */
   const { adicionaConsumidor } = useConsumidores();
-  const { conta, criaConta } = useConta();
+  const { conta, contaExiste, criaConta } = useConta();
 
   /* REDIRECIONADOR */
   useEffect(() => {
-    if (conta.id) navigate("/consumidores")
+    if (contaExiste) navigate("/consumidores")
   })
 
   /* CRIAR NOVA CONTA */

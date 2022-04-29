@@ -4,6 +4,11 @@ import IConsumidor from "../interfaces/consumidor";
 import ICompra from "../interfaces/compra";
 import IConta from "../interfaces/conta";
 
+export const contaAberta = atom<boolean>({
+  key: "contaAberta",
+  default: false
+})
+
 /* ESTADO GLOBAL CONTA */
 export const contaAtual = atom<IConta>({
   key: "conta",

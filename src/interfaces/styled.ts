@@ -1,6 +1,7 @@
 export interface IBotaoProps {
   secondary?: boolean;
   danger?: boolean;
+  white?: boolean;
 }
 
 export interface ITituloProps {

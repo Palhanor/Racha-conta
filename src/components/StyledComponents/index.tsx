@@ -23,8 +23,8 @@ export const Botao = styled.button`
 
     ${(props: IBotaoProps) => props.secondary && css`
         border: 2px solid ${color.white};
-        width: 60%;
         margin: 2rem auto 1rem;
+        width: 80%;
     `};
 
     ${(props: IBotaoProps) => props.danger && css`
@@ -32,6 +32,13 @@ export const Botao = styled.button`
         background-color: ${color.white};
         color: ${color.red};
         margin: 2rem auto 1rem;
+    `};
+
+    ${(props: IBotaoProps) => props.white && css`
+        background-color: ${color.white};
+        color: ${color.theme};
+        margin: 2rem auto 1rem;
+        width: 80%;
     `};
 `;
 export const Input = styled.input`
