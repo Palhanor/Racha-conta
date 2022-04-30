@@ -75,9 +75,15 @@ export default function Extrato() {
   const navigate = useNavigate();
   const { ID } = useParams();
   const { encontraCompra, setListaCompras } = useCompras();
-  const { setListaConsumidores } = useConsumidores()
-  const { conta, historico, adicionaConta, removeConta, resetaConta, criaConta } =
-    useConta();
+  const { setListaConsumidores } = useConsumidores();
+  const {
+    conta,
+    historico,
+    adicionaConta,
+    removeConta,
+    resetaConta,
+    criaConta,
+  } = useConta();
 
   const contaSelecionada: IConta =
     conta.id === ID
@@ -182,9 +188,7 @@ export default function Extrato() {
             <Botao danger onClick={excluir}>
               Excluir
             </Botao>
-            <Botao onClick={reabrir}>
-              Reabrir
-            </Botao>
+            <Botao onClick={reabrir}>Reabrir</Botao>
           </>
         )}
       </Container>

@@ -6,7 +6,6 @@ const erro: string = require("../../assets/ErrorIllustration.svg").default;
 
 /* COMPOENTE */
 export default function NotFound() {
-
   /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
 

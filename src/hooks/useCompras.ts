@@ -12,29 +12,23 @@ function useCompras() {
     useConsumidores();
   const { atualizaContaCompras } = useConta();
 
+  // Adiciona uma compra dentro da lista de compras.
   function adicionaCompra(compra: ICompra): void | ErrorConstructor {
-    if(!compra.id) {
-      if (compra.autores.length === 0)
-        throw new Error("Adicione ao menos um autor para a compra");
-      if (!compra.preco) throw new Error("Adicione um preço para a compra");
-      const novaCompra: ICompra = {
-        ...compra,
-        preco: (compra.preco as number) / 100,
-        id: nanoid(idSize),
-      };
-      const novaListaCompras = [...listaCompras, novaCompra];
-      setListaCompras(novaListaCompras);
-      adicionaPedidoConsumidor(novaCompra);
-      atualizaContaCompras(novaListaCompras);
-    } else {
-      const novaListaCompras = [...listaCompras, compra];
-      setListaCompras(novaListaCompras);
-      adicionaPedidoConsumidor(compra);
-      atualizaContaCompras(novaListaCompras);
-
-    }
+    if (compra.autores.length === 0)
+      throw new Error("Adicione ao menos um autor para a compra");
+    if (!compra.preco) throw new Error("Adicione um preço para a compra");
+    const novaCompra: ICompra = {
+      ...compra,
+      preco: (compra.preco as number) / 100,
+      id: nanoid(idSize),
+    };
+    const novaListaCompras = [...listaCompras, novaCompra];
+    setListaCompras(novaListaCompras);
+    adicionaPedidoConsumidor(novaCompra);
+    atualizaContaCompras(novaListaCompras);
   }
 
+  // Remove uma compra dentro da lista de compras.
   function removeCompra(compraID: string): void {
     removePedidoConsumidor(compraID);
     const novaListaCompras = listaCompras.filter(
@@ -44,6 +38,7 @@ function useCompras() {
     atualizaContaCompras(novaListaCompras);
   }
 
+  // Retorna os dados da compra considerando seu id.
   function encontraCompra(compraID: string, compras?: ICompra[]): ICompra {
     const compraAtual = compras
       ? compras.find((compra) => compra.id === compraID)
@@ -52,6 +47,7 @@ function useCompras() {
     return compraAtual;
   }
 
+  // Remove um consumidor de dentro da lista de autores da compra. Também apaga a compra caso esta fique sem consumidores.
   function removeAutorCompra(consumidorApagado: string) {
     const novaListaCompras = listaCompras
       .map((compra) => {
@@ -69,11 +65,11 @@ function useCompras() {
 
   return {
     listaCompras,
+    setListaCompras,
     adicionaCompra,
     removeCompra,
     encontraCompra,
     removeAutorCompra,
-    setListaCompras
   };
 }
 

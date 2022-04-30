@@ -4,12 +4,16 @@ Então o valor é convertido em uma string e são adicionados novos zeros (caso 
 Por fim, a string é quebrada em duas novas strings, uma de antes da vírgula e a outra de depois da vírgula
 Então é retornado o valor concatenado com a vírgula, e os valores de depois da vírgula passa em uma função auxiliar que adiciona os pontos
 ************************/
-function adicionaMascaraMonetaria(valor: (number | null)): string {
+function adicionaMascaraMonetaria(valor: number | null): string {
   if (!valor) valor = 0;
   const valorString: string = valor.toString().padStart(3, "0");
   const valorQuebrado: string[] = valorString.split("");
-  const parteInteira: string = valorQuebrado.slice(0, valorQuebrado.length - 2).join("");
-  const parteFracionaria: string = valorQuebrado.slice(valorQuebrado.length - 2, valorQuebrado.length).join("");
+  const parteInteira: string = valorQuebrado
+    .slice(0, valorQuebrado.length - 2)
+    .join("");
+  const parteFracionaria: string = valorQuebrado
+    .slice(valorQuebrado.length - 2, valorQuebrado.length)
+    .join("");
   return `R$ ${adicionaPontos(parteInteira)},${parteFracionaria}`;
 }
 
@@ -19,8 +23,11 @@ Então ele passa por uma função auxiliar que limita seu tamanho para um númer
 Por fim, são removidos todos os valores não numéricos, e o valor é transformado em um número que é retornado no final
 ************************/
 function removeMascaraMonetaria(valor: string): number {
-  const valorLimitado: string = limitaTamanho(valor)
-  const removeMascara: string = valorLimitado.replace("R$ ", "").replace(",", "").replace(/\./g, "");
+  const valorLimitado: string = limitaTamanho(valor);
+  const removeMascara: string = valorLimitado
+    .replace("R$ ", "")
+    .replace(",", "")
+    .replace(/\./g, "");
   const valorNumerico: number = parseInt(removeMascara);
   return valorNumerico;
 }
@@ -54,17 +61,17 @@ No final, o valor é retornado
 function limitaTamanho(valor: string): string {
   const tamanhoMaximo: number = 17;
   if (valor.length > tamanhoMaximo) {
-    const valorQuebrado: string[] = String(valor).split("")
-    valorQuebrado.pop()
-    const valorLimitado: string = valorQuebrado.join("")
+    const valorQuebrado: string[] = String(valor).split("");
+    valorQuebrado.pop();
+    const valorLimitado: string = valorQuebrado.join("");
     return valorLimitado;
   }
-  return valor
+  return valor;
 }
 
 /* OBJETO CONTENDO FUNÇÕES DA MÁSCARA */
 const mascaraMonetaria = {
   adicionaMascaraMonetaria,
-  removeMascaraMonetaria
-}
+  removeMascaraMonetaria,
+};
 export default mascaraMonetaria;

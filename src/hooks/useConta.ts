@@ -13,6 +13,7 @@ function useConta() {
   const setListaConsumidores = useSetRecoilState(consumidores);
   const historico: IConta[] = listaContas();
 
+  // Configura umm conta, podendo ser uam nova conta ou uma conta reaberta.
   function criaConta(conta: IConta): void {
     if (conta.id === "") {
       setConta({
@@ -27,6 +28,7 @@ function useConta() {
     setContaExiste(true);
   }
 
+  // Adiciona a conta na lista de contas salva no histórico (localStorage).
   function adicionaConta(conta: IConta): void {
     if (!localStorage.getItem("historicoContas")) {
       const listaConta: IConta[] = [conta];
@@ -42,6 +44,7 @@ function useConta() {
     }
   }
 
+  // Remove a conta da lista de contas salva no histórico (localStorage).
   function removeConta(contaID: string): void {
     const novoHistorico: IConta[] = historico.filter(
       (conta) => conta.id !== contaID
@@ -49,6 +52,7 @@ function useConta() {
     localStorage.setItem("historicoContas", JSON.stringify(novoHistorico));
   }
 
+  // Apaga todos os dados globais da conta aberta.
   function resetaConta(): void {
     setConta({ nome: "", consumidores: [], compras: [], id: "" });
     setListaConsumidores([]);
@@ -56,6 +60,7 @@ function useConta() {
     setContaExiste(false);
   }
 
+  // Atualiza a lista de consumidores de dentro da conta.
   function atualizaContaConsumidores(consumidores: IConsumidor[]): void {
     setConta((conta) => {
       return {
@@ -65,6 +70,7 @@ function useConta() {
     });
   }
 
+  // Atualiza a lista de compras de dentro da conta.
   function atualizaContaCompras(compras: ICompra[]): void {
     setConta((conta) => {
       return {
@@ -74,6 +80,7 @@ function useConta() {
     });
   }
 
+  // Retorna uma lista com tod o histórico de contas salvas (localStorage).
   function listaContas(): IConta[] {
     const dadosArmazenados: string | null =
       localStorage.getItem("historicoContas");

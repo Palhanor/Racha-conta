@@ -20,15 +20,14 @@ import {
 
 /* COMPONENTE */
 export default function Compras() {
-  
   /* ESTADOS DO COMPONENTE */
   const [nomeCompra, setNomeCompra] = useState<string>("");
   const [precoCompra, setPrecoCompra] = useState<number | null>(0);
   const [autoresCompra, setAutoresCompra] = useState<string[]>([]);
-  
+
   /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
-  
+
   /* HOOK PERSONALIZADO */
   const { conta, contaExiste } = useConta();
   const { listaCompras, adicionaCompra } = useCompras();
@@ -70,9 +69,9 @@ export default function Compras() {
     try {
       adicionaCompra({
         nome: nomeCompra,
-        preco: (precoCompra as number),
+        preco: precoCompra as number,
         autores: [...autoresCompra],
-        id: ""
+        id: "",
       });
       setNomeCompra("");
       setPrecoCompra(0);

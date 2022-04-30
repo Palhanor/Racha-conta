@@ -17,7 +17,6 @@ import useConta from "../../hooks/useConta";
 
 /* COMPONENTE */
 export default function Consumidores() {
-
   /* ESTADO DO COMPONENTE */
   const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
 
@@ -42,7 +41,7 @@ export default function Consumidores() {
       adicionaConsumidor({
         nome: nomeConsumidor,
         pedidos: [],
-        id: ""
+        id: "",
       });
       setNomeConsumidor("");
     } catch (err) {
@@ -71,7 +70,8 @@ export default function Consumidores() {
       </Container>
       <ListaContainer>
         <ListaTitulo>Consumidores</ListaTitulo>
-        <ListaConsumidores listaConsumidores={listaConsumidores} /> {/* COMPONENTE */}
+        <ListaConsumidores listaConsumidores={listaConsumidores} />{" "}
+        {/* COMPONENTE */}
       </ListaContainer>
       <Navegacao /> {/* COMPONENTE */}
     </>

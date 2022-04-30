@@ -91,8 +91,8 @@ export default function Historico() {
       ) : (
         <TituloDesktop>Histórico vazio</TituloDesktop>
       )}
-      <NavegacaoPlaceholder/>
-      <Navegacao/>
+      <NavegacaoPlaceholder />
+      <Navegacao />
     </>
   );
 }

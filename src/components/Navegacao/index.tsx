@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { brkpt, color } from "../../styles";
 import { IconContext } from "react-icons";
 import useConta from "../../hooks/useConta";
-import { CgProfile } from "react-icons/cg"
+import { CgProfile } from "react-icons/cg";
 import {
   BsPeopleFill,
   BsCartCheckFill,
@@ -35,18 +35,17 @@ const Navbar = styled.nav`
 `;
 const IconLink = styled(Link)`
   text-decoration: none;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 5px;
-  transition: .2s;
-  font-size: .8rem;
+  transition: 0.2s;
+  font-size: 0.8rem;
 `;
 
 /* COMPONENTE */
 export default function Navegacao() {
-
   /* HOOK DO REACT ROUTER */
   const { pathname } = useLocation();
-  const { conta } = useConta()
+  const { conta } = useConta();
 
   /* DADOS ESTÁTICOS DOS ÍCONES */
   const dadosNavegacao = [
@@ -94,7 +93,10 @@ export default function Navegacao() {
       icon: (
         <IconContext.Provider
           value={{
-            color: pathname === `/extrato/${conta.id}` ? color.themeLighter : color.white,
+            color:
+              pathname === `/extrato/${conta.id}`
+                ? color.themeLighter
+                : color.white,
           }}
         >
           <BsFileEarmarkTextFill size={22} />

@@ -6,8 +6,8 @@ import IConta from "../interfaces/conta";
 
 export const contaAberta = atom<boolean>({
   key: "contaAberta",
-  default: false
-})
+  default: false,
+});
 
 /* ESTADO GLOBAL CONTA */
 export const contaAtual = atom<IConta>({

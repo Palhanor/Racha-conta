@@ -17,7 +17,6 @@ const ilustracao: string =
 
 /* COMPONENTE */
 export default function NovaConta() {
-
   /* ESTADOS DO COMPONENTE */
   const [nomeConta, setNomeConta] = useState("");
   const [nomeConsumidor, setNomeConsumidor] = useState<string>("");
@@ -31,8 +30,8 @@ export default function NovaConta() {
 
   /* REDIRECIONADOR */
   useEffect(() => {
-    if (contaExiste) navigate("/consumidores")
-  })
+    if (contaExiste) navigate("/consumidores");
+  });
 
   /* CRIAR NOVA CONTA */
   function criar(e: FormEvent<HTMLFormElement>) {
@@ -43,12 +42,12 @@ export default function NovaConta() {
         nome: nomeConta,
         consumidores: [],
         compras: [],
-        id: ""
-      })
+        id: "",
+      });
       adicionaConsumidor({
         nome: nomeConsumidor,
         pedidos: [],
-        id: ""
+        id: "",
       });
       setNomeConsumidor("");
       navigate("/consumidores", { replace: true });

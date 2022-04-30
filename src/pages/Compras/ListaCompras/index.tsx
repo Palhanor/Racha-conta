@@ -11,8 +11,11 @@ import {
 } from "../../../components/StyledComponents";
 
 /* COMPONENTE */
-export default function ListaCompras({listaCompras}: {listaCompras: ICompra[]}) {
-
+export default function ListaCompras({
+  listaCompras,
+}: {
+  listaCompras: ICompra[];
+}) {
   /* HOOK DO REACT ROUTER */
   const navigate = useNavigate();
 
