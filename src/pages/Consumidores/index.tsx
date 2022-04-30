@@ -39,7 +39,11 @@ export default function Consumidores() {
     e.preventDefault();
 
     try {
-      adicionaConsumidor(nomeConsumidor);
+      adicionaConsumidor({
+        nome: nomeConsumidor,
+        pedidos: [],
+        id: ""
+      });
       setNomeConsumidor("");
     } catch (err) {
       alert(err);

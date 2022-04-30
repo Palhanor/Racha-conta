@@ -40,7 +40,7 @@ export default function Perfil() {
           </Botao>
         )}
       </div>
-      <Navegacao />
+      {contaExiste && <Navegacao />}
     </>
   );
 }

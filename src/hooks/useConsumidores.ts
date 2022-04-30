@@ -11,20 +11,25 @@ function useConsumidores() {
     useRecoilState(consumidores);
   const { atualizaContaConsumidores } = useConta();
 
-  function adicionaConsumidor(nomeConsumidor: string): void | ErrorConstructor {
-    const nomeDuplicado: boolean = listaConsumidores.some(
-      (consumidorVirificado) => consumidorVirificado.nome === nomeConsumidor
-    );
-    if (nomeDuplicado)
-      throw new Error("O nome dos consumidores devem ser diferentes entre si");
-    const novoConsumidor: IConsumidor = {
-      nome: nomeConsumidor,
-      pedidos: [],
-      id: nanoid(idSize),
-    };
-    const novaListaConsumidores = [...listaConsumidores, novoConsumidor];
-    setListaConsumidores(novaListaConsumidores);
-    atualizaContaConsumidores(novaListaConsumidores);
+  function adicionaConsumidor(consumidor: IConsumidor): void | ErrorConstructor {
+    if (consumidor.id === "") {
+      const nomeDuplicado: boolean = listaConsumidores.some(
+        (consumidorVirificado) => consumidorVirificado.nome === consumidor.nome
+      );
+      if (nomeDuplicado)
+        throw new Error("O nome dos consumidores devem ser diferentes entre si");
+      const novoConsumidor: IConsumidor = {
+        ...consumidor,
+        id: nanoid(idSize),
+      };
+      const novaListaConsumidores = [...listaConsumidores, novoConsumidor];
+      setListaConsumidores(novaListaConsumidores);
+      atualizaContaConsumidores(novaListaConsumidores);
+    } else {
+      const novaListaConsumidores = [...listaConsumidores, consumidor];
+      setListaConsumidores(novaListaConsumidores);
+      atualizaContaConsumidores(novaListaConsumidores);
+    }
   }
 
   function removeConsumidor(consumidorID: string): void {
@@ -72,6 +77,7 @@ function useConsumidores() {
     removeConsumidor,
     adicionaPedidoConsumidor,
     removePedidoConsumidor,
+    setListaConsumidores
   };
 }
 

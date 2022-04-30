@@ -68,7 +68,12 @@ export default function Compras() {
     e.preventDefault();
 
     try {
-      adicionaCompra(nomeCompra, precoCompra, autoresCompra);
+      adicionaCompra({
+        nome: nomeCompra,
+        preco: (precoCompra as number),
+        autores: [...autoresCompra],
+        id: ""
+      });
       setNomeCompra("");
       setPrecoCompra(0);
     } catch (err) {

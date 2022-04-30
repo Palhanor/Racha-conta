@@ -27,7 +27,7 @@ export default function NovaConta() {
 
   /* HOOKS PERSONALIZADOS */
   const { adicionaConsumidor } = useConsumidores();
-  const { conta, contaExiste, criaConta } = useConta();
+  const { contaExiste, criaConta } = useConta();
 
   /* REDIRECIONADOR */
   useEffect(() => {
@@ -45,7 +45,11 @@ export default function NovaConta() {
         compras: [],
         id: ""
       })
-      adicionaConsumidor(nomeConsumidor);
+      adicionaConsumidor({
+        nome: nomeConsumidor,
+        pedidos: [],
+        id: ""
+      });
       setNomeConsumidor("");
       navigate("/consumidores", { replace: true });
     } catch (err) {

@@ -12,55 +12,59 @@ function useCompras() {
     useConsumidores();
   const { atualizaContaCompras } = useConta();
 
-  function adicionaCompra(
-    nome: string,
-    preco: number | null,
-    autores: string[]
-  ): void | ErrorConstructor {
-    if (autores.length === 0)
-      throw new Error("Adicione ao menos um autor para a compra");
-    if (!preco) throw new Error("Adicione um preço para a compra");
-    const novaCompra: ICompra = {
-      nome: nome,
-      preco: (preco as number) / 100,
-      autores: [...autores],
-      id: nanoid(idSize),
-    };
-    const novaListaCompras = [...listaCompras, novaCompra];
-    setListaCompras(novaListaCompras);
-    adicionaPedidoConsumidor(novaCompra);
-    atualizaContaCompras(novaListaCompras);
+  function adicionaCompra(compra: ICompra): void | ErrorConstructor {
+    if(!compra.id) {
+      if (compra.autores.length === 0)
+        throw new Error("Adicione ao menos um autor para a compra");
+      if (!compra.preco) throw new Error("Adicione um preço para a compra");
+      const novaCompra: ICompra = {
+        ...compra,
+        preco: (compra.preco as number) / 100,
+        id: nanoid(idSize),
+      };
+      const novaListaCompras = [...listaCompras, novaCompra];
+      setListaCompras(novaListaCompras);
+      adicionaPedidoConsumidor(novaCompra);
+      atualizaContaCompras(novaListaCompras);
+    } else {
+      const novaListaCompras = [...listaCompras, compra];
+      setListaCompras(novaListaCompras);
+      adicionaPedidoConsumidor(compra);
+      atualizaContaCompras(novaListaCompras);
+
+    }
   }
 
-  function removeCompra(pedidoID: string): void {
-    removePedidoConsumidor(pedidoID);
+  function removeCompra(compraID: string): void {
+    removePedidoConsumidor(compraID);
     const novaListaCompras = listaCompras.filter(
-      (velhoCompra) => velhoCompra.id !== pedidoID
+      (velhoCompra) => velhoCompra.id !== compraID
     );
     setListaCompras(novaListaCompras);
     atualizaContaCompras(novaListaCompras);
   }
 
-  function encontraCompra(idCompra: string, compras?: ICompra[]): ICompra {
+  function encontraCompra(compraID: string, compras?: ICompra[]): ICompra {
     const compraAtual = compras
-      ? compras.find((compra) => compra.id === idCompra)
-      : listaCompras.find((compra) => compra.id === idCompra);
+      ? compras.find((compra) => compra.id === compraID)
+      : listaCompras.find((compra) => compra.id === compraID);
     if (!compraAtual) return { nome: "", preco: 0, autores: [], id: "" };
     return compraAtual;
   }
 
   function removeAutorCompra(consumidorApagado: string) {
-    const novaListaCompras = listaCompras.map((compra) => {
-      return {
-        ...compra,
-        autores: compra.autores.filter((autor) => autor !== consumidorApagado),
-      };
-    });
-    const novaListaComprasLimpa = novaListaCompras.filter(
-      (compra) => compra.autores.length !== 0
-    );
-    setListaCompras(novaListaComprasLimpa);
-    atualizaContaCompras(novaListaComprasLimpa);
+    const novaListaCompras = listaCompras
+      .map((compra) => {
+        return {
+          ...compra,
+          autores: compra.autores.filter(
+            (autor) => autor !== consumidorApagado
+          ),
+        };
+      })
+      .filter((compra) => compra.autores.length !== 0);
+    setListaCompras(novaListaCompras);
+    atualizaContaCompras(novaListaCompras);
   }
 
   return {
@@ -69,6 +73,7 @@ function useCompras() {
     removeCompra,
     encontraCompra,
     removeAutorCompra,
+    setListaCompras
   };
 }
 
