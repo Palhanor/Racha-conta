@@ -17,9 +17,7 @@ function useConta() {
   function criaConta(conta: IConta): void {
     if (conta.id === "") {
       setConta({
-        nome: conta.nome,
-        consumidores: [],
-        compras: [],
+        ...conta,
         id: nanoid(idSize),
       });
     } else {

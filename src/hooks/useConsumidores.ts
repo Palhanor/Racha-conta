@@ -42,14 +42,14 @@ function useConsumidores() {
   function adicionaPedidoConsumidor(compra: ICompra): void {
     const listaAutores: string[] = [...compra.autores];
     const novaListaConsumidores: IConsumidor[] = listaConsumidores.map(
-      (dadosConsumidor) => {
-        if (listaAutores.some((autor) => autor === dadosConsumidor.nome)) {
+      (consumidor) => {
+        if (listaAutores.some((autor) => autor === consumidor.nome)) {
           return {
-            ...dadosConsumidor,
-            pedidos: [...dadosConsumidor.pedidos, compra.id],
+            ...consumidor,
+            pedidos: [...consumidor.pedidos, compra.id],
           };
         }
-        return { ...dadosConsumidor };
+        return { ...consumidor };
       }
     );
     setListaConsumidores(novaListaConsumidores);
@@ -58,10 +58,10 @@ function useConsumidores() {
 
   // Remove uma compra de dentro da lista de compras de cada consumidor.
   function removePedidoConsumidor(pedidoID: string): void {
-    const novaListaConsumidores = listaConsumidores.map((dadosConsumidor) => {
+    const novaListaConsumidores = listaConsumidores.map((consumidor) => {
       return {
-        ...dadosConsumidor,
-        pedidos: dadosConsumidor.pedidos.filter(
+        ...consumidor,
+        pedidos: consumidor.pedidos.filter(
           (pedido) => pedido !== pedidoID
         ),
       };

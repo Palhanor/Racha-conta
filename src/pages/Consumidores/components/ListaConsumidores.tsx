@@ -26,8 +26,8 @@ export default function ListaConsumidores({
   /* CALCULA GASTO INDIVIDUAL */
   function gastoIndividual(pedidos: string[]): number {
     return pedidos.reduce(
-      (total, item) =>
-        encontraCompra(item).preco / encontraCompra(item).autores.length +
+      (total, compra) =>
+        encontraCompra(compra).preco / encontraCompra(compra).autores.length +
         total,
       0
     );

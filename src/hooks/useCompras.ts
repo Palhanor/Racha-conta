@@ -32,7 +32,7 @@ function useCompras() {
   function removeCompra(compraID: string): void {
     removePedidoConsumidor(compraID);
     const novaListaCompras = listaCompras.filter(
-      (velhoCompra) => velhoCompra.id !== compraID
+      (compra) => compra.id !== compraID
     );
     setListaCompras(novaListaCompras);
     atualizaContaCompras(novaListaCompras);

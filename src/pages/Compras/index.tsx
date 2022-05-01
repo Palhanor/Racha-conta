@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import mascaraMonetaria from "../../utils/mascaraMonetaria";
-import ListaCompras from "./ListaCompras";
+import ListaCompras from "./components/ListaCompras";
 import Multiselect from "multiselect-react-dropdown";
 import Navegacao from "../../components/Navegacao";
 import useCompras from "../../hooks/useCompras";
@@ -29,7 +29,7 @@ export default function Compras() {
   const navigate = useNavigate();
 
   /* HOOK PERSONALIZADO */
-  const { conta, contaExiste } = useConta();
+  const { contaExiste } = useConta();
   const { listaCompras, adicionaCompra } = useCompras();
   const { listaConsumidores } = useConsumidores();
 
@@ -37,7 +37,7 @@ export default function Compras() {
   useEffect(() => {
     if (!contaExiste) navigate("/");
     // console.log("Lista de compras: ", listaCompras)
-  }, [listaCompras, conta.id, navigate]);
+  }, [listaCompras, contaExiste, navigate]);
 
   /* ESTILO DO COMPOENNTE MULTISELECT */
   const multiselectStyle = {

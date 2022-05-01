@@ -99,8 +99,8 @@ export default function Extrato() {
     0
   );
 
-  const gastosIndividuais: number[] = consumidores.map((dadosConsumidor) =>
-    dadosConsumidor.pedidos.reduce(
+  const gastosIndividuais: number[] = consumidores.map((consumidor) =>
+    consumidor.pedidos.reduce(
       (total, compraId) =>
         encontraCompra(compraId, compras).preco /
           encontraCompra(compraId, compras).autores.length +
@@ -138,9 +138,9 @@ export default function Extrato() {
       <ContainerConta>
         <ListaTituloExtrato>Consumidores</ListaTituloExtrato>
         <Lista>
-          {consumidores.map((dadosConsumidor, index) => (
-            <ItemLista key={dadosConsumidor.id}>
-              <ItemNome>{dadosConsumidor.nome}</ItemNome>
+          {consumidores.map((consumidor, index) => (
+            <ItemLista key={consumidor.id}>
+              <ItemNome>{consumidor.nome}</ItemNome>
               <div>
                 <ItemCusto>
                   R$ {gastosIndividuais[index].toLocaleString("BRL")}
@@ -157,16 +157,16 @@ export default function Extrato() {
         </Lista>
         <ListaTituloExtrato>Compras</ListaTituloExtrato>
         <Lista>
-          {compras.map((dadosCompra) => (
-            <ItemLista key={dadosCompra.id}>
-              <ItemNome>{dadosCompra.nome}</ItemNome>
+          {compras.map((compra) => (
+            <ItemLista key={compra.id}>
+              <ItemNome>{compra.nome}</ItemNome>
               <div>
                 <ItemCusto>
-                  R$ {dadosCompra.preco.toLocaleString("BRL")}
+                  R$ {compra.preco.toLocaleString("BRL")}
                 </ItemCusto>{" "}
                 &#183;{" "}
                 <ItemTexto>
-                  {((dadosCompra.preco / gastoTotal) * 100).toFixed(2)}%
+                  {((compra.preco / gastoTotal) * 100).toFixed(2)}%
                 </ItemTexto>
               </div>
             </ItemLista>

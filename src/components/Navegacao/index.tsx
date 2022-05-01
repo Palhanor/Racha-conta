@@ -108,9 +108,9 @@ export default function Navegacao() {
   /* JSX */
   return (
     <Navbar>
-      {dadosNavegacao.map((item) => (
-        <IconLink to={item.url} key={item.id}>
-          {item.icon}
+      {dadosNavegacao.map((nav) => (
+        <IconLink to={nav.url} key={nav.id}>
+          {nav.icon}
         </IconLink>
       ))}
     </Navbar>

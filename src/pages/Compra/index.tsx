@@ -1,6 +1,6 @@
 /* IMPORTS */
 import { useNavigate, useParams } from "react-router-dom";
-import ListaAutoresCompra from "./ListaAutoresCompra";
+import ListaAutoresCompra from "./components/ListaAutoresCompra";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
 import ICompra from "../../interfaces/compra";
@@ -27,7 +27,7 @@ export default function Compra() {
 
   /* COMPRA SELECIONADA */
   const compraSelecionada: ICompra = listaCompras.find(
-    (dadosCompra) => dadosCompra.id === ID
+    (compra) => compra.id === ID
   ) as ICompra;
 
   /* REDIRECIONADOR */

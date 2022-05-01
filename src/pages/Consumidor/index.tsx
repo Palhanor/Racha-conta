@@ -1,6 +1,6 @@
 /* IMPORTS */
 import { useNavigate, useParams } from "react-router-dom";
-import ListaComprasConsumidor from "./ListaComprasConsumidor";
+import ListaComprasConsumidor from "./components/ListaComprasConsumidor";
 import Navegacao from "../../components/Navegacao";
 import NotFound from "../NotFound";
 import IConsumidor from "../../interfaces/consumidor";
@@ -29,7 +29,7 @@ export default function Consumidor() {
 
   /* CONSUMIDOR SELECIONADO */
   const consumidorSelecionado: IConsumidor = listaConsumidores.find(
-    (dadosConsumidor) => dadosConsumidor.id === ID
+    (consumidor) => consumidor.id === ID
   ) as IConsumidor;
 
   /* REDIRECIONADOR */
@@ -38,7 +38,7 @@ export default function Consumidor() {
   /* APAGAR CONSUMIDOR DA LISTA */
   function apagar(): void {
     removeConsumidor(consumidorSelecionado.id);
-    // Deveria estar dentro do removeConsumidor()
+    // Deveria estar dentro do removeConsumidor
     removeAutorCompra(consumidorSelecionado.nome);
     navigate("/consumidores");
   }
@@ -57,9 +57,9 @@ export default function Consumidor() {
             R${" "}
             {consumidorSelecionado.pedidos
               .reduce(
-                (total, item) =>
-                  encontraCompra(item).preco /
-                    encontraCompra(item).autores.length +
+                (total, compra) =>
+                  encontraCompra(compra).preco /
+                    encontraCompra(compra).autores.length +
                   total,
                 0
               )

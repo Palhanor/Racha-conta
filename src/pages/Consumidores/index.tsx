@@ -1,7 +1,7 @@
 /* IMPORTS */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ListaConsumidores from "./ListaConsumidores";
+import ListaConsumidores from "./components/ListaConsumidores";
 import Navegacao from "../../components/Navegacao";
 import useConsumidores from "../../hooks/useConsumidores";
 import {
@@ -25,13 +25,13 @@ export default function Consumidores() {
 
   /* HOOK PERSONALIZADO */
   const { listaConsumidores, adicionaConsumidor } = useConsumidores();
-  const { conta, contaExiste } = useConta();
+  const { contaExiste } = useConta();
 
   /* REDIRECIONADOR */
   useEffect(() => {
     if (!contaExiste) navigate("/");
     // console.log("Lista de consumidores: ", listaConsumidores)
-  }, [listaConsumidores, conta.id, navigate]);
+  }, [listaConsumidores, contaExiste, navigate]);
 
   /* ADICIONAR NO CONSUMIDOR À LISTA */
   function adicionar(e: React.FormEvent<HTMLFormElement>) {
