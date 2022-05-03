@@ -6,4 +6,5 @@ export default interface IConta {
   consumidores: IConsumidor[]; // Lista de consumidores
   compras: ICompra[]; // Lista de compras
   id: string; // Valor do id da conta
+  data: Date | string;
 }

@@ -12,7 +12,7 @@ export const contaAberta = atom<boolean>({
 /* ESTADO GLOBAL CONTA */
 export const contaAtual = atom<IConta>({
   key: "conta",
-  default: { nome: "", consumidores: [], compras: [], id: "" },
+  default: { nome: "", consumidores: [], compras: [], id: "", data: "" },
 });
 
 /* ESTADO GLOBAL CONSUMIDORES */

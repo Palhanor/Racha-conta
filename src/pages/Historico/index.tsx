@@ -12,6 +12,7 @@ import {
   ItemNome,
   ItemCusto,
   ListaTitulo,
+  ItemTexto,
 } from "../../components/StyledComponents";
 
 /* STYLED COMPONENTS */
@@ -62,6 +63,14 @@ export default function Historico() {
   /* HOOK PERSONALIZADO */
   const { historico } = useConta();
 
+  function retornaData(data: Date): string {
+    const dataNormal = String(data)
+    const soData = dataNormal.slice(0, 10)
+    const quebraData = soData.split("-")
+    const dataOrdenada = quebraData.reverse().join("/")
+    return dataOrdenada;
+  }
+
   /* JSX */
   return (
     <>
@@ -76,7 +85,10 @@ export default function Historico() {
                 onClick={() => navigate(`/extrato/${conta.id}`)}
               >
                 <Inline>
-                  <ItemNome>{conta.nome}</ItemNome>
+                  <Inline>
+                    <ItemNome>{conta.nome}</ItemNome> &#183;
+                    <ItemTexto>{retornaData(conta.data as Date)}</ItemTexto>
+                  </Inline>
                   <ItemCusto>
                     R${" "}
                     {conta.compras

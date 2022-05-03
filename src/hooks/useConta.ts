@@ -19,6 +19,7 @@ function useConta() {
       setConta({
         ...conta,
         id: nanoid(idSize),
+        data: new Date()
       });
     } else {
       setConta(conta);
@@ -52,7 +53,7 @@ function useConta() {
 
   // Apaga todos os dados globais da conta aberta.
   function resetaConta(): void {
-    setConta({ nome: "", consumidores: [], compras: [], id: "" });
+    setConta({ nome: "", consumidores: [], compras: [], id: "", data: "" });
     setListaConsumidores([]);
     setListaCompras([]);
     setContaExiste(false);

@@ -43,6 +43,7 @@ export default function NovaConta() {
         consumidores: [],
         compras: [],
         id: "",
+        data: ""
       });
       adicionaConsumidor({
         nome: nomeConsumidor,
